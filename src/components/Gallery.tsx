@@ -311,6 +311,15 @@ export default function Gallery() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, 5, 0], rotate: [15, 20, 15] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "10%", top: "10%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchPaw className="w-12 h-12" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
         transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut" }}
         style={{ right: "4%", top: "35%" }}
@@ -320,12 +329,30 @@ export default function Gallery() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, 7, 0], rotate: [-5, -15, -5] }}
+        transition={{ duration: 5.0, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "8%", top: "50%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchHeart className="w-10 h-10 fill-orange-950/2" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, -7, 0], rotate: [0, 4, 0] }}
         transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
         style={{ left: "4%", bottom: "20%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
       >
         <OrangeSlice className="w-12 h-12" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, -6, 0], rotate: [20, 10, 20] }}
+        transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "12%", bottom: "55%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchStar className="w-8 h-8" />
       </motion.div>
 
       <motion.div

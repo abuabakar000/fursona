@@ -8,7 +8,7 @@ import { Heart, X, Check, Paintbrush, ShieldCheck, Copy, Sparkles, Star } from "
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { useAudio } from "@/context/AudioContext";
-import { SketchStar, SketchHeart, SketchPaw } from "./SketchIcons";
+import { SketchStar, SketchHeart, SketchPaw, SketchTwig, SketchLeaf, OrangeSlice } from "./SketchIcons";
 
 // Cute custom Paw Swatch Vector
 const ColorPaw = ({ color }: { color: string }) => (
@@ -125,6 +125,15 @@ export default function About() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, 5, 0], rotate: [12, 18, 12] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "8%", top: "12%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <OrangeSlice className="w-10 h-10" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         style={{ left: "4%", top: "45%" }}
@@ -134,12 +143,30 @@ export default function About() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, -4, 0], rotate: [-10, -5, -10] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "12%", top: "52%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchTwig className="w-9 h-9" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, -7, 0], rotate: [0, 4, 0] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
         style={{ right: "8%", bottom: "10%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
       >
         <SketchStar className="w-8 h-8" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, 6, 0], rotate: [8, 12, 8] }}
+        transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "6%", bottom: "25%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchLeaf className="w-10 h-10" />
       </motion.div>
 
       {/* Copied Hex Code Toast Dialog */}

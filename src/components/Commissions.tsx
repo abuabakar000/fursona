@@ -195,6 +195,15 @@ export default function Commissions() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, -4, 0], rotate: [12, 18, 12] }}
+        transition={{ duration: 5.3, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "12%", top: "45%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchLeaf className="w-10 h-10" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, -6, 0], rotate: [0, 4, 0] }}
         transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut" }}
         style={{ left: "4%", bottom: "35%" }}
@@ -204,12 +213,30 @@ export default function Commissions() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, 6, 0], rotate: [-10, -5, -10] }}
+        transition={{ duration: 4.9, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "10%", top: "65%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchPaw className="w-10 h-10" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, 9, 0], rotate: [0, -3, 0] }}
         transition={{ duration: 5.7, repeat: Infinity, ease: "easeInOut" }}
         style={{ right: "5%", bottom: "15%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
       >
         <OrangeSlice className="w-11 h-11" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, -7, 0], rotate: [15, 25, 15] }}
+        transition={{ duration: 5.9, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "15%", bottom: "60%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchHeart className="w-9 h-9 fill-orange-950/2" />
       </motion.div>
 
       <motion.div

@@ -123,6 +123,15 @@ export default function Contact() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, 5, 0], rotate: [10, 15, 10] }}
+        transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "14%", top: "45%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchLeaf className="w-10 h-10" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, -6, 0], rotate: [0, 4, 0] }}
         transition={{ duration: 4.9, repeat: Infinity, ease: "easeInOut" }}
         style={{ left: "5%", bottom: "25%" }}
@@ -132,12 +141,30 @@ export default function Contact() {
       </motion.div>
 
       <motion.div
+        animate={{ y: [0, -5, 0], rotate: [-20, -10, -20] }}
+        transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "12%", top: "60%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchTwig className="w-10 h-10" />
+      </motion.div>
+
+      <motion.div
         animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
         transition={{ duration: 5.3, repeat: Infinity, ease: "easeInOut" }}
         style={{ right: "7%", bottom: "12%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
       >
         <SketchStar className="w-9 h-9" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, -7, 0], rotate: [25, 15, 25] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "10%", bottom: "10%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchPaw className="w-11 h-11" />
       </motion.div>
 
       <div className="max-w-4xl mx-auto space-y-12">
