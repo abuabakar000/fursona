@@ -657,7 +657,7 @@ export default function Gallery() {
                       
                       <div className="space-y-1">
                         <label className="text-[10px] font-comic font-black text-orange-950/70 uppercase">Pick Avatar {selectedAvatar}</label>
-                        <div className="flex gap-1.5 overflow-x-auto pb-1 max-w-full no-scrollbar">
+                        <div className="flex gap-1.5 overflow-x-auto pb-1 max-w-full scrollbar-none">
                           {avatarOptions.map((av) => (
                             <button
                               key={av}
