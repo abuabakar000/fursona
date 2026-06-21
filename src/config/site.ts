@@ -11,7 +11,7 @@ export interface CommissionTier {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: "illustration" | "chibi" | "refsheet" | "fursuit";
+  category: "canine" | "feline" | "other" | "refsheet";
   imageUrl: string;
   description: string;
   artistName?: string;
@@ -88,35 +88,35 @@ export const siteConfig = {
   gallery: [
     {
       id: "gal-1",
-      title: "Cozy Hot Chocolate Chibi",
-      category: "chibi",
+      title: "Cocoa Character Sheet",
+      category: "canine",
       imageUrl: "/images/gallery-1.png",
-      description: "Super soft chibi Citrini enjoying a warm beverage. Art by FennecIllustrates.",
+      description: "Reference sheet for my puppy friend Cocoa, showing front/back views and cute expressions. Art by FennecIllustrates.",
       artistName: "FennecIllustrates",
       artistUrl: "https://twitter.com/fennecillustrates",
     },
     {
       id: "gal-2",
-      title: "Magical Moonlit Wolf Friend",
-      category: "illustration",
+      title: "Awoo Character Sheet",
+      category: "canine",
       imageUrl: "/images/gallery-2.png",
-      description: "Detailed full-body illustration of my wolf friend surrounded by glowing forest flora. Art by CelestialArts.",
+      description: "Reference sheet for my wolf friend Awoo, showing front/back views and celestial details. Art by CelestialArts.",
       artistName: "CelestialArts",
       artistUrl: "https://twitter.com/celestialarts",
     },
     {
       id: "gal-3",
-      title: "Cozy Ramen Break",
-      category: "chibi",
+      title: "Noodle Character Sheet",
+      category: "other",
       imageUrl: "/images/gallery-3.png",
-      description: "Red panda friend taking a ramen break in a traditional cozy noodle cafe. Art by NoodleDraws.",
+      description: "Reference sheet for my red panda friend Noodle, showing front/back views and cute expressions. Art by NoodleDraws.",
       artistName: "NoodleDraws",
       artistUrl: "https://twitter.com/noodledraws",
     },
     {
       id: "gal-4",
       title: "Citrini Reference Sheet",
-      category: "refsheet",
+      category: "canine",
       imageUrl: "/images/gallery-4.png",
       description: "My official reference sheet featuring front/back profiles, color palette, and close-ups. Art by CitrusPaws.",
       artistName: "CitrusPaws",

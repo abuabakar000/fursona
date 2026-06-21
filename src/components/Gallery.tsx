@@ -76,10 +76,9 @@ export default function Gallery() {
   const [hasCelebratedMelt, setHasCelebratedMelt] = useState(false);
 
   const categories = [
-    { label: "All Art", id: "all", icon: "🐾" },
-    { label: "Illustrations", id: "illustration", icon: "🌌" },
-    { label: "Chibis & Icons", id: "chibi", icon: "✨" },
-    { label: "Ref Sheets", id: "refsheet", icon: "📋" },
+    { label: "All Sheets", id: "all", icon: "🐾" },
+    { label: "Canines 🦊", id: "canine", icon: "🐺" },
+    { label: "Other Species 🐼", id: "other", icon: "🐾" },
   ];
 
   const filteredGallery = filter === "all"
@@ -453,7 +452,7 @@ export default function Gallery() {
                 <div className="flex-1 flex flex-col justify-between">
                   <div className="text-center space-y-1">
                     <span className="text-[10px] font-comic font-black uppercase tracking-wider text-orange-600 bg-orange-100 px-2 py-0.5 rounded-full border border-orange-200 inline-block">
-                      {item.category === "refsheet" ? "ref sheet" : item.category}
+                      {item.category === "canine" ? "canine ref sheet" : item.category === "other" ? "ref sheet" : item.category}
                     </span>
                     <h3 className="font-comic text-base sm:text-lg font-black text-orange-950 leading-snug">
                       {item.title}
@@ -542,7 +541,7 @@ export default function Gallery() {
                   <div className="space-y-3 pr-2">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-xs font-comic font-black uppercase tracking-wider text-orange-600 bg-orange-100 px-3 py-0.5 rounded-full border border-orange-200">
-                        {selectedItem.category}
+                        {selectedItem.category === "canine" ? "canine ref sheet" : selectedItem.category === "other" ? "ref sheet" : selectedItem.category}
                       </span>
                       <button
                         onClick={(e) => {
