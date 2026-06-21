@@ -301,6 +301,13 @@ export default function Gallery() {
           );
           animation: meter-shimmer 1.5s linear infinite;
         }
+        .scrollbar-none::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-none {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
       `}</style>
 
       {/* Render local clicked/double-tapped emojis */}
@@ -395,7 +402,7 @@ export default function Gallery() {
         {/* Gallery Grid: Polaroid Scrapbook Layout */}
         <motion.div 
           layout 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pt-4"
+          className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 pt-4 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-8 px-4 -mx-4 sm:px-0 sm:mx-0"
         >
           <AnimatePresence mode="popLayout">
             {filteredGallery.map((item, index) => (
@@ -409,7 +416,7 @@ export default function Gallery() {
                 whileHover={{ y: -8, rotate: 0, scale: 1.02, zIndex: 10 }}
                 onClick={() => handleOpenModal(item)}
                 style={{ rotate: index % 2 === 0 ? "-1.5deg" : "1.5deg" }}
-                className="group cursor-pointer bg-white border-3 border-orange-950 p-4 pb-8 shadow-[5px_6px_0px_rgba(69,26,3,0.18)] flex flex-col h-full rounded-sm relative select-none transition-shadow hover:shadow-[9px_10px_0px_rgba(69,26,3,0.15)]"
+                className="group cursor-pointer bg-white border-3 border-orange-950 p-4 pb-8 shadow-[5px_6px_0px_rgba(69,26,3,0.18)] flex flex-col h-full rounded-sm relative select-none transition-shadow hover:shadow-[9px_10px_0px_rgba(69,26,3,0.15)] flex-shrink-0 w-[82vw] max-w-[290px] sm:w-auto sm:max-w-none snap-center"
               >
                 {/* Translucent Washi Tape at the top of Polaroid */}
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3 w-16 h-5 backdrop-blur-[0.5px] border border-dashed shadow-[1px_1.5px_2px_rgba(0,0,0,0.06)] z-20 ${
