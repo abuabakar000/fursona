@@ -115,6 +115,22 @@ const adoredArtists: AdoredArtist[] = [
     url: "https://twitter.com/citruspaws",
     badge: "Inspirational 🌟",
     badgeColor: "bg-orange-100 text-orange-700 border-orange-200"
+  },
+  {
+    name: "MarshmallowPaws",
+    handle: "@MarshmallowPaws",
+    avatar: "🐻",
+    url: "https://twitter.com/marshmallowpaws",
+    badge: "Super Cute 🌸",
+    badgeColor: "bg-teal-100 text-teal-700 border-teal-200"
+  },
+  {
+    name: "SpookyBunny",
+    handle: "@SpookyBunny",
+    avatar: "🐰",
+    url: "https://twitter.com/spookybunny",
+    badge: "Spooky Vibes 🎃",
+    badgeColor: "bg-indigo-100 text-indigo-700 border-indigo-200"
   }
 ];
 
@@ -337,13 +353,13 @@ export default function Commissions() {
           transition={{ duration: 0.6 }}
           className="space-y-8 pt-12 border-t border-dashed border-amber-200"
         >
-          <div className="text-left space-y-1">
-            <h3 className="font-comic text-2xl md:text-3xl font-black text-orange-950 flex items-center justify-start space-x-1.5">
-              <Star className="w-5 h-5 text-orange-500 fill-orange-500" />
+          <div className="text-left space-y-4">
+            <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950 flex flex-wrap items-center justify-start gap-2.5">
+              <Star className="w-6 h-6 md:w-8 md:h-8 text-orange-500 fill-orange-500" />
               <span>Artists I Adore 💖</span>
-              <Heart className="w-5 h-5 text-red-500 fill-red-500" />
-            </h3>
-            <p className="text-orange-900/70 font-sans text-xs sm:text-sm max-w-md">
+              <Heart className="w-6 h-6 md:w-8 md:h-8 text-red-500 fill-red-500" />
+            </h2>
+            <p className="text-orange-900/80 font-sans max-w-xl text-base sm:text-lg">
               Incredible creators whose style I absolutely worship. Click below to view their art pages!
             </p>
           </div>
@@ -367,6 +383,8 @@ export default function Commissions() {
                   rotate: idx % 2 === 0 ? "-1.5deg" : "1.5deg"
                 }}
                 className={`border-y-2 border-dashed border-orange-950/30 p-4 px-6 flex flex-row items-center space-x-4 shadow-[4px_4px_0px_rgba(69,26,3,0.15)] w-[75vw] max-w-[280px] flex-shrink-0 snap-center snap-always sm:w-auto sm:max-w-xs relative overflow-visible ${
+                  idx >= 4 ? "hidden md:flex" : ""
+                } ${
                   idx % 4 === 0 ? "bg-amber-100/90" :
                   idx % 4 === 1 ? "bg-rose-100/90" :
                   idx % 4 === 2 ? "bg-sky-100/90" :
@@ -408,15 +426,15 @@ export default function Commissions() {
             ))}
           </div>
 
-          {/* Sketchy dots for mobile artists slider */}
+          {/* Sketchy dots for mobile artists slider (only shows for mobile-visible artists) */}
           <div className="flex sm:hidden justify-center items-center space-x-2.5 pt-1 pb-4 select-none">
-            {adoredArtists.map((_, idx) => (
+            {adoredArtists.slice(0, 4).map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => {
                   const container = artistsScrollRef.current;
                   if (container) {
-                    const cardWidth = container.scrollWidth / adoredArtists.length;
+                    const cardWidth = container.scrollWidth / 4;
                     container.scrollTo({
                       left: cardWidth * idx,
                       behavior: "smooth"

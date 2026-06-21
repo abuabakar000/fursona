@@ -511,7 +511,13 @@ export default function Gallery() {
         {/* Lightbox Modal with interactive comment form & mascot */}
         <AnimatePresence>
           {selectedItem && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-orange-950/65 backdrop-blur-sm">
+            <>
+              <style>{`
+                header {
+                  display: none !important;
+                }
+              `}</style>
+              <div className="fixed inset-0 z-50 overflow-y-auto flex items-start justify-center p-2 sm:p-4 md:p-6 bg-orange-950/65 backdrop-blur-sm">
               <motion.div 
                 className="absolute inset-0" 
                 onClick={handleCloseModal} 
@@ -533,7 +539,7 @@ export default function Gallery() {
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                className={`relative bg-amber-50 border-4 border-orange-950 p-4 sm:p-6 max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col md:flex-row gap-5 sm:gap-6 md:gap-8 ${sketchyBorderStyles.card}`}
+                className={`relative bg-amber-50 border-4 border-orange-950 p-4 sm:p-6 max-w-4xl w-full my-auto md:max-h-[90vh] md:overflow-hidden shadow-2xl flex flex-col md:flex-row gap-5 sm:gap-6 md:gap-8 ${sketchyBorderStyles.card}`}
               >
                 {/* Space holder for floating button on mobile close */}
                 <div className="h-4 w-full md:hidden flex-shrink-0" />
@@ -541,7 +547,7 @@ export default function Gallery() {
                 {/* Left Side: Double-tappable Modal Image */}
                 <div 
                   onClick={(e) => handleDoubleTap(selectedItem.id, e)}
-                  className="flex-shrink-0 md:flex-1 relative aspect-square w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] mx-auto bg-white border-3 border-orange-950 rounded-2xl overflow-hidden p-2 select-none cursor-pointer group shadow-inner"
+                  className="flex-shrink-0 md:flex-1 relative aspect-square w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] md:max-h-[calc(90vh-5rem)] mx-auto bg-white border-3 border-orange-950 rounded-2xl overflow-hidden p-2 select-none cursor-pointer group shadow-inner"
                 >
                   <div className="relative w-full h-full rounded-xl overflow-hidden bg-amber-50/20">
                     <Image
@@ -560,7 +566,7 @@ export default function Gallery() {
                 </div>
 
                 {/* Right Side: Artwork Info, Dynamic Mascot & Guestbook Comments */}
-                <div className="flex-1 flex flex-col justify-between py-1 text-left space-y-4 md:max-h-[500px] md:overflow-y-auto pr-1">
+                <div className="flex-1 flex flex-col justify-between py-1 text-left space-y-4 md:max-h-[calc(90vh-5rem)] md:overflow-y-auto pr-1">
                   
                   {/* Title & Metadata */}
                   <div className="space-y-3 pr-2">
@@ -608,24 +614,7 @@ export default function Gallery() {
                     )}
                   </div>
 
-                  {/* Mascot reactions bubble box */}
-                  <div className="bg-amber-100/50 p-3 rounded-2xl border border-orange-950/10 flex items-center space-x-3 text-xs relative overflow-visible mt-2 pr-2">
-                    <div className="relative w-12 h-12 flex-shrink-0 rounded-full border-2 border-orange-950 overflow-hidden bg-white shadow-sm">
-                      <Image
-                        src="/images/mascot.png"
-                        alt="Mascot Reaction"
-                        fill
-                        className="object-cover scale-110"
-                      />
-                    </div>
-                    <div className="bg-white border-2 border-orange-950 p-2.5 rounded-xl shadow-[1.5px_2.5px_0px_#451a03] relative flex-1 text-left">
-                      {/* Arrow tail */}
-                      <div className="absolute top-1/2 -left-1.5 w-3 h-3 bg-white border-b-2 border-l-2 border-orange-950 transform -translate-y-1/2 rotate-45" />
-                      <p className="font-comic font-black text-orange-950 relative z-10 leading-snug">
-                        {mascotSpeech}
-                      </p>
-                    </div>
-                  </div>
+
 
                   {/* Comments Guestbook List */}
                   <div className="space-y-3 pt-3 border-t border-dashed border-amber-200 pr-2">
@@ -743,6 +732,7 @@ export default function Gallery() {
 
               </motion.div>
             </div>
+            </>
           )}
         </AnimatePresence>
       </div>
