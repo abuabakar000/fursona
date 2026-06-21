@@ -113,7 +113,7 @@ export default function Header() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 220 }}
+              transition={{ type: "tween", ease: "easeOut", duration: 0.22 }}
               style={{ willChange: "transform" }}
               className="relative w-[calc(100%-16px)] sm:max-w-[380px] h-screen bg-white border-l-4 border-orange-950 shadow-2xl z-10"
             >
@@ -143,28 +143,20 @@ export default function Header() {
 
                 {/* Links List */}
                 <nav className="flex flex-col space-y-7 pl-8 md:pl-12 mt-4 sm:mt-8 mb-auto text-left">
-                  {siteConfig.navigation.map((item, index) => (
-                    <motion.a
+                  {siteConfig.navigation.map((item) => (
+                    <a
                       key={item.label}
                       href={item.href}
                       onClick={() => handleLinkClick(item.href)}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: index * 0.05 }}
                       className="font-comic text-3xl font-black text-orange-950 hover:text-orange-600 transition-colors w-fit relative group"
                     >
                       {item.label}
                       <span className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-200 group-hover:w-full" />
-                    </motion.a>
+                    </a>
                   ))}
                   
                   {/* Art Wishlist Button badge */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.25 }}
-                    className="pt-4"
-                  >
+                  <div className="pt-4">
                     <a
                       href="#commissions"
                       onClick={() => handleLinkClick("#commissions")}
@@ -173,7 +165,7 @@ export default function Header() {
                       <span>Wishlist 🎨</span>
                       <Heart className="w-4 h-4 fill-white text-orange-200 animate-pulse" />
                     </a>
-                  </motion.div>
+                  </div>
                 </nav>
 
                 {/* Social icons footer in drawer */}

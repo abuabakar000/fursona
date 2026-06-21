@@ -213,14 +213,7 @@ export default function Commissions() {
           transition={{ duration: 0.6 }}
           className="text-left space-y-4"
         >
-          <motion.div 
-            initial={{ scale: 0.95 }}
-            animate={{ scale: [1, 1.03, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className={`inline-flex items-center space-x-1.5 px-4 py-1.5 bg-orange-100 border-2 border-orange-500 font-comic font-black text-orange-950 text-xs sm:text-sm ${sketchyBorderStyles.badge} shadow-sm`}
-          >
-            <span>My Art Wishlist 🎨</span>
-          </motion.div>
+
           
           <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950 text-left">
             My Art Wishlist 🎨
@@ -357,7 +350,6 @@ export default function Commissions() {
             <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950 flex flex-wrap items-center justify-start gap-2.5">
               <Star className="w-6 h-6 md:w-8 md:h-8 text-orange-500 fill-orange-500" />
               <span>Artists I Adore 💖</span>
-              <Heart className="w-6 h-6 md:w-8 md:h-8 text-red-500 fill-red-500" />
             </h2>
             <p className="text-orange-900/80 font-sans max-w-xl text-base sm:text-lg">
               Incredible creators whose style I absolutely worship. Click below to view their art pages!
@@ -368,7 +360,7 @@ export default function Commissions() {
           <div 
             ref={artistsScrollRef}
             onScroll={handleArtistsScroll}
-            className="flex overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-6 px-4 -mx-4 sm:px-0 sm:mx-0 sm:flex-wrap sm:justify-center gap-6 md:gap-8 max-w-4xl mx-auto"
+            className="flex overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-6 px-4 -mx-4 sm:px-0 sm:mx-0 sm:flex-wrap md:grid md:grid-cols-3 sm:justify-center gap-6 md:gap-8 max-w-5xl mx-auto"
           >
             {adoredArtists.map((artist, idx) => (
               <motion.div
@@ -382,7 +374,7 @@ export default function Commissions() {
                   clipPath: "polygon(2% 0%, 0% 25%, 2% 50%, 0% 75%, 2% 100%, 98% 100%, 100% 75%, 98% 50%, 100% 25%, 98% 0%)",
                   rotate: idx % 2 === 0 ? "-1.5deg" : "1.5deg"
                 }}
-                className={`border-y-2 border-dashed border-orange-950/30 p-4 px-6 flex flex-row items-center space-x-4 shadow-[4px_4px_0px_rgba(69,26,3,0.15)] w-[75vw] max-w-[280px] flex-shrink-0 snap-center snap-always sm:w-auto sm:max-w-xs relative overflow-visible ${
+                className={`border-y-2 border-dashed border-orange-950/30 p-4 px-6 flex flex-row items-center space-x-4 shadow-[4px_4px_0px_rgba(69,26,3,0.15)] w-[75vw] max-w-[280px] flex-shrink-0 snap-center snap-always sm:w-auto sm:max-w-xs md:w-full md:max-w-none relative overflow-visible ${
                   idx >= 4 ? "hidden md:flex" : ""
                 } ${
                   idx % 4 === 0 ? "bg-amber-100/90" :

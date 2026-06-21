@@ -128,7 +128,7 @@ export default function About() {
         )}
       </AnimatePresence>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-y-4 lg:gap-y-6 gap-x-8 lg:gap-x-12 items-center lg:items-start">
         
         {/* Section Heading at the top spanning all columns */}
         <motion.div
