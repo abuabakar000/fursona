@@ -7,8 +7,8 @@ import { Mail, Globe, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full px-6 py-12 bg-amber-50/80 border-t-2 border-dashed border-amber-200">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer className="w-full px-6 py-8 md:py-12 bg-amber-50/80 border-t-2 border-dashed border-amber-200">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
         
         {/* Left Side */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-1.5">
@@ -21,7 +21,7 @@ export default function Footer() {
         </div>
 
         {/* Center Social Links */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
           <a
             href={siteConfig.socials.twitter}
             target="_blank"
@@ -69,7 +69,7 @@ export default function Footer() {
 
         {/* Right Side Copyright */}
         <div className="flex flex-col items-center md:items-end text-center md:text-right space-y-2">
-          <div className="flex items-center space-x-1.5 text-xs text-orange-900/60 font-sans">
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-1.5 text-xs text-orange-900/60 font-sans">
             <span>Made with</span>
             <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
             <span>for the furry community.</span>
