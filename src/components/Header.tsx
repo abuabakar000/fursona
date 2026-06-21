@@ -31,17 +31,17 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-[9999] w-full px-6 py-4 bg-amber-50/80 backdrop-blur-md border-b-2 border-dashed border-amber-200">
+    <header className="sticky top-0 z-[9999] w-full px-4 sm:px-6 py-4 bg-amber-50/80 backdrop-blur-md border-b-2 border-dashed border-amber-200">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <a 
           href="#home" 
           onClick={() => playSound("click")}
-          className="flex items-center space-x-3 group"
+          className="flex items-center space-x-2 sm:space-x-3 group"
         >
-          <div className={`p-2 bg-amber-100 border-2 border-orange-700/80 ${sketchyBorderStyles.avatar} transition-all duration-300 group-hover:rotate-6 group-hover:scale-105 shadow-[2px_3px_0px_rgba(120,53,4,0.15)]`}>
+          <div className={`p-1.5 sm:p-2 bg-amber-100 border-2 border-orange-700/80 ${sketchyBorderStyles.avatar} transition-all duration-300 group-hover:rotate-6 group-hover:scale-105 shadow-[2px_3px_0px_rgba(120,53,4,0.15)]`}>
             {/* Orange Paw Logo */}
-            <svg viewBox="0 0 100 100" fill="currentColor" className="w-8 h-8 text-orange-600">
+            <svg viewBox="0 0 100 100" fill="currentColor" className="w-7 h-7 sm:w-8 sm:h-8 text-orange-600">
               <path d="M50,80 C60,80 67,73 67,64 C67,59 62,56 50,56 C38,56 33,59 33,64 C33,73 40,80 50,80 Z" />
               <circle cx="25" cy="46" r="9" />
               <circle cx="39" cy="32" r="10" />
@@ -49,14 +49,14 @@ export default function Header() {
               <circle cx="75" cy="46" r="9" />
             </svg>
           </div>
-          <span className="font-comic text-2xl font-bold tracking-tight text-orange-950">
+          <span className="font-comic text-xl sm:text-2xl font-bold tracking-tight text-orange-950">
             {siteConfig.name}
             <span className="text-orange-500 text-sm ml-1 select-none">🐾</span>
           </span>
         </a>
 
         {/* Action Controls: Sound Toggle + Hamburger menu */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2 sm:space-x-3">
           
           {/* Global Sound Toggler */}
           <button
@@ -68,7 +68,7 @@ export default function Header() {
                 setTimeout(() => playSound("pop"), 50);
               }
             }}
-            className="p-3 bg-amber-100 hover:bg-amber-200 border-2 border-orange-950 font-comic font-black flex items-center justify-center shadow-[3px_3px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 rounded-[150px_10px_140px_10px/10px_140px_10px_150px]"
+            className="p-2.5 sm:p-3 bg-amber-100 hover:bg-amber-200 border-2 border-orange-950 font-comic font-black flex items-center justify-center shadow-[3px_3px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 rounded-[150px_10px_140px_10px/10px_140px_10px_150px]"
             title={isMuted ? "Unmute sound effects" : "Mute sound effects"}
           >
             {isMuted ? (
@@ -81,7 +81,7 @@ export default function Header() {
           {/* Hamburger menu button */}
           <motion.button
             onClick={handleOpenDrawer}
-            className={`p-3 bg-amber-100 border-2 border-orange-950 text-orange-950 shadow-[3px_3px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 ${sketchyBorderStyles.avatar}`}
+            className={`p-2.5 sm:p-3 bg-amber-100 border-2 border-orange-950 text-orange-950 shadow-[3px_3px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 ${sketchyBorderStyles.avatar}`}
             whileHover={{ scale: 1.05, rotate: 3 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Open Menu"
@@ -111,7 +111,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 220 }}
-              className="relative w-full max-w-[380px] h-screen bg-white border-l-4 border-orange-950 shadow-2xl z-10"
+              className="relative w-[calc(100%-16px)] sm:max-w-[380px] h-screen bg-white border-l-4 border-orange-950 shadow-2xl z-10"
             >
               {/* Red notebook margin line */}
               <div className="absolute top-0 bottom-0 left-8 md:left-10 w-0.5 bg-red-400/40 pointer-events-none z-0" />
