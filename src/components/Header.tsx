@@ -98,7 +98,7 @@ export default function Header() {
       {/* Fullscreen Artsy Notebook Menu Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-[9999] flex justify-end bg-orange-950/40 backdrop-blur-sm">
+          <div className="fixed inset-0 z-[9999] flex justify-end bg-orange-950/45">
             {/* Click outside to close */}
             <motion.div
               className="absolute inset-0"
@@ -114,6 +114,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 220 }}
+              style={{ willChange: "transform" }}
               className="relative w-[calc(100%-16px)] sm:max-w-[380px] h-screen bg-white border-l-4 border-orange-950 shadow-2xl z-10"
             >
               {/* Red notebook margin line */}
@@ -127,7 +128,7 @@ export default function Header() {
               </div>
 
               {/* Scrollable Content Wrapper */}
-              <div className="w-full h-full overflow-y-auto flex flex-col justify-between py-12 px-6 md:px-8 relative z-10">
+              <div className="w-full h-full overflow-y-auto flex flex-col justify-between pt-8 pb-10 sm:py-12 px-6 md:px-8 relative z-10">
                 {/* Close Button Inside Drawer */}
                 <div className="flex justify-end pl-6">
                   <motion.button
@@ -141,15 +142,15 @@ export default function Header() {
                 </div>
 
                 {/* Links List */}
-                <nav className="flex flex-col space-y-7 pl-8 md:pl-12 mt-6 sm:mt-10 mb-auto text-left">
+                <nav className="flex flex-col space-y-7 pl-8 md:pl-12 mt-4 sm:mt-8 mb-auto text-left">
                   {siteConfig.navigation.map((item, index) => (
                     <motion.a
                       key={item.label}
                       href={item.href}
                       onClick={() => handleLinkClick(item.href)}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.08 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.05 }}
                       className="font-comic text-3xl font-black text-orange-950 hover:text-orange-600 transition-colors w-fit relative group"
                     >
                       {item.label}
@@ -159,9 +160,9 @@ export default function Header() {
                   
                   {/* Art Wishlist Button badge */}
                   <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.35 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.25 }}
                     className="pt-4"
                   >
                     <a

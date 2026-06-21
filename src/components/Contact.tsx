@@ -139,8 +139,6 @@ export default function Contact() {
 
           {/* Form Sheet (Looks like notebook paper) */}
           <div className={`bg-white border-4 border-orange-950 pt-8 pb-6 px-4 sm:px-6 md:px-12 shadow-[6px_8px_0px_rgba(120,53,4,0.15)] relative ${sketchyBorderStyles.card}`}>
-            {/* Margins/Lined paper background red margin line */}
-            <div className="absolute top-0 bottom-0 left-8 sm:left-10 md:left-14 w-0.5 bg-red-400/60" />
 
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-4 text-left relative pl-6 sm:pl-8 md:pl-12">

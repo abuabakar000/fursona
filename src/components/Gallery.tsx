@@ -366,51 +366,7 @@ export default function Gallery() {
           </p>
         </motion.div>
 
-        {/* Cuteness Melt Meter thermometer */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.1 }}
-          className="bg-white border-3 border-orange-950 p-6 rounded-[25px_15px_30px_15px/15px_30px_15px_25px] shadow-[5px_6px_0px_#451a03] max-w-xl mx-auto flex flex-col items-center space-y-4"
-        >
-          <div className="flex items-center justify-between w-full">
-            <span className="font-comic font-black text-orange-950 text-sm sm:text-base flex items-center gap-1.5 select-none">
-              🌡️ Citrini's Melt Meter
-            </span>
-            <span className="font-comic font-black text-orange-600 bg-orange-100 px-3 py-0.5 rounded-full border border-orange-200 text-xs sm:text-sm">
-              {meltPercentage}% Melted
-            </span>
-          </div>
-          
-          {/* Temperature Progress bar */}
-          <div className="relative w-full h-8 bg-amber-100/50 rounded-full border-3 border-orange-950 overflow-hidden shadow-inner flex items-center">
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: `${meltPercentage}%` }}
-              transition={{ type: "spring", stiffness: 45, damping: 13 }}
-              className="h-full bg-gradient-to-r from-orange-400 via-pink-400 to-red-500 rounded-r-full relative"
-            >
-              {/* Animated sparkles/bubbles inside progress */}
-              <div className="absolute inset-0 animate-shimmer opacity-85" />
-            </motion.div>
-            
-            {/* Milestones lines */}
-            <div className="absolute left-[30%] top-0 bottom-0 w-[2px] bg-orange-950/15" />
-            <div className="absolute left-[65%] top-0 bottom-0 w-[2px] bg-orange-950/15" />
-            <div className="absolute left-[90%] top-0 bottom-0 w-[2px] bg-orange-950/15" />
-            
-            <span className="absolute inset-0 flex items-center justify-center font-comic font-black text-xs text-orange-950 pointer-events-none drop-shadow-[0_1.5px_1px_rgba(255,255,255,0.9)] uppercase tracking-wider">
-              {meltPercentage === 100 ? "🥰 A Literal Puddle!" : meltPercentage >= 90 ? "✨ BLUSHING SO HARD! 🥺" : meltPercentage >= 65 ? "🐾 HAPPY TAIL WAGS! 🐾" : "☕ WARM & COZY"}
-            </span>
-          </div>
-          
-          <p className="text-xs text-orange-900/70 font-sans font-semibold text-center leading-relaxed max-w-md">
-            {meltPercentage === 100 
-              ? "Oh goodness! You made Citrini completely melt into a warm puddle of orange juice! 🧡🍊✨ Thank you!"
-              : "Help Citrini melt! Click ❤️ on art, double-tap images, or leave sweet guestbook comments! 🐾"}
-          </p>
-        </motion.div>
+
 
         {/* Filter Tags styled like stickers */}
         <div className="flex flex-wrap justify-center gap-3.5">
@@ -456,7 +412,7 @@ export default function Gallery() {
                 whileHover={{ y: -8, rotate: 0, scale: 1.02, zIndex: 10 }}
                 onClick={() => handleOpenModal(item)}
                 style={{ rotate: index % 2 === 0 ? "-1.5deg" : "1.5deg" }}
-                className="group cursor-pointer bg-white border-3 border-orange-950 p-4 pb-8 shadow-[5px_6px_0px_rgba(69,26,3,0.18)] flex flex-col h-full rounded-sm relative select-none transition-shadow hover:shadow-[9px_10px_0px_rgba(69,26,3,0.15)] flex-shrink-0 w-[82vw] max-w-[290px] sm:w-auto sm:max-w-none snap-center"
+                className="group cursor-pointer bg-white border-3 border-orange-950 p-4 pb-8 shadow-[5px_6px_0px_rgba(69,26,3,0.18)] flex flex-col h-full rounded-sm relative select-none transition-shadow hover:shadow-[9px_10px_0px_rgba(69,26,3,0.15)] flex-shrink-0 w-[82vw] max-w-[290px] sm:w-auto sm:max-w-none snap-center snap-always"
               >
                 {/* Translucent Washi Tape at the top of Polaroid */}
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3 w-16 h-5 backdrop-blur-[0.5px] border border-dashed shadow-[1px_1.5px_2px_rgba(0,0,0,0.06)] z-20 ${
@@ -564,25 +520,28 @@ export default function Gallery() {
                 exit={{ opacity: 0 }}
               />
 
+              {/* Close button - Fixed at top-right of screen for mobile/desktop, very easy to tap! */}
+              <button
+                onClick={handleCloseModal}
+                className="fixed top-4 right-4 md:absolute md:top-4 md:right-4 p-2 bg-white hover:bg-orange-100 text-orange-950 border-2 border-orange-950 rounded-full shadow-[2px_2px_0px_#451a03] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#451a03] transition-all z-50"
+              >
+                <X className="w-5 h-5 stroke-[2.5]" />
+              </button>
+
               {/* Modal Box */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                className={`relative bg-amber-50 border-4 border-orange-950 p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col md:flex-row gap-6 md:gap-8 ${sketchyBorderStyles.card}`}
+                className={`relative bg-amber-50 border-4 border-orange-950 p-4 sm:p-6 max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col md:flex-row gap-5 sm:gap-6 md:gap-8 ${sketchyBorderStyles.card}`}
               >
-                {/* Close button */}
-                <button
-                  onClick={handleCloseModal}
-                  className="absolute top-4 right-4 p-2 bg-white hover:bg-orange-100 text-orange-950 border-2 border-orange-950 rounded-full shadow-[2px_2px_0px_#451a03] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#451a03] transition-all z-10"
-                >
-                  <X className="w-5 h-5 stroke-[2.5]" />
-                </button>
+                {/* Space holder for floating button on mobile close */}
+                <div className="h-4 w-full md:hidden flex-shrink-0" />
 
                 {/* Left Side: Double-tappable Modal Image */}
                 <div 
                   onClick={(e) => handleDoubleTap(selectedItem.id, e)}
-                  className="flex-1 relative aspect-square w-full max-w-[380px] mx-auto bg-white border-3 border-orange-950 rounded-2xl overflow-hidden p-2 select-none cursor-pointer group shadow-inner"
+                  className="flex-shrink-0 md:flex-1 relative aspect-square w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] mx-auto bg-white border-3 border-orange-950 rounded-2xl overflow-hidden p-2 select-none cursor-pointer group shadow-inner"
                 >
                   <div className="relative w-full h-full rounded-xl overflow-hidden bg-amber-50/20">
                     <Image
