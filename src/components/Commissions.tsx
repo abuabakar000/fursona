@@ -16,6 +16,7 @@ interface WishlistItem {
   emoji: string;
   bgColor: string;
   accentColor: string;
+  imageUrl: string;
 }
 
 const wishlistItems: WishlistItem[] = [
@@ -29,7 +30,8 @@ const wishlistItems: WishlistItem[] = [
     budget: "$80 - $150",
     emoji: "🍜",
     bgColor: "bg-violet-50/40",
-    accentColor: "text-rose-500 border-rose-200"
+    accentColor: "text-rose-500 border-rose-200",
+    imageUrl: "/images/wishlist_ramen.png"
   },
   {
     id: "wish-2",
@@ -41,7 +43,8 @@ const wishlistItems: WishlistItem[] = [
     budget: "$35 - $60",
     emoji: "🍪",
     bgColor: "bg-sky-50/40",
-    accentColor: "text-orange-500 border-orange-200"
+    accentColor: "text-orange-500 border-orange-200",
+    imageUrl: "/images/wishlist_cookies.png"
   },
   {
     id: "wish-3",
@@ -53,7 +56,8 @@ const wishlistItems: WishlistItem[] = [
     budget: "$70 - $100",
     emoji: "🍊",
     bgColor: "bg-indigo-50/40",
-    accentColor: "text-amber-500 border-amber-200"
+    accentColor: "text-amber-500 border-amber-200",
+    imageUrl: "/images/wishlist_orange.png"
   },
   {
     id: "wish-4",
@@ -65,7 +69,8 @@ const wishlistItems: WishlistItem[] = [
     budget: "$130 - $220",
     emoji: "💤",
     bgColor: "bg-sky-50/50",
-    accentColor: "text-sky-500 border-sky-200"
+    accentColor: "text-sky-500 border-sky-200",
+    imageUrl: "/images/wishlist_slumber.png"
   }
 ];
 
@@ -113,72 +118,7 @@ const adoredArtists: AdoredArtist[] = [
   }
 ];
 
-const renderSketchDoodle = (id: string) => {
-  if (id === "wish-1") {
-    // Steaming ramen bowl with stars
-    return (
-      <svg className="w-14 h-14 stroke-[#7c2d12]/50 fill-none stroke-[2.5] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 100 100">
-        <path d="M 38,25 C 38,15 42,15 42,8" />
-        <path d="M 50,25 C 50,15 54,15 54,8" />
-        <path d="M 62,25 C 62,15 66,15 66,8" />
-        <path d="M 25,48 C 25,72 75,72 75,48 Z" />
-        <path d="M 20,48 C 30,44 70,44 80,48" />
-        <line x1="45" y1="52" x2="80" y2="18" />
-        <line x1="52" y1="52" x2="85" y2="23" />
-        <path d="M 18,28 L 20,31 L 23,31 L 21,33 L 22,36 L 18,34 L 14,36 L 15,33 L 13,31 L 16,31 Z" className="fill-[#7c2d12]/15 stroke-none" />
-        <path d="M 80,45 L 81.5,48 L 84.5,48 L 82,49.5 L 83,52.5 L 80,50.5 L 77,52.5 L 78,49.5 L 75.5,48 L 78.5,48 Z" className="fill-[#7c2d12]/15 stroke-none" />
-      </svg>
-    );
-  }
-  if (id === "wish-2") {
-    // Chocolate chip cookie with sparkles
-    return (
-      <svg className="w-14 h-14 stroke-[#7c2d12]/50 fill-none stroke-[2.5] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="28" />
-        <circle cx="38" cy="40" r="3" className="fill-[#7c2d12]/50 stroke-none" />
-        <circle cx="52" cy="36" r="3.5" className="fill-[#7c2d12]/50 stroke-none" />
-        <circle cx="44" cy="58" r="3" className="fill-[#7c2d12]/50 stroke-none" />
-        <circle cx="62" cy="52" r="3.5" className="fill-[#7c2d12]/50 stroke-none" />
-        <circle cx="34" cy="54" r="3" className="fill-[#7c2d12]/50 stroke-none" />
-        <path d="M 22,22 Q 24,27 22,32 Q 20,27 22,22 Z" className="fill-[#7c2d12]/20 stroke-none" />
-        <path d="M 76,26 Q 78,31 76,36 Q 74,31 76,26 Z" className="fill-[#7c2d12]/20 stroke-none" />
-        <path d="M 74,68 Q 76,73 74,78 Q 72,73 74,68 Z" className="fill-[#7c2d12]/20 stroke-none" />
-      </svg>
-    );
-  }
-  if (id === "wish-3") {
-    // Orange slice with paw prints
-    return (
-      <svg className="w-14 h-14 stroke-[#7c2d12]/50 fill-none stroke-[2.5] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="28" />
-        <circle cx="50" cy="50" r="24" />
-        <line x1="50" y1="26" x2="50" y2="74" />
-        <line x1="26" y1="50" x2="74" y2="50" />
-        <line x1="33" y1="33" x2="67" y2="67" />
-        <line x1="33" y1="67" x2="67" y2="33" />
-        <path d="M 50,20 C 53,12 61,12 65,17 C 65,23 57,25 50,20 Z" />
-        <path d="M 18,70 C 21,70 23,68 23,65 C 23,63 21,62 18,62 C 15,62 13,63 13,65 C 13,68 15,70 18,70 Z" className="fill-[#7c2d12]/15 stroke-none" />
-        <circle cx="14" cy="59" r="2.2" className="fill-[#7c2d12]/15 stroke-none" />
-        <circle cx="18" cy="55" r="2.5" className="fill-[#7c2d12]/15 stroke-none" />
-        <circle cx="22" cy="59" r="2.2" className="fill-[#7c2d12]/15 stroke-none" />
-        <path d="M 80,30 C 83,30 85,28 85,25 C 85,23 83,22 80,22 C 77,22 75,23 75,25 C 75,28 77,30 80,30 Z" className="fill-[#7c2d12]/15 stroke-none" />
-        <circle cx="76" cy="19" r="2.2" className="fill-[#7c2d12]/15 stroke-none" />
-        <circle cx="80" cy="15" r="2.5" className="fill-[#7c2d12]/15 stroke-none" />
-        <circle cx="84" cy="19" r="2.2" className="fill-[#7c2d12]/15 stroke-none" />
-      </svg>
-    );
-  }
-  // Sleeping crescent moon with stars and ZZZs
-  return (
-    <svg className="w-14 h-14 stroke-[#7c2d12]/50 fill-none stroke-[2.5] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 100 100">
-      <path d="M 52,25 C 38,25 28,36 28,50 C 28,64 38,74 52,74 C 44,74 37.5,67 37.5,54 C 37.5,41 43.5,30 52,25 Z" />
-      <path d="M 18,32 L 20,35 L 24,35 L 21,37 L 22,41 L 18,39 L 14,41 L 15,37 L 12,35 L 16,35 Z" className="fill-[#7c2d12]/15 stroke-none" />
-      <path d="M 72,55 L 73.5,58 L 76.5,58 L 74,59.5 L 75,62.5 L 72,60.5 L 69,62.5 L 70,59.5 L 67.5,58 L 70.5,58 Z" className="fill-[#7c2d12]/15 stroke-none" />
-      <path d="M 64,22 L 72,22 L 64,30 L 72,30" className="stroke-[2]" />
-      <path d="M 74,10 L 80,10 L 74,16 L 80,16" className="stroke-[1.5]" />
-    </svg>
-  );
-};
+
 
 export default function Commissions() {
   return (
@@ -245,25 +185,30 @@ export default function Commissions() {
               }`} />
 
               <div className="space-y-4">
-                {/* Sketchpad Placeholder Image Slot */}
+                 {/* Sketchpad Placeholder Image Slot */}
                 <div className={`relative w-full aspect-[4/3] rounded-xl border-2 border-dashed border-orange-950/20 flex flex-col items-center justify-center overflow-hidden ${item.bgColor} shadow-inner group select-none`}>
                   
                   {/* Grid lines to make it look like sketch paper */}
                   <div className="absolute inset-0 bg-[linear-gradient(rgba(120,53,4,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(120,53,4,0.05)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none" />
                   
-                  {/* Rough Sketch Doodle Background */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-85 group-hover:scale-105 transition-transform duration-300">
-                    {renderSketchDoodle(item.id)}
+                  {/* Cozy Concept Illustration Image */}
+                  <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out">
+                    <img 
+                      src={item.imageUrl} 
+                      alt={item.character} 
+                      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300"
+                    />
                   </div>
 
-                  {/* Floating sketch emoji icon */}
-                  <span className="text-4.5xl filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.12)] group-hover:scale-110 transition-transform duration-300 select-none animate-float-slow z-10">
+                  {/* Emoji Sticker Badge on top right of sketchpad */}
+                  <div className="absolute top-3.5 right-3.5 w-9 h-9 rounded-full bg-white/90 border-2 border-orange-950 flex items-center justify-center text-lg shadow-[2px_2.5px_0px_rgba(120,53,4,0.15)] z-20 rotate-6 group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 select-none">
                     {item.emoji}
-                  </span>
+                  </div>
                   
-                  <div className="flex items-center space-x-1 mt-2 text-gray-400 z-10">
-                    <Pencil className="w-3 h-3" />
-                    <span className="font-comic text-[9px] uppercase font-black tracking-wider">Idea Sketchpad</span>
+                  {/* Bottom Pencil Label */}
+                  <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center space-x-1 text-[9px] font-comic font-bold text-orange-950/40 bg-white/80 px-2 py-0.5 rounded-full border border-orange-950/10 z-20">
+                    <Pencil className="w-2.5 h-2.5 text-orange-950/30" />
+                    <span>Idea Sketchpad</span>
                   </div>
                 </div>
 
