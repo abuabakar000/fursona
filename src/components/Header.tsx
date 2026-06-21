@@ -21,6 +21,25 @@ export default function Header() {
     setTimeout(() => {
       playSound("whoosh");
     }, 100);
+
+    // Use Lenis smooth scroll for anchor links if available
+    const lenis = (window as unknown as Record<string, unknown>).__lenis as {
+      scrollTo: (target: string | number | HTMLElement, opts?: object) => void;
+    } | undefined;
+
+    if (lenis && href.startsWith("#")) {
+      const target = document.querySelector(href);
+      if (target) {
+        // Small delay so the drawer close animation starts first
+        setTimeout(() => {
+          lenis.scrollTo(target as HTMLElement, {
+            offset: -80, // account for sticky header height
+            duration: 1.6,
+            easing: (t: number) => 1 - Math.pow(1 - t, 4),
+          });
+        }, 80);
+      }
+    }
   };
 
   const handleOpenDrawer = () => {

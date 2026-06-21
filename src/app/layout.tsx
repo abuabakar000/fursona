@@ -3,6 +3,7 @@ import { Comic_Neue, Fredoka } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import FloatingPaws from "@/components/FloatingPaws";
 import { AudioProvider } from "@/context/AudioContext";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import "./globals.css";
 
 const comicNeue = Comic_Neue({
@@ -36,15 +37,17 @@ export default function RootLayout({
       className={`${comicNeue.variable} ${fredoka.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-paper-texture">
-        <AudioProvider>
-          {/* Floating animated click details and particles */}
-          <FloatingPaws />
-          
-          {/* Content container */}
-          <div className="relative z-10 flex-1 flex flex-col">
-            {children}
-          </div>
-        </AudioProvider>
+        <SmoothScrollProvider>
+          <AudioProvider>
+            {/* Floating animated click details and particles */}
+            <FloatingPaws />
+            
+            {/* Content container */}
+            <div className="relative z-10 flex-1 flex flex-col">
+              {children}
+            </div>
+          </AudioProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

@@ -14,6 +14,8 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  /* Lenis takes over scroll — disable native scroll behavior to avoid conflicts */
+  scroll-behavior: auto;
   
   /* Default custom cursor: Cute Orange Paw Print */
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 100 100'><path d='M50,85 C62.1,85 71,76.1 71,65 C71,59 64.5,55 50,55 C35.5,55 29,59 29,65 C29,76.1 37.9,85 50,85 Z' fill='%23ea580c'/><circle cx='22' cy='43' r='10' fill='%23ea580c'/><circle cx='38' cy='27' r='11' fill='%23ea580c'/><circle cx='62' cy='27' r='11' fill='%23ea580c'/><circle cx='78' cy='43' r='10' fill='%23ea580c'/></svg>") 12 12, auto;
