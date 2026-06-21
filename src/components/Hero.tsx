@@ -317,16 +317,15 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="font-comic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] text-orange-950 tracking-tight"
           >
-            Soft, Playful <br className="hidden md:inline" />
+            Welcome to <br className="hidden md:inline" />
             <span className="relative inline-block text-orange-600">
-              Furry Art
+              {siteConfig.name}'s Den
               {/* sketchy underline brush effect */}
               <svg className="absolute left-0 -bottom-1.5 w-full h-3 text-amber-400" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0,8 Q50,0 100,8" stroke="currentColor" strokeWidth="4.5" fill="none" strokeLinecap="round" />
               </svg>
             </span>{" "}
-            by <br className="md:hidden" />
-            <span className="text-orange-950">{siteConfig.name}</span>
+            🦊
           </motion.h1>
  
           <motion.p 
@@ -335,7 +334,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-orange-900/90 text-lg md:text-xl lg:text-2xl font-sans max-w-xl leading-relaxed pt-2"
           >
-            {siteConfig.mascot.bio}
+            A cozy little corner of the internet for my fursona, art collection, and furry friends!
           </motion.p>
  
           {/* CTA Buttons */}

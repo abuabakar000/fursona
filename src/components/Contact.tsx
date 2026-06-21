@@ -38,22 +38,56 @@ export default function Contact() {
       return;
     }
 
-    // Mock API Call delay
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      
-      // Play success chime
-      playSound("success");
+    try {
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_default";
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_default";
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "user_default";
 
-      // Fire confetti for celebration!
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#fb923c", "#fcd34d", "#fca5a5", "#fdba74"],
+      if (serviceId === "service_default" || templateId === "template_default" || publicKey === "user_default") {
+        console.warn("EmailJS keys are not configured in environment variables. Set NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY in .env.local to send real emails.");
+      }
+
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            from_name: formData.name,
+            species: formData.species,
+            found_from: formData.foundFrom,
+            message: formData.message,
+          },
+        }),
       });
-    }, 1200);
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        setSubmitted(true);
+        playSound("success");
+
+        // Fire confetti for celebration!
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#fb923c", "#fcd34d", "#fca5a5", "#fdba74"],
+        });
+      } else {
+        const errText = await response.text();
+        console.error("EmailJS sending failed:", errText);
+        throw new Error(errText);
+      }
+    } catch (err) {
+      console.error("EmailJS Error:", err);
+      setIsSubmitting(false);
+      setError("Oh noes! Something went wrong, try again! 😿");
+      playSound("pop");
+    }
   };
 
   const socialLinks = [
@@ -204,10 +238,10 @@ export default function Contact() {
                 </div>
                 <div className="space-y-3">
                   <h3 className="font-comic text-2xl md:text-3xl font-black text-orange-950 uppercase">
-                    Boop sent successfully!
+                    Boop received! 🐾
                   </h3>
                   <p className="text-orange-950 max-w-md mx-auto text-sm md:text-base leading-relaxed font-sans font-medium">
-                    Thank you so much! Your message has been sent. I'll read your note and look forward to chatting with you! *happy tail wiggles* 🐾
+                    Citrini will get back to you soon!
                   </p>
                 </div>
 

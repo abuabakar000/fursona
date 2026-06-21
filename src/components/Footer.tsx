@@ -11,12 +11,12 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         
         {/* Left Side */}
-        <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
+        <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-1.5">
           <span className="font-comic text-xl font-bold text-orange-950">
-            {siteConfig.name} Portfolio Template 🐾
+            🐾 {siteConfig.name}'s Den · Made with love
           </span>
           <p className="text-xs text-orange-900/60 font-sans max-w-sm">
-            Designed for artists to showcase furry art, reference sheets, and process commissions effortlessly.
+            A cozy corner of the web for my fursona and furry friends.
           </p>
         </div>
 
@@ -72,7 +72,7 @@ export default function Footer() {
           <div className="flex items-center space-x-1.5 text-xs text-orange-900/60 font-sans">
             <span>Made with</span>
             <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
-            <span>for the furry art community.</span>
+            <span>for the furry community.</span>
           </div>
           <span className="text-[10px] text-orange-900/40 font-sans">
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.

@@ -114,65 +114,33 @@ const adoredArtists: AdoredArtist[] = [
 ];
 
 const renderSketchDoodle = (id: string) => {
-  if (id === "wish-1") {
+  if (id === "wish-1" || id === "wish-3") {
+    // Soft doodle style question mark with stars
     return (
-      <svg className="w-14 h-14 stroke-orange-950/25 fill-none stroke-[2.5]" viewBox="0 0 100 100">
-        {/* Bowl body */}
-        <path d="M 22,48 C 22,72 78,72 78,48" />
-        {/* Bowl rim */}
-        <path d="M 18,48 C 30,44 70,44 82,48" />
-        {/* Chopsticks */}
-        <line x1="45" y1="52" x2="82" y2="18" />
-        <line x1="52" y1="52" x2="85" y2="23" />
-        {/* Steam */}
-        <path d="M 33,35 Q 30,27 33,20" />
-        <path d="M 48,32 Q 51,22 48,14" />
-        <path d="M 63,35 Q 60,27 63,20" />
+      <svg className="w-16 h-16 stroke-orange-950/25 fill-none stroke-[2.5] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 100 100">
+        <path d="M 40,32 C 40,18 62,18 62,32 C 62,43 50,47 50,56" />
+        <circle cx="50" cy="70" r="3" className="fill-orange-950/25 stroke-none" />
+        <path d="M 25,25 L 27,29 L 31,29 L 28,31 L 29,35 L 25,32 L 21,35 L 22,31 L 19,29 L 23,29 Z" className="fill-orange-950/15 stroke-none" />
+        <path d="M 75,55 L 76.5,58 L 79.5,58 L 77,59.5 L 78,62.5 L 75,60.5 L 72,62.5 L 73,59.5 L 70.5,58 L 73.5,58 Z" className="fill-orange-950/15 stroke-none" />
+        <path d="M 70,22 Q 72,27 70,32 Q 68,27 70,22 Z" className="fill-orange-950/20 stroke-none" />
       </svg>
     );
   }
-  if (id === "wish-2") {
-    return (
-      <svg className="w-14 h-14 stroke-orange-950/25 fill-none stroke-[2.5]" viewBox="0 0 100 100">
-        {/* Cookie outline */}
-        <path d="M 50,22 C 66,22 78,34 78,50 C 78,66 66,78 50,78 C 34,78 22,66 22,50 C 22,34 34,22 50,22 Z" />
-        {/* Bite mark */}
-        <path d="M 72,36 C 68,37 66,41 66,45 C 66,49 70,52 74,51" className="stroke-white" />
-        <path d="M 72,36 C 68,37 66,41 66,45 C 66,49 70,52 74,51" />
-        {/* Chocolate chips */}
-        <circle cx="36" cy="42" r="3.5" className="fill-orange-950/25 stroke-none" />
-        <circle cx="54" cy="36" r="4.5" className="fill-orange-950/25 stroke-none" />
-        <circle cx="44" cy="60" r="3.5" className="fill-orange-950/25 stroke-none" />
-        <circle cx="62" cy="56" r="3.5" className="fill-orange-950/25 stroke-none" />
-        <circle cx="32" cy="54" r="4" className="fill-orange-950/25 stroke-none" />
-      </svg>
-    );
-  }
-  if (id === "wish-3") {
-    return (
-      <svg className="w-14 h-14 stroke-orange-950/25 fill-none stroke-[2.5]" viewBox="0 0 100 100">
-        {/* Orange Outer Circle */}
-        <circle cx="50" cy="50" r="30" />
-        {/* Orange Inner Circle */}
-        <circle cx="50" cy="50" r="26" />
-        {/* Orange slices */}
-        <line x1="50" y1="20" x2="50" y2="80" />
-        <line x1="20" y1="50" x2="80" y2="50" />
-        <line x1="29" y1="29" x2="71" y2="71" />
-        <line x1="29" y1="71" x2="71" y2="29" />
-        {/* Little Leaf */}
-        <path d="M 50,20 C 53,10 63,10 67,16 C 67,23 57,25 50,20 Z" />
-      </svg>
-    );
-  }
+  // Curled up sleeping fennec fox outline with Zzz's
   return (
-    <svg className="w-14 h-14 stroke-orange-950/25 fill-none stroke-[2.5]" viewBox="0 0 100 100">
-      {/* Crescent Moon */}
-      <path d="M 58,25 C 44,25 34,36 34,50 C 34,64 45,74 59,74 C 50,74 43.5,67 43.5,54 C 43.5,41 49.5,30 58,25 Z" />
-      {/* Stars */}
-      <path d="M 23,34 L 25,37 L 29,37 L 26,39 L 27,43 L 23,40 L 19,43 L 20,39 L 17,37 L 21,37 Z" className="fill-orange-950/20" />
-      {/* Cloud line */}
-      <path d="M 22,70 C 22,65 29,62 35,65 C 38,60 48,60 51,66 C 56,63 64,66 64,71 L 22,71" />
+    <svg className="w-16 h-16 stroke-orange-950/25 fill-none stroke-[2.2] stroke-linecap-round stroke-linejoin-round" viewBox="0 0 100 100">
+      {/* Curled body circle */}
+      <path d="M 32,62 C 22,53 22,36 35,27 C 48,18 66,22 73,34 C 80,47 76,62 64,68 C 52,74 38,70 32,62 Z" />
+      {/* Huge fennec ears */}
+      <path d="M 35,27 C 29,15 17,14 19,24 C 21,32 30,34 35,27 Z" />
+      <path d="M 45,21 C 41,10 30,9 31,18 C 32,25 40,26 45,21 Z" />
+      {/* Curled tail wrapping */}
+      <path d="M 32,62 C 40,66 52,66 58,59 C 64,52 61,43 55,41 C 48,39 44,48 48,55 C 52,60 58,57 60,50" />
+      {/* Sleeping closed eye */}
+      <path d="M 54,34 Q 57,37 60,34" />
+      {/* Dreaming Zzz */}
+      <path d="M 74,18 L 80,18 L 74,24 L 80,24" className="stroke-[1.5]" />
+      <path d="M 81,10 L 85,10 L 81,14 L 85,14" className="stroke-[1]" />
     </svg>
   );
 };

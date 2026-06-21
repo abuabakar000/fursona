@@ -81,7 +81,7 @@ export const siteConfig = {
     { label: "Home", href: "#home" },
     { label: "Profile", href: "#about" },
     { label: "Ref Gallery", href: "#gallery" },
-    { label: "Trade Rates", href: "#commissions" },
+    { label: "Art Wishlist", href: "#commissions" },
     { label: "Get In Touch", href: "#contact" },
   ],
   
