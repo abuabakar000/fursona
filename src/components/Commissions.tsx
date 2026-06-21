@@ -156,7 +156,13 @@ export default function Commissions() {
       <div className="max-w-6xl mx-auto space-y-16 relative">
         
         {/* Section Heading */}
-        <div className="text-center space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4"
+        >
           <motion.div 
             initial={{ scale: 0.95 }}
             animate={{ scale: [1, 1.03, 1] }}
@@ -172,10 +178,16 @@ export default function Commissions() {
           <p className="text-orange-900/80 font-sans max-w-xl mx-auto text-base sm:text-lg">
             Art I dream of getting commissioned someday! Hover over each card to check out my character reference ideas.
           </p>
-        </div>
+        </motion.div>
 
         {/* Wishlist Grid */}
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-8 px-4 -mx-4 sm:px-0 sm:mx-0">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-8 px-4 -mx-4 sm:px-0 sm:mx-0"
+        >
           {wishlistItems.map((item, index) => (
             <motion.div
               key={item.id}
@@ -254,10 +266,16 @@ export default function Commissions() {
 
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Artists I Adore bottom row */}
-        <div className="space-y-8 pt-12 border-t border-dashed border-amber-200">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="space-y-8 pt-12 border-t border-dashed border-amber-200"
+        >
           <div className="text-center space-y-1">
             <h3 className="font-comic text-2xl md:text-3xl font-black text-orange-950 flex items-center justify-center space-x-1.5">
               <Star className="w-5 h-5 text-orange-500 fill-orange-500" />
@@ -274,7 +292,11 @@ export default function Commissions() {
             {adoredArtists.map((artist, idx) => (
               <motion.div
                 key={artist.handle}
-                whileHover={{ y: -5 }}
+                initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ type: "spring", stiffness: 100, damping: 15, delay: idx * 0.08 }}
+                whileHover={{ y: -5, scale: 1.02 }}
                 className="bg-white border-3 border-orange-950 p-5 rounded-2xl flex flex-col items-center space-y-4 shadow-[5px_6px_0px_#451a03] max-w-[195px] w-full text-center relative overflow-visible"
               >
                 {/* Small customized badge stuck to the top right of card */}
@@ -311,7 +333,7 @@ export default function Commissions() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

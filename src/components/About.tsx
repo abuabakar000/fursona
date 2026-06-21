@@ -191,7 +191,13 @@ export default function About() {
         </div>
 
         {/* Right Side: RPG Character Card bio */}
-        <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="lg:col-span-7 flex flex-col space-y-6 text-left"
+        >
           <div className="space-y-2">
             <h2 className="font-comic text-3xl sm:text-4xl font-black text-orange-950 flex flex-wrap items-center gap-2">
               <span>Meet {siteConfig.name}!</span>
@@ -203,7 +209,13 @@ export default function About() {
           </div>
 
           {/* Interactive RPG details frame */}
-          <div className={`bg-white border-3 border-orange-950 p-5 md:p-6 shadow-[5px_6px_0px_#451a03] grid grid-cols-1 md:grid-cols-2 gap-6 ${sketchyBorderStyles.card}`}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.15 }}
+            className={`bg-white border-3 border-orange-950 p-5 md:p-6 shadow-[5px_6px_0px_#451a03] grid grid-cols-1 md:grid-cols-2 gap-6 ${sketchyBorderStyles.card}`}
+          >
             
             {/* Left Col: Color Palette with Copy HEX codes */}
             <div className="space-y-3.5">
@@ -288,16 +300,22 @@ export default function About() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* SFW Profile rules shield */}
-          <div className="flex items-center space-x-3 p-3.5 bg-amber-100/40 border border-dashed border-orange-900/40 rounded-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex items-center space-x-3 p-3.5 bg-amber-100/40 border border-dashed border-orange-900/40 rounded-lg"
+          >
             <ShieldCheck className="w-6 h-6 text-orange-700 flex-shrink-0" />
             <p className="text-xs text-orange-950 leading-relaxed font-medium font-sans">
               <strong>SFW Profile Rules:</strong> This page represents a clean, SFW furry character space. Anyone is welcome to draw Citrini as long as the content stays PG-13!
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
       </div>
     </section>

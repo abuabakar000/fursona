@@ -4,11 +4,18 @@ import React from "react";
 import { siteConfig } from "@/config/site";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { Mail, Globe, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
     <footer className="w-full px-6 py-8 md:py-12 bg-amber-50/80 border-t-2 border-dashed border-amber-200">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8"
+      >
         
         {/* Left Side */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-1.5">
@@ -79,7 +86,7 @@ export default function Footer() {
           </span>
         </div>
 
-      </div>
+      </motion.div>
     </footer>
   );
 }

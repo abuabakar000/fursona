@@ -325,7 +325,13 @@ export default function Gallery() {
       <div className="max-w-6xl mx-auto space-y-12 relative z-10">
         
         {/* Heading */}
-        <div className="text-center space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4"
+        >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950">
               Art Gallery & Refsheets 🐾
@@ -335,10 +341,16 @@ export default function Gallery() {
           <p className="text-orange-900/80 font-sans max-w-xl mx-auto text-base sm:text-lg">
             Browse through my favorite drawings and character reference pages! Give them a double tap or heart to show love.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cuteness Melt Meter thermometer */}
-        <div className="bg-white border-3 border-orange-950 p-6 rounded-[25px_15px_30px_15px/15px_30px_15px_25px] shadow-[5px_6px_0px_#451a03] max-w-xl mx-auto flex flex-col items-center space-y-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.1 }}
+          className="bg-white border-3 border-orange-950 p-6 rounded-[25px_15px_30px_15px/15px_30px_15px_25px] shadow-[5px_6px_0px_#451a03] max-w-xl mx-auto flex flex-col items-center space-y-4"
+        >
           <div className="flex items-center justify-between w-full">
             <span className="font-comic font-black text-orange-950 text-sm sm:text-base flex items-center gap-1.5 select-none">
               🌡️ Citrini's Melt Meter
@@ -375,7 +387,7 @@ export default function Gallery() {
               ? "Oh goodness! You made Citrini completely melt into a warm puddle of orange juice! 🧡🍊✨ Thank you!"
               : "Help Citrini melt! Click ❤️ on art, double-tap images, or leave sweet guestbook comments! 🐾"}
           </p>
-        </div>
+        </motion.div>
 
         {/* Filter Tags styled like stickers */}
         <div className="flex flex-wrap justify-center gap-3.5">
@@ -401,6 +413,10 @@ export default function Gallery() {
         {/* Gallery Grid: Polaroid Scrapbook Layout */}
         <motion.div 
           layout 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, delay: 0.2 }}
           className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 pt-4 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-8 px-4 -mx-4 sm:px-0 sm:mx-0"
         >
           <AnimatePresence mode="popLayout">

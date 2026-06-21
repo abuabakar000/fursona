@@ -6,6 +6,7 @@ import { sketchyBorderStyles } from "@/utils/sketchy";
 import { Send, Sparkles, AlertCircle, Heart } from "lucide-react";
 import { useAudio } from "@/context/AudioContext";
 import confetti from "canvas-confetti";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -103,17 +104,29 @@ export default function Contact() {
       <div className="max-w-4xl mx-auto space-y-12">
         
         {/* Heading */}
-        <div className="text-center space-y-3">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-3"
+        >
           <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950">
             Let's Be Friends! 🐾
           </h2>
           <p className="text-orange-900/80 font-sans max-w-xl mx-auto text-base sm:text-lg">
             Spotted a cool sona? Want to chat? Send me a friendly boop message!
           </p>
-        </div>
+        </motion.div>
 
         {/* Notebook container */}
-        <div className="relative">
+        <motion.div
+          initial={{ opacity: 0, y: 50, rotate: -1.5 }}
+          whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 60, damping: 15 }}
+          className="relative"
+        >
           {/* Spiral binding rings at the top */}
           <div className="absolute top-[-18px] left-0 right-0 flex justify-around px-8 pointer-events-none z-10">
             {Array.from({ length: 12 }).map((_, i) => (
@@ -264,24 +277,29 @@ export default function Contact() {
               </h3>
               
               <div className="flex flex-wrap justify-center gap-3">
-                {socialLinks.map((social) => (
-                  <a
+                {socialLinks.map((social, idx) => (
+                  <motion.a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => playSound("click")}
+                    initial={{ opacity: 0, scale: 0.8, rotate: idx % 2 === 0 ? -10 : 10 }}
+                    whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ type: "spring", stiffness: 120, damping: 12, delay: idx * 0.05 }}
+                    whileHover={{ scale: 1.05, rotate: idx % 2 === 0 ? 3 : -3 }}
                     className={`px-3 py-1.5 bg-orange-100/50 hover:bg-orange-500 hover:text-white border-2 border-orange-950 font-comic font-black text-[10px] sm:text-xs flex items-center space-x-1 shadow-[2px_2px_0px_#451a03] hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1px_1.5px_0px_#451a03] transition-all duration-150 ${sketchyBorderStyles.badge}`}
                   >
                     <span className="text-sm leading-none select-none">{social.icon}</span>
                     <span>{social.name}</span>
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>
 
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>
