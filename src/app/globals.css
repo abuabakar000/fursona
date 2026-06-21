@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfbf7; /* Warm cream paper */
+  --foreground: #2d1606; /* Dark brown wood-pencil feel */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --font-comic: var(--font-comic), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Android Emoji", EmojiSymbols, cursive;
+  --font-sans: var(--font-fredoka), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Android Emoji", EmojiSymbols, sans-serif;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  
+  /* Default custom cursor: Cute Orange Paw Print */
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 100 100'><path d='M50,85 C62.1,85 71,76.1 71,65 C71,59 64.5,55 50,55 C35.5,55 29,59 29,65 C29,76.1 37.9,85 50,85 Z' fill='%23ea580c'/><circle cx='22' cy='43' r='10' fill='%23ea580c'/><circle cx='38' cy='27' r='11' fill='%23ea580c'/><circle cx='62' cy='27' r='11' fill='%23ea580c'/><circle cx='78' cy='43' r='10' fill='%23ea580c'/></svg>") 12 12, auto;
+}
+
+/* Hover/Pointer custom cursor: Cute Paintbrush */
+a, button, select, option, [role="button"], input[type="submit"], input[type="button"], .cursor-pointer {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ea580c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M18 22H3v-3l6-6 4 4-6 6Z' fill='%23ffedd5'/><path d='M21 3l-8.5 8.5'/><path d='M19 5l-1.5 1.5'/><path d='M21 7l-1.5 1.5'/><path d='M9 13l4-4'/></svg>") 0 24, pointer !important;
+}
+
+/* Custom handwritten / comic styling helper */
+.font-comic {
+  font-family: var(--font-comic), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Android Emoji", EmojiSymbols, cursive;
+}
+
+/* Paper watercolor overlay filter */
+.bg-paper-texture {
+  position: relative;
+}
+
+.bg-paper-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  background-image: url("/images/bg-paper.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Custom selection */
+::selection {
+  background-color: #fdba74;
+  color: #7c2d12;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdfbf7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fed7aa;
+  border-radius: 9999px;
+  border: 2px solid #fdfbf7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fdba74;
 }
