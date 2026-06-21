@@ -130,6 +130,20 @@ export default function About() {
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
+        {/* Section Heading at the top spanning all columns */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="lg:col-span-12 text-left mb-2"
+        >
+          <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950 flex flex-wrap items-center justify-start gap-2">
+            <span>Meet {siteConfig.name}!</span>
+            <span className="animate-spin text-2xl text-amber-500 duration-1000">✨</span>
+          </h2>
+        </motion.div>
+
         {/* Left Side: Polaroid Photo of Citrini with interactive Boop Game! */}
         <div className="lg:col-span-5 flex flex-col items-center relative">
           
@@ -198,15 +212,9 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="lg:col-span-7 flex flex-col space-y-6 text-left"
         >
-          <div className="space-y-2">
-            <h2 className="font-comic text-3xl sm:text-4xl font-black text-orange-950 flex flex-wrap items-center gap-2">
-              <span>Meet {siteConfig.name}!</span>
-              <span className="animate-spin text-2xl text-amber-500 duration-1000">✨</span>
-            </h2>
-            <p className="text-orange-900/90 font-sans text-base sm:text-lg leading-relaxed">
-              {siteConfig.mascot.bio}
-            </p>
-          </div>
+          <p className="text-orange-900/90 font-sans text-base sm:text-lg leading-relaxed text-left">
+            {siteConfig.mascot.bio}
+          </p>
 
           {/* Interactive RPG details frame */}
           <motion.div

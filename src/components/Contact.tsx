@@ -109,12 +109,12 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-3"
+          className="text-left space-y-3"
         >
           <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950">
             Let's Be Friends! 🐾
           </h2>
-          <p className="text-orange-900/80 font-sans max-w-xl mx-auto text-base sm:text-lg">
+          <p className="text-orange-900/80 font-sans max-w-xl text-base sm:text-lg">
             Spotted a cool sona? Want to chat? Send me a friendly boop message!
           </p>
         </motion.div>
@@ -223,7 +223,7 @@ export default function Contact() {
                 </div>
 
                 {/* Submit button */}
-                <div className="pt-1 text-right">
+                <div className="pt-1 text-center md:text-right">
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -271,12 +271,12 @@ export default function Contact() {
             )}
 
             {/* Find Me Online Row - Circular sticker style buttons */}
-            <div className="pt-6 border-t border-dashed border-orange-900/10 mt-6 text-center">
-              <h3 className="font-comic text-base sm:text-lg font-black text-orange-950 mb-4 select-none">
+            <div className="pt-6 border-t border-dashed border-orange-900/10 mt-6 text-left">
+              <h3 className="font-comic text-base sm:text-lg font-black text-orange-950 mb-4 select-none text-left">
                 Find Me Online! 🌐
               </h3>
               
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="flex flex-wrap justify-start gap-3">
                 {socialLinks.map((social, idx) => (
                   <motion.a
                     key={social.name}

@@ -12,6 +12,7 @@ const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export function AudioProvider({ children }: { children: React.ReactNode }) {
   const [isMuted, setIsMuted] = useState<boolean>(true);
+  const audioCtxRef = React.useRef<AudioContext | null>(null);
 
   // Sync mute state with localStorage if available
   useEffect(() => {
@@ -36,9 +37,16 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   const playSound = (type: "pop" | "like" | "success" | "chime" | "melt" | "boop" | "poke" | "whoosh" | "click" | "fill") => {
     if (isMuted || typeof window === "undefined") return;
     try {
-      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
+      let ctx = audioCtxRef.current;
+      if (!ctx) {
+        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+        if (!AudioCtx) return;
+        ctx = new AudioCtx();
+        audioCtxRef.current = ctx;
+      }
+      if (ctx.state === "suspended") {
+        ctx.resume();
+      }
       const now = ctx.currentTime;
 
       if (type === "pop") {

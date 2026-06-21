@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { siteConfig, GalleryItem } from "@/config/site";
 import { sketchyBorderStyles } from "@/utils/sketchy";
@@ -38,6 +38,29 @@ const mockCommentsMap: Record<string, MockComments[]> = {
 export default function Gallery() {
   const [filter, setFilter] = useState<string>("all");
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+  const [galleryActiveIndex, setGalleryActiveIndex] = useState(0);
+
+  const handleGalleryScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (window.innerWidth >= 640) return;
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth - container.clientWidth;
+    if (scrollWidth <= 0) return;
+    const pct = scrollLeft / scrollWidth;
+    const index = Math.min(
+      filteredGallery.length - 1,
+      Math.max(0, Math.round(pct * (filteredGallery.length - 1)))
+    );
+    setGalleryActiveIndex(index);
+  };
+
+  useEffect(() => {
+    setGalleryActiveIndex(0);
+    if (galleryScrollRef.current) {
+      galleryScrollRef.current.scrollLeft = 0;
+    }
+  }, [filter]);
   
   // Shared audio context
   const { playSound } = useAudio();
@@ -330,15 +353,15 @@ export default function Gallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-4"
+          className="text-left space-y-4 animate-heading"
         >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-start justify-start gap-4">
             <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950">
               Art Gallery & Refsheets 🐾
             </h2>
           </div>
           
-          <p className="text-orange-900/80 font-sans max-w-xl mx-auto text-base sm:text-lg">
+          <p className="text-orange-900/80 font-sans max-w-xl text-base sm:text-lg">
             Browse through my favorite drawings and character reference pages! Give them a double tap or heart to show love.
           </p>
         </motion.div>
@@ -413,6 +436,8 @@ export default function Gallery() {
         {/* Gallery Grid: Polaroid Scrapbook Layout */}
         <motion.div 
           layout 
+          ref={galleryScrollRef}
+          onScroll={handleGalleryScroll}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -501,6 +526,31 @@ export default function Gallery() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Sketchy dots for mobile slider */}
+        <div className="flex sm:hidden justify-center items-center space-x-2.5 pt-2 pb-4 select-none">
+          {filteredGallery.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                const container = galleryScrollRef.current;
+                if (container) {
+                  const cardWidth = container.scrollWidth / filteredGallery.length;
+                  container.scrollTo({
+                    left: cardWidth * idx,
+                    behavior: "smooth"
+                  });
+                }
+              }}
+              className={`w-3.5 h-3.5 border-2 border-orange-950 transition-all duration-300 ${
+                galleryActiveIndex === idx
+                  ? "bg-orange-500 scale-110 rotate-[6deg] rounded-[40%_60%_40%_60%/60%_40%_60%_40%]"
+                  : "bg-amber-100 rounded-full"
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
 
         {/* Lightbox Modal with interactive comment form & mascot */}
         <AnimatePresence>

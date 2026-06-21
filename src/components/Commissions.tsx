@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { Heart, Sparkles, Star, Flame, Coffee, ExternalLink, Pencil, Camera } from "lucide-react";
 import { motion } from "framer-motion";
@@ -121,6 +121,40 @@ const adoredArtists: AdoredArtist[] = [
 
 
 export default function Commissions() {
+  const wishlistScrollRef = useRef<HTMLDivElement>(null);
+  const [wishlistActiveIndex, setWishlistActiveIndex] = useState(0);
+
+  const handleWishlistScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (window.innerWidth >= 640) return;
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth - container.clientWidth;
+    if (scrollWidth <= 0) return;
+    const pct = scrollLeft / scrollWidth;
+    const index = Math.min(
+      wishlistItems.length - 1,
+      Math.max(0, Math.round(pct * (wishlistItems.length - 1)))
+    );
+    setWishlistActiveIndex(index);
+  };
+
+  const artistsScrollRef = useRef<HTMLDivElement>(null);
+  const [artistsActiveIndex, setArtistsActiveIndex] = useState(0);
+
+  const handleArtistsScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (window.innerWidth >= 640) return;
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth - container.clientWidth;
+    if (scrollWidth <= 0) return;
+    const pct = scrollLeft / scrollWidth;
+    const index = Math.min(
+      adoredArtists.length - 1,
+      Math.max(0, Math.round(pct * (adoredArtists.length - 1)))
+    );
+    setArtistsActiveIndex(index);
+  };
+
   return (
     <section id="commissions" className="w-full px-6 py-16 md:py-24 bg-amber-50/40 overflow-hidden relative border-t-2 border-dashed border-amber-200">
       
@@ -161,7 +195,7 @@ export default function Commissions() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-4"
+          className="text-left space-y-4"
         >
           <motion.div 
             initial={{ scale: 0.95 }}
@@ -172,16 +206,18 @@ export default function Commissions() {
             <span>My Art Wishlist 🎨</span>
           </motion.div>
           
-          <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950">
+          <h2 className="font-comic text-3xl sm:text-4xl md:text-5xl font-black text-orange-950 text-left">
             My Art Wishlist 🎨
           </h2>
-          <p className="text-orange-900/80 font-sans max-w-xl mx-auto text-base sm:text-lg">
+          <p className="text-orange-900/80 font-sans max-w-xl text-base sm:text-lg">
             Art I dream of getting commissioned someday! Hover over each card to check out my character reference ideas.
           </p>
         </motion.div>
 
         {/* Wishlist Grid */}
         <motion.div
+          ref={wishlistScrollRef}
+          onScroll={handleWishlistScroll}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -268,6 +304,31 @@ export default function Commissions() {
           ))}
         </motion.div>
 
+        {/* Sketchy dots for mobile wishlist slider */}
+        <div className="flex sm:hidden justify-center items-center space-x-2.5 pt-1 pb-4 select-none">
+          {wishlistItems.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                const container = wishlistScrollRef.current;
+                if (container) {
+                  const cardWidth = container.scrollWidth / wishlistItems.length;
+                  container.scrollTo({
+                    left: cardWidth * idx,
+                    behavior: "smooth"
+                  });
+                }
+              }}
+              className={`w-3.5 h-3.5 border-2 border-orange-950 transition-all duration-300 ${
+                wishlistActiveIndex === idx
+                  ? "bg-orange-500 scale-110 rotate-[6deg] rounded-[40%_60%_40%_60%/60%_40%_60%_40%]"
+                  : "bg-amber-100 rounded-full"
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
+
         {/* Artists I Adore bottom row */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -276,19 +337,23 @@ export default function Commissions() {
           transition={{ duration: 0.6 }}
           className="space-y-8 pt-12 border-t border-dashed border-amber-200"
         >
-          <div className="text-center space-y-1">
-            <h3 className="font-comic text-2xl md:text-3xl font-black text-orange-950 flex items-center justify-center space-x-1.5">
+          <div className="text-left space-y-1">
+            <h3 className="font-comic text-2xl md:text-3xl font-black text-orange-950 flex items-center justify-start space-x-1.5">
               <Star className="w-5 h-5 text-orange-500 fill-orange-500" />
               <span>Artists I Adore 💖</span>
               <Heart className="w-5 h-5 text-red-500 fill-red-500" />
             </h3>
-            <p className="text-orange-900/70 font-sans text-xs sm:text-sm max-w-md mx-auto">
+            <p className="text-orange-900/70 font-sans text-xs sm:text-sm max-w-md">
               Incredible creators whose style I absolutely worship. Click below to view their art pages!
             </p>
           </div>
 
           {/* Artist Circular Profiles */}
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-4xl mx-auto">
+          <div 
+            ref={artistsScrollRef}
+            onScroll={handleArtistsScroll}
+            className="flex overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-6 px-4 -mx-4 sm:px-0 sm:mx-0 sm:flex-wrap sm:justify-center gap-6 md:gap-8 max-w-4xl mx-auto"
+          >
             {adoredArtists.map((artist, idx) => (
               <motion.div
                 key={artist.handle}
@@ -297,7 +362,7 @@ export default function Commissions() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ type: "spring", stiffness: 100, damping: 15, delay: idx * 0.08 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white border-3 border-orange-950 p-5 rounded-2xl flex flex-col items-center space-y-4 shadow-[5px_6px_0px_#451a03] max-w-[195px] w-full text-center relative overflow-visible"
+                className="bg-white border-3 border-orange-950 p-5 rounded-2xl flex flex-col items-center space-y-4 shadow-[5px_6px_0px_#451a03] w-[65vw] max-w-[195px] flex-shrink-0 snap-center sm:w-auto text-center relative overflow-visible"
               >
                 {/* Small customized badge stuck to the top right of card */}
                 <div className={`absolute -top-3.5 -right-2 px-2 py-0.5 border border-orange-950 font-comic font-black text-[9px] rotate-[10deg] shadow-sm ${sketchyBorderStyles.badge} ${artist.badgeColor} z-10`}>
@@ -331,6 +396,31 @@ export default function Commissions() {
                   <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </motion.div>
+            ))}
+          </div>
+
+          {/* Sketchy dots for mobile artists slider */}
+          <div className="flex sm:hidden justify-center items-center space-x-2.5 pt-1 pb-4 select-none">
+            {adoredArtists.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  const container = artistsScrollRef.current;
+                  if (container) {
+                    const cardWidth = container.scrollWidth / adoredArtists.length;
+                    container.scrollTo({
+                      left: cardWidth * idx,
+                      behavior: "smooth"
+                    });
+                  }
+                }}
+                className={`w-3.5 h-3.5 border-2 border-orange-950 transition-all duration-300 ${
+                  artistsActiveIndex === idx
+                    ? "bg-orange-500 scale-110 rotate-[6deg] rounded-[40%_60%_40%_60%/60%_40%_60%_40%]"
+                    : "bg-amber-100 rounded-full"
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
             ))}
           </div>
         </motion.div>

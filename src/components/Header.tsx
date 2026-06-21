@@ -141,7 +141,7 @@ export default function Header() {
                 </div>
 
                 {/* Links List */}
-                <nav className="flex flex-col space-y-7 pl-8 md:pl-12 my-auto text-left">
+                <nav className="flex flex-col space-y-7 pl-8 md:pl-12 mt-6 sm:mt-10 mb-auto text-left">
                   {siteConfig.navigation.map((item, index) => (
                     <motion.a
                       key={item.label}

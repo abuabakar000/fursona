@@ -109,7 +109,7 @@ export default function Hero() {
     const y = e.clientY - rect.top;
     
     // Spawn sparkles
-    const newSparkles = Array.from({ length: 5 }).map((_, i) => ({
+    const newSparkles = Array.from({ length: 3 }).map((_, i) => ({
       id: Date.now() + i,
       x: x + (Math.random() * 60 - 30),
       y: y + (Math.random() * 60 - 30),
@@ -310,7 +310,7 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
         
         {/* Left Text details */}
-        <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
+        <div className="lg:col-span-6 flex flex-col items-start text-left space-y-4">
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -379,7 +379,7 @@ export default function Hero() {
               className="relative w-full h-full flex items-center justify-center p-2"
               animate={{
                 x: mouseOffset.x,
-                y: mouseOffset.y + Math.sin(Date.now() / 800) * 4, // Gentle breathing overlay
+                y: mouseOffset.y,
                 rotate: mouseOffset.x * 0.4,
               }}
               transition={{
@@ -405,14 +405,27 @@ export default function Hero() {
                 )}
               </AnimatePresence>
 
-              <Image
-                src={siteConfig.mascot.imageUrl}
-                alt={siteConfig.mascot.name}
-                width={450}
-                height={450}
-                className="object-contain max-h-[95%] drop-shadow-[8px_12px_0px_rgba(251,146,60,0.15)] group-hover:scale-102 transition-transform duration-300"
-                priority
-              />
+              {/* Nested div for hardware-accelerated continuous breathing */}
+              <motion.div
+                className="w-full h-full flex items-center justify-center animate-breathing"
+                animate={{
+                  y: [0, -5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 3.5,
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src={siteConfig.mascot.imageUrl}
+                  alt={siteConfig.mascot.name}
+                  width={450}
+                  height={450}
+                  className="object-contain max-h-[95%] drop-shadow-[8px_12px_0px_rgba(251,146,60,0.15)] group-hover:scale-102 transition-transform duration-300"
+                  priority
+                />
+              </motion.div>
             </motion.div>
  
             {/* Tap prompt */}
