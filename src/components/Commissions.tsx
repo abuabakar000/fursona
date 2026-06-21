@@ -188,9 +188,6 @@ export default function Commissions() {
                  {/* Sketchpad Placeholder Image Slot */}
                 <div className={`relative w-full aspect-[4/3] rounded-xl border-2 border-dashed border-orange-950/20 flex flex-col items-center justify-center overflow-hidden ${item.bgColor} shadow-inner group select-none`}>
                   
-                  {/* Grid lines to make it look like sketch paper */}
-                  <div className="absolute inset-0 bg-[linear-gradient(rgba(120,53,4,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(120,53,4,0.05)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none" />
-                  
                   {/* Cozy Concept Illustration Image */}
                   <div className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out">
                     <img 
@@ -199,6 +196,9 @@ export default function Commissions() {
                       className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-300"
                     />
                   </div>
+
+                  {/* Grid lines to make it look like sketch paper */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(120,53,4,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(120,53,4,0.05)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none z-10" />
 
                   {/* Emoji Sticker Badge on top right of sketchpad */}
                   <div className="absolute top-3.5 right-3.5 w-9 h-9 rounded-full bg-white/90 border-2 border-orange-950 flex items-center justify-center text-lg shadow-[2px_2.5px_0px_rgba(120,53,4,0.15)] z-20 rotate-6 group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 select-none">
