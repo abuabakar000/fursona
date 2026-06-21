@@ -7,6 +7,7 @@ import { Send, Sparkles, AlertCircle, Heart } from "lucide-react";
 import { useAudio } from "@/context/AudioContext";
 import confetti from "canvas-confetti";
 import { motion } from "framer-motion";
+import { SketchPaw, SketchTwig, SketchLeaf, SketchStar, SketchHeart, OrangeSlice } from "./SketchIcons";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -100,7 +101,45 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="w-full px-6 py-16 md:py-24 bg-amber-50/20 border-t-2 border-dashed border-amber-200">
+    <section id="contact" className="relative overflow-hidden w-full px-6 py-16 md:py-24 bg-amber-50/20 border-t-2 border-dashed border-amber-200">
+      
+      {/* Background doodles */}
+      <motion.div
+        animate={{ y: [0, -7, 0], rotate: [0, 3, 0] }}
+        transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "6%", top: "15%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchPaw className="w-12 h-12" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, 9, 0], rotate: [0, -2, 0] }}
+        transition={{ duration: 6.0, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "5%", top: "25%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchHeart className="w-10 h-10 fill-orange-950/2" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, -6, 0], rotate: [0, 4, 0] }}
+        transition={{ duration: 4.9, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "5%", bottom: "25%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <OrangeSlice className="w-11 h-11" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
+        transition={{ duration: 5.3, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "7%", bottom: "12%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchStar className="w-9 h-9" />
+      </motion.div>
+
       <div className="max-w-4xl mx-auto space-y-12">
         
         {/* Heading */}

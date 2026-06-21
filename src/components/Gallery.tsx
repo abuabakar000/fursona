@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Search, Heart, MessageSquare, ExternalLink, Send, Smile, Sparkles } from "lucide-react";
 import { useAudio } from "@/context/AudioContext";
 import confetti from "canvas-confetti";
+import { SketchPaw, SketchTwig, SketchLeaf, SketchStar, SketchHeart, OrangeSlice } from "./SketchIcons";
 
 interface MockComments {
   author: string;
@@ -299,6 +300,43 @@ export default function Gallery() {
   return (
     <section id="gallery" className="relative w-full px-6 py-16 md:py-24 bg-amber-50/20 border-t-2 border-dashed border-amber-200 overflow-hidden">
       
+      {/* Background doodles */}
+      <motion.div
+        animate={{ y: [0, -6, 0], rotate: [0, 2, 0] }}
+        transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "3%", top: "15%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchTwig className="w-10 h-10" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
+        transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "4%", top: "35%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchStar className="w-9 h-9" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, -7, 0], rotate: [0, 4, 0] }}
+        transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "4%", bottom: "20%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <OrangeSlice className="w-12 h-12" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, 6, 0], rotate: [0, -2, 0] }}
+        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "6%", bottom: "10%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchLeaf className="w-11 h-11" />
+      </motion.div>
+
       {/* Floating animations styling helper */}
       <style>{`
         @keyframes float-up {

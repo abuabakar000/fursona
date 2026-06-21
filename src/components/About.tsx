@@ -8,6 +8,7 @@ import { Heart, X, Check, Paintbrush, ShieldCheck, Copy, Sparkles, Star } from "
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { useAudio } from "@/context/AudioContext";
+import { SketchStar, SketchHeart, SketchPaw } from "./SketchIcons";
 
 // Cute custom Paw Swatch Vector
 const ColorPaw = ({ color }: { color: string }) => (
@@ -113,6 +114,34 @@ export default function About() {
   return (
     <section id="about" className="w-full px-6 py-12 md:py-16 bg-amber-50/20 border-t-2 border-dashed border-amber-200 relative overflow-hidden">
       
+      {/* Background doodles */}
+      <motion.div
+        animate={{ y: [0, -6, 0], rotate: [0, 2, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "5%", top: "8%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchPaw className="w-12 h-12" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ left: "4%", top: "45%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchHeart className="w-10 h-10 fill-orange-950/2" />
+      </motion.div>
+
+      <motion.div
+        animate={{ y: [0, -7, 0], rotate: [0, 4, 0] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+        style={{ right: "8%", bottom: "10%" }}
+        className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+      >
+        <SketchStar className="w-8 h-8" />
+      </motion.div>
+
       {/* Copied Hex Code Toast Dialog */}
       <AnimatePresence>
         {copiedColor && (
