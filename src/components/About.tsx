@@ -193,8 +193,8 @@ export default function About() {
         {/* Right Side: RPG Character Card bio */}
         <div className="lg:col-span-7 flex flex-col space-y-6 text-left">
           <div className="space-y-2">
-            <h2 className="font-comic text-3xl sm:text-4xl font-black text-orange-950 flex items-center space-x-2">
-              <span>Meet {siteConfig.mascot.name}!</span>
+            <h2 className="font-comic text-3xl sm:text-4xl font-black text-orange-950 flex flex-wrap items-center gap-2">
+              <span>Meet {siteConfig.name}!</span>
               <span className="animate-spin text-2xl text-amber-500 duration-1000">✨</span>
             </h2>
             <p className="text-orange-900/90 font-sans text-base sm:text-lg leading-relaxed">
@@ -207,7 +207,7 @@ export default function About() {
             
             {/* Left Col: Color Palette with Copy HEX codes */}
             <div className="space-y-3.5">
-              <h3 className="font-comic text-lg font-black text-orange-950 border-b-2 border-dashed border-amber-200 pb-1.5 flex items-center space-x-1.5">
+              <h3 className="font-comic text-lg font-black text-orange-950 border-b-2 border-dashed border-amber-200 pb-1.5 flex flex-wrap items-center gap-1.5">
                 <Paintbrush className="w-4.5 h-4.5 text-orange-600" />
                 <span>Ref Color Palette</span>
               </h3>
@@ -246,27 +246,27 @@ export default function About() {
             {/* Right Col: Interaction Trade status cards & Ref drawing guidelines */}
             <div className="space-y-4 flex flex-col justify-between">
               <div>
-                <h3 className="font-comic text-lg font-black text-orange-950 border-b-2 border-dashed border-amber-200 pb-1.5 flex items-center space-x-1.5">
+                <h3 className="font-comic text-lg font-black text-orange-950 border-b-2 border-dashed border-amber-200 pb-1.5 flex flex-wrap items-center gap-1.5">
                   <Star className="w-4.5 h-4.5 text-red-500 fill-red-500/10" />
                   <span>Interaction Status</span>
                 </h3>
                 
                 <div className="grid grid-cols-1 gap-2.5 mt-3">
-                  <div className="flex items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl">
+                  <div className="flex flex-wrap items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl gap-2">
                     <span className="text-xs font-comic font-black text-orange-950">Art Trades:</span>
                     <span className={`px-2.5 py-1 text-xs font-bold border-2 ${getStatusBadge("trades").style} ${sketchyBorderStyles.badge}`}>
                       {getStatusBadge("trades").text}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl">
+                  <div className="flex flex-wrap items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl gap-2">
                     <span className="text-xs font-comic font-black text-orange-950">Gift Art:</span>
                     <span className={`px-2.5 py-1 text-xs font-bold border-2 ${getStatusBadge("gifts").style} ${sketchyBorderStyles.badge}`}>
                       {getStatusBadge("gifts").text}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl">
+                  <div className="flex flex-wrap items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl gap-2">
                     <span className="text-xs font-comic font-black text-orange-950">Fursuit Owns:</span>
                     <span className={`px-2.5 py-1 text-xs font-bold border-2 ${getStatusBadge("suit").style} ${sketchyBorderStyles.badge}`}>
                       {getStatusBadge("suit").text}

@@ -166,7 +166,7 @@ export default function Hero() {
 
       {/* Middle Left Area */}
       <motion.div
-        className="absolute top-[40%] left-[2%] text-orange-300/45 pointer-events-none"
+        className="absolute top-[40%] left-[2%] text-orange-300/45 pointer-events-none hidden md:block"
         animate={{ x: [0, 2, 0], rotate: [25, 20, 25] }}
         transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
       >
@@ -174,7 +174,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute top-[32%] left-[20%] text-red-400/40 pointer-events-none"
+        className="absolute top-[32%] left-[20%] text-red-400/40 pointer-events-none hidden md:block"
         animate={{ scale: [0.95, 1.05, 0.95], rotate: [-8, -3, -8] }}
         transition={{ repeat: Infinity, duration: 3.8, ease: "easeInOut" }}
       >
@@ -199,7 +199,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-[24%] left-[14%] text-amber-500/60 pointer-events-none"
+        className="absolute bottom-[24%] left-[14%] text-amber-500/60 pointer-events-none hidden md:block"
         animate={{ scale: [0.9, 1.05, 0.9] }}
         transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
       >
@@ -207,7 +207,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-6 left-[22%] text-red-455/45 pointer-events-none"
+        className="absolute bottom-6 left-[22%] text-red-455/45 pointer-events-none hidden md:block"
         animate={{ y: [0, -3, 0], rotate: [12, 18, 12] }}
         transition={{ repeat: Infinity, duration: 4.4, ease: "easeInOut" }}
       >
@@ -216,7 +216,7 @@ export default function Hero() {
 
       {/* Top Center & Header Area */}
       <motion.div
-        className="absolute top-6 left-[46%] text-orange-400/45 pointer-events-none"
+        className="absolute top-6 left-[46%] text-orange-400/45 pointer-events-none hidden md:block"
         animate={{ y: [0, 4, 0], rotate: [20, 15, 20] }}
         transition={{ repeat: Infinity, duration: 4.2, ease: "easeInOut" }}
       >
@@ -241,7 +241,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute top-18 right-[14%] text-amber-500/50 pointer-events-none"
+        className="absolute top-18 right-[14%] text-amber-500/50 pointer-events-none hidden md:block"
         animate={{ scale: [1, 1.08, 1], rotate: [10, 15, 10] }}
         transition={{ repeat: Infinity, duration: 3.6, ease: "easeInOut" }}
       >
@@ -258,7 +258,7 @@ export default function Hero() {
 
       {/* Middle Right Area */}
       <motion.div
-        className="absolute top-[44%] right-[4%] text-orange-355/50 pointer-events-none"
+        className="absolute top-[44%] right-[4%] text-orange-355/50 pointer-events-none hidden md:block"
         animate={{ scale: [0.95, 1.05, 0.95], rotate: [-10, -5, -10] }}
         transition={{ repeat: Infinity, duration: 4.1, ease: "easeInOut" }}
       >
@@ -266,7 +266,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute top-[52%] right-[2%] text-red-400/40 pointer-events-none"
+        className="absolute top-[52%] right-[2%] text-red-400/40 pointer-events-none hidden md:block"
         animate={{ x: [0, 2, 0], rotate: [15, 20, 15] }}
         transition={{ repeat: Infinity, duration: 3.4, ease: "easeInOut", delay: 0.8 }}
       >
@@ -274,7 +274,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute top-[26%] right-[30%] text-orange-300/40 pointer-events-none"
+        className="absolute top-[26%] right-[30%] text-orange-300/40 pointer-events-none hidden md:block"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ repeat: Infinity, duration: 3.9, ease: "easeInOut" }}
       >
@@ -283,7 +283,7 @@ export default function Hero() {
 
       {/* Bottom Right Area */}
       <motion.div
-        className="absolute bottom-10 right-[2%] text-orange-300/45 pointer-events-none"
+        className="absolute bottom-10 right-[2%] text-orange-300/45 pointer-events-none hidden md:block"
         animate={{ x: [0, -2, 0], rotate: [-20, -15, -20] }}
         transition={{ repeat: Infinity, duration: 4.4, ease: "easeInOut" }}
       >
@@ -291,7 +291,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-14 right-[10%] text-amber-500/70 pointer-events-none"
+        className="absolute bottom-14 right-[10%] text-amber-500/70 pointer-events-none hidden md:block"
         animate={{ scale: [0.9, 1.05, 0.9] }}
         transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
       >
@@ -310,7 +310,7 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
         
         {/* Left Text details */}
-        <div className="lg:col-span-6 flex flex-col items-start text-left space-y-4">
+        <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4">
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -365,24 +365,7 @@ export default function Hero() {
         </div>
  
         {/* Right Mascot (Follows Cursor & Reacts dynamically) */}
-        <div className="lg:col-span-6 flex justify-center items-center relative min-h-[400px] md:min-h-[460px] lg:min-h-[480px]">
-          
-          {/* Cute Dialog speech bubble floating above mascot */}
-          <AnimatePresence>
-            {speechBubble && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.6, y: 20, x: "-50%", rotate: -6 }}
-                animate={{ opacity: 1, scale: 1, y: -230, x: "-50%", rotate: Math.random() * 8 - 4 }}
-                exit={{ opacity: 0, scale: 0.7, y: -270, x: "-50%" }}
-                transition={{ type: "spring", damping: 12 }}
-                className={`absolute left-1/2 bg-white border-3 border-orange-950 text-orange-950 px-4 py-2 font-comic font-black text-base shadow-[3px_4px_0px_#451a03] whitespace-nowrap z-30 ${sketchyBorderStyles.badge}`}
-              >
-                {/* speech bubble triangle */}
-                <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-r-3 border-b-3 border-orange-950 rotate-45" />
-                {speechBubble}
-              </motion.div>
-            )}
-          </AnimatePresence>
+        <div className="lg:col-span-6 flex justify-center items-center relative min-h-[320px] sm:min-h-[400px] md:min-h-[460px] lg:min-h-[480px]">
  
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -405,6 +388,23 @@ export default function Hero() {
                 damping: 18,
               }}
             >
+              {/* Cute Dialog speech bubble floating above mascot */}
+              <AnimatePresence>
+                {speechBubble && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.6, y: 15, x: "-50%", rotate: -6 }}
+                    animate={{ opacity: 1, scale: 1, y: 0, x: "-50%", rotate: Math.random() * 8 - 4 }}
+                    exit={{ opacity: 0, scale: 0.7, y: -15, x: "-50%" }}
+                    transition={{ type: "spring", damping: 12 }}
+                    className={`absolute top-[-30px] sm:top-[-45px] left-1/2 bg-white border-3 border-orange-950 text-orange-950 px-4 py-2 font-comic font-black text-sm sm:text-base shadow-[3px_4px_0px_#451a03] whitespace-nowrap z-30 ${sketchyBorderStyles.badge}`}
+                  >
+                    {/* speech bubble triangle */}
+                    <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-r-3 border-b-3 border-orange-950 rotate-45" />
+                    {speechBubble}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               <Image
                 src={siteConfig.mascot.imageUrl}
                 alt={siteConfig.mascot.name}
