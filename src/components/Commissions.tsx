@@ -293,7 +293,7 @@ export default function Commissions() {
             My Art Wishlist 🎨
           </h2>
           <p className="text-orange-900/80 font-sans max-w-xl text-base sm:text-lg">
-            Art I dream of getting commissioned someday! Hover over each card to check out my character reference ideas.
+            Art I dream of getting commissioned someday! Tap each card to check out my character reference ideas.
           </p>
         </motion.div>
 

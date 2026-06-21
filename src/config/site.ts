@@ -35,7 +35,7 @@ export const siteConfig = {
     species: "Fennec Fox",
     imageUrl: "/images/hero.png",
     intro: "Hewwo! Welcome to my personal den!",
-    bio: "Bright characters, gentle colors, and lots of heart. I am a sweet fennec fox who loves cookies, drawing, and dressing up in cozy hoodies! Explore my profile to draw me or check if my trades are open!",
+    bio: "Bright characters, gentle colors, and lots of heart. I am a sweet fennec fox who loves cookies, cozy vibes, and dressing up in adorable hoodies! Feel free to explore my reference sheets, look at my art wishlist, or say hello!",
   },
   
   // Custom trade/interaction status options for the fursona
