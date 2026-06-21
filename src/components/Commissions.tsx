@@ -288,25 +288,25 @@ export default function Commissions() {
               <motion.div
                 key={artist.handle}
                 whileHover={{ y: -5 }}
-                className="bg-white border-3 border-orange-950 p-4 rounded-2xl flex flex-col items-center space-y-3.5 shadow-[4px_4px_0px_#451a03] max-w-[170px] w-full text-center relative overflow-visible"
+                className="bg-white border-3 border-orange-950 p-5 rounded-2xl flex flex-col items-center space-y-4 shadow-[5px_6px_0px_#451a03] max-w-[195px] w-full text-center relative overflow-visible"
               >
                 {/* Small customized badge stuck to the top right of card */}
-                <div className={`absolute -top-3.5 -right-2 px-2 py-0.5 border border-orange-950 font-comic font-black text-[8px] rotate-[10deg] shadow-sm ${sketchyBorderStyles.badge} ${artist.badgeColor} z-10`}>
+                <div className={`absolute -top-3.5 -right-2 px-2 py-0.5 border border-orange-950 font-comic font-black text-[9px] rotate-[10deg] shadow-sm ${sketchyBorderStyles.badge} ${artist.badgeColor} z-10`}>
                   {artist.badge}
                 </div>
 
                 {/* Circular Avatar sketch frame */}
-                <div className={`w-14 h-14 rounded-full border-2 border-orange-950 bg-amber-50/60 flex items-center justify-center text-3xl shadow-inner select-none animate-float-slow ${sketchyBorderStyles.avatar}`}
+                <div className={`w-18 h-18 rounded-full border-2 border-orange-950 bg-amber-50/60 flex items-center justify-center text-4xl shadow-inner select-none animate-float-slow ${sketchyBorderStyles.avatar}`}
                      style={{ animationDelay: `${idx * 0.5}s` }}>
                   {artist.avatar}
                 </div>
 
                 {/* Identity info */}
                 <div className="space-y-0.5">
-                  <h4 className="font-comic text-xs font-black text-orange-950 truncate max-w-[130px]">
+                  <h4 className="font-comic text-sm font-black text-orange-950 truncate max-w-[155px]">
                     {artist.name}
                   </h4>
-                  <span className="text-[9px] text-orange-900/50 block font-bold">
+                  <span className="text-xs text-orange-900/50 block font-bold">
                     {artist.handle}
                   </span>
                 </div>
@@ -316,7 +316,7 @@ export default function Commissions() {
                   href={artist.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-1.5 bg-orange-500 hover:bg-orange-600 text-white font-comic font-black text-[10px] flex items-center justify-center space-x-1 border border-orange-950 shadow-[1.5px_2px_0px_#451a03] hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1px_1px_0px_#451a03] transition-all duration-150 ${sketchyBorderStyles.button}`}
+                  className={`w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-comic font-black text-xs flex items-center justify-center space-x-1 border border-orange-950 shadow-[1.5px_2px_0px_#451a03] hover:translate-x-[0.5px] hover:translate-y-[0.5px] hover:shadow-[1px_1px_0px_#451a03] transition-all duration-150 ${sketchyBorderStyles.button}`}
                 >
                   <span>View Art</span>
                   <ExternalLink className="w-2.5 h-2.5" />
