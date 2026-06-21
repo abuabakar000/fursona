@@ -125,12 +125,12 @@ export default function Contact() {
           </div>
 
           {/* Form Sheet (Looks like notebook paper) */}
-          <div className={`bg-white border-4 border-orange-950 pt-10 pb-8 px-6 md:px-12 shadow-[6px_8px_0px_rgba(120,53,4,0.15)] relative ${sketchyBorderStyles.card}`}>
+          <div className={`bg-white border-4 border-orange-950 pt-8 pb-6 px-4 sm:px-6 md:px-12 shadow-[6px_8px_0px_rgba(120,53,4,0.15)] relative ${sketchyBorderStyles.card}`}>
             {/* Margins/Lined paper background red margin line */}
-            <div className="absolute top-0 bottom-0 left-10 md:left-14 w-0.5 bg-red-400/60" />
+            <div className="absolute top-0 bottom-0 left-8 sm:left-10 md:left-14 w-0.5 bg-red-400/60" />
 
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-6 text-left relative pl-8 md:pl-12">
+              <form onSubmit={handleSubmit} className="space-y-4 text-left relative pl-6 sm:pl-8 md:pl-12">
                 {error && (
                   <div className="p-3 bg-red-50 border-2 border-red-300 text-red-800 rounded-lg flex items-center space-x-2 text-sm font-medium font-sans">
                     <AlertCircle className="w-5 h-5 flex-shrink-0" />
@@ -139,10 +139,10 @@ export default function Contact() {
                 )}
 
                 {/* Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Name */}
-                  <div className="space-y-2">
-                    <label className="block font-comic font-bold text-orange-950 text-sm">
+                  <div className="space-y-1.5">
+                    <label className="block font-comic font-bold text-orange-950 text-xs sm:text-sm">
                       Your Name / Handle:
                     </label>
                     <input
@@ -152,13 +152,13 @@ export default function Contact() {
                       onChange={handleChange}
                       onFocus={() => playSound("click")}
                       placeholder="e.g. FluffyTail"
-                      className="w-full px-4 py-2.5 bg-amber-50/20 border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors text-sm font-medium"
+                      className="w-full px-3 py-2 bg-amber-50/20 border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors text-xs sm:text-sm font-medium"
                     />
                   </div>
 
                   {/* Fursona Species */}
-                  <div className="space-y-2">
-                    <label className="block font-comic font-bold text-orange-950 text-sm">
+                  <div className="space-y-1.5">
+                    <label className="block font-comic font-bold text-orange-950 text-xs sm:text-sm">
                       Your Fursona Species:
                     </label>
                     <input
@@ -168,14 +168,14 @@ export default function Contact() {
                       onChange={handleChange}
                       onFocus={() => playSound("click")}
                       placeholder="e.g. Red Fox, Dragon, Bunny"
-                      className="w-full px-4 py-2.5 bg-amber-50/20 border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors text-sm font-medium"
+                      className="w-full px-3 py-2 bg-amber-50/20 border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors text-xs sm:text-sm font-medium"
                     />
                   </div>
                 </div>
 
                 {/* Dropdown Find Source */}
-                <div className="space-y-2">
-                  <label className="block font-comic font-bold text-orange-950 text-sm">
+                <div className="space-y-1.5">
+                  <label className="block font-comic font-bold text-orange-950 text-xs sm:text-sm">
                     Where did you find me?
                   </label>
                   <select
@@ -183,7 +183,7 @@ export default function Contact() {
                     value={formData.foundFrom}
                     onChange={handleChange}
                     onFocus={() => playSound("click")}
-                    className="w-full px-4 py-2.5 bg-white border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors cursor-pointer text-sm font-medium"
+                    className="w-full px-3 py-2 bg-white border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors cursor-pointer text-xs sm:text-sm font-medium"
                   >
                     <option value="Twitter/X">Twitter/X</option>
                     <option value="Discord">Discord</option>
@@ -194,8 +194,8 @@ export default function Contact() {
                 </div>
 
                 {/* Message Box */}
-                <div className="space-y-2">
-                  <label className="block font-comic font-bold text-orange-950 text-sm">
+                <div className="space-y-1.5">
+                  <label className="block font-comic font-bold text-orange-950 text-xs sm:text-sm">
                     Your Message:
                   </label>
                   <textarea
@@ -203,18 +203,18 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     onFocus={() => playSound("click")}
-                    rows={4}
+                    rows={3}
                     placeholder="Say hi, share your sona, or just leave a pawprint! 🐾"
-                    className="w-full px-4 py-2.5 bg-amber-50/20 border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors resize-y text-sm font-medium"
+                    className="w-full px-3 py-2 bg-amber-50/20 border-2 border-orange-900/40 rounded-lg font-sans focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors resize-y text-xs sm:text-sm font-medium"
                   />
                 </div>
 
                 {/* Submit button */}
-                <div className="pt-2 text-right">
+                <div className="pt-1 text-right">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`inline-flex items-center space-x-2 px-8 py-3.5 bg-orange-500 text-white font-comic text-lg font-black border-2 border-orange-950 shadow-[4px_5px_0px_#7c2d12] hover:shadow-[1px_2px_0px_#7c2d12] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-150 disabled:bg-orange-350 disabled:cursor-not-allowed ${sketchyBorderStyles.button}`}
+                    className={`inline-flex items-center space-x-2 px-5 py-2.5 sm:px-8 sm:py-3.5 bg-orange-500 text-white font-comic text-base sm:text-lg font-black border-2 border-orange-950 shadow-[4px_5px_0px_#7c2d12] hover:shadow-[1px_2px_0px_#7c2d12] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-150 disabled:bg-orange-350 disabled:cursor-not-allowed ${sketchyBorderStyles.button}`}
                   >
                     {isSubmitting ? (
                       <>
@@ -232,7 +232,7 @@ export default function Contact() {
               </form>
             ) : (
               // Success Speech bubble details
-              <div className="py-12 px-4 md:px-8 text-center flex flex-col items-center space-y-6 pl-8 md:pl-12">
+              <div className="py-12 px-4 md:px-8 text-center flex flex-col items-center space-y-6 pl-6 sm:pl-8 md:pl-12">
                 <div className="w-20 h-20 bg-orange-100 rounded-full border-2 border-orange-500 flex items-center justify-center text-3xl animate-bounce shadow-md">
                   🎉
                 </div>
@@ -258,7 +258,7 @@ export default function Contact() {
             )}
 
             {/* Find Me Online Row - Circular sticker style buttons */}
-            <div className="pt-8 border-t border-dashed border-orange-900/10 mt-8 text-center pl-8 md:pl-12">
+            <div className="pt-6 border-t border-dashed border-orange-900/10 mt-6 text-center">
               <h3 className="font-comic text-base sm:text-lg font-black text-orange-950 mb-4 select-none">
                 Find Me Online! 🌐
               </h3>
