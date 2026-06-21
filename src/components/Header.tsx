@@ -3,13 +3,16 @@
 import React, { useState } from "react";
 import { siteConfig } from "@/config/site";
 import { Menu, X, Heart, Volume2, VolumeX } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { useAudio } from "@/context/AudioContext";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { isMuted, toggleMute, playSound } = useAudio();
+  const { scrollYProgress } = useScroll();
+  const pawLeft = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const pawRotate = useTransform(scrollYProgress, [0, 1], [0, 720]);
 
   const handleLinkClick = (href: string) => {
     playSound("click");
@@ -221,6 +224,23 @@ export default function Header() {
           </div>
         )}
       </AnimatePresence>
+      {/* Scroll Progress Bar with running paw print */}
+      <div className="absolute bottom-[-3px] left-0 right-0 h-[3px] bg-amber-100/40 overflow-visible pointer-events-none z-50">
+        <motion.div
+          className="h-full bg-gradient-to-r from-orange-400 to-orange-500 origin-left"
+          style={{ scaleX: scrollYProgress }}
+        />
+        <motion.span 
+          className="absolute top-[-7px] text-sm select-none z-50 pointer-events-none"
+          style={{ 
+            left: pawLeft,
+            x: "-50%",
+            rotate: pawRotate
+          }}
+        >
+          🐾
+        </motion.span>
+      </div>
     </header>
   );
 }
