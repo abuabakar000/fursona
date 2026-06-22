@@ -77,7 +77,7 @@ export default function About() {
     const y = (rect.top + rect.height / 2) / window.innerHeight;
 
     confetti({
-      particleCount: 18,
+      particleCount: 9,
       spread: 45,
       origin: { x, y },
       colors: [hex, "#ffffff", "#fdba74"],
@@ -98,7 +98,7 @@ export default function About() {
     const y = (rect.top + rect.height / 2) / window.innerHeight;
     
     confetti({
-      particleCount: 15,
+      particleCount: 7,
       spread: 35,
       origin: { x, y },
       colors: ["#f07828", "#fce8a6", "#fca5a5"]

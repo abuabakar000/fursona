@@ -101,7 +101,7 @@ export default function Contact() {
 
         // Fire confetti for celebration!
         confetti({
-          particleCount: 100,
+          particleCount: 50,
           spread: 70,
           origin: { y: 0.6 },
           colors: ["#fb923c", "#fcd34d", "#fca5a5", "#fdba74"],

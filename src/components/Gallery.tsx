@@ -193,7 +193,7 @@ export default function Gallery() {
 
       // Burst of cute red/pink hearts!
       confetti({
-        particleCount: 15,
+        particleCount: 8,
         spread: 35,
         origin: { x, y },
         colors: ["#fca5a5", "#f87171", "#ef4444", "#ffffff"]
@@ -224,7 +224,7 @@ export default function Gallery() {
         const y = (rect.top + rect.height / 2) / window.innerHeight;
 
         confetti({
-          particleCount: 25,
+          particleCount: 12,
           spread: 50,
           origin: { x, y },
           colors: ["#fca5a5", "#f87171", "#ef4444"]
@@ -274,7 +274,7 @@ export default function Gallery() {
     if (formBtn) {
       const rect = formBtn.getBoundingClientRect();
       confetti({
-        particleCount: 15,
+        particleCount: 8,
         spread: 30,
         origin: {
           x: (rect.left + rect.width / 2) / window.innerWidth,
@@ -299,14 +299,14 @@ export default function Gallery() {
 
       (function frame() {
         confetti({
-          particleCount: 4,
+          particleCount: 2,
           angle: 60,
           spread: 55,
           origin: { x: 0, y: 0.8 },
           colors: ["#fca5a5", "#fdba74", "#ef4444", "#60a5fa"]
         });
         confetti({
-          particleCount: 4,
+          particleCount: 2,
           angle: 120,
           spread: 55,
           origin: { x: 1, y: 0.8 },

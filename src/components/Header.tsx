@@ -115,127 +115,122 @@ export default function Header() {
       </div>
 
       {/* Fullscreen Artsy Notebook Menu Drawer */}
-      <AnimatePresence>
-        {isOpen && (
-          <div className="fixed inset-0 z-[9999] flex justify-end bg-orange-950/45">
-            {/* Click outside to close */}
-            <motion.div
-              className="absolute inset-0"
-              onClick={handleCloseDrawer}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
+      <div 
+        className={`fixed inset-0 z-[9999] flex justify-end transition-all duration-350 ease-in-out ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Click outside to close */}
+        <div
+          className="absolute inset-0 bg-orange-950/45 transition-opacity duration-350"
+          onClick={handleCloseDrawer}
+        />
 
-            {/* Slide-out Notebook drawer */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "tween", ease: "easeOut", duration: 0.22 }}
-              style={{ willChange: "transform" }}
-              className="relative w-[calc(100%-16px)] sm:max-w-[380px] h-screen bg-white border-l-4 border-orange-950 shadow-2xl z-10"
-            >
-              {/* Red notebook margin line */}
-              <div className="absolute top-0 bottom-0 left-8 md:left-10 w-0.5 bg-red-400/40 pointer-events-none z-0" />
-              
-              {/* Spiral rings effect on the left edge of drawer (completely unclipped!) */}
-              <div className="absolute top-0 bottom-0 left-[-13px] flex flex-col justify-around py-4 pointer-events-none z-20">
-                {Array.from({ length: 15 }).map((_, i) => (
-                  <div key={i} className="w-[26px] h-[18px] bg-gradient-to-b from-gray-400 to-gray-250 border-2 border-orange-950 rounded-full shadow-sm" />
-                ))}
-              </div>
-
-              {/* Scrollable Content Wrapper */}
-              <div className="w-full h-full overflow-y-auto flex flex-col justify-between pt-8 pb-10 sm:py-12 px-6 md:px-8 relative z-10">
-                {/* Close Button Inside Drawer */}
-                <div className="flex justify-end pl-6">
-                  <motion.button
-                    onClick={handleCloseDrawer}
-                    className={`p-2.5 bg-amber-100 border-2 border-orange-950 text-orange-950 shadow-[2px_2px_0px_#451a03] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all ${sketchyBorderStyles.avatar}`}
-                    whileHover={{ scale: 1.05, rotate: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <X className="w-6 h-6 stroke-[2.5]" />
-                  </motion.button>
-                </div>
-
-                {/* Links List */}
-                <nav className="flex flex-col space-y-7 pl-8 md:pl-12 mt-4 sm:mt-8 mb-auto text-left">
-                  {siteConfig.navigation.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={() => handleLinkClick(item.href)}
-                      className="font-comic text-3xl font-black text-orange-950 hover:text-orange-600 transition-colors w-fit relative group"
-                    >
-                      {item.label}
-                      <span className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-200 group-hover:w-full" />
-                    </a>
-                  ))}
-                  
-                  {/* Art Wishlist Button badge */}
-                  <div className="pt-4">
-                    <a
-                      href="#commissions"
-                      onClick={() => handleLinkClick("#commissions")}
-                      className={`inline-flex items-center space-x-2 px-4 py-3 bg-orange-500 text-white font-comic font-black text-sm border-2 border-orange-950 shadow-[3px_4px_0px_#7c2d12] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 ${sketchyBorderStyles.button}`}
-                    >
-                      <span>Wishlist 🎨</span>
-                      <Heart className="w-4 h-4 fill-white text-orange-200 animate-pulse" />
-                    </a>
-                  </div>
-                </nav>
-
-                {/* Social icons footer in drawer */}
-                <div className="pl-8 md:pl-12 text-left space-y-4">
-                  <div className="text-sm font-comic font-bold text-orange-900/60 uppercase tracking-wider">
-                    Draw with me! 🎨
-                  </div>
-                  <div className="flex gap-4">
-                    <a 
-                      href={siteConfig.socials.twitter} 
-                      onClick={() => playSound("click")}
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-sm hover:scale-105 transition-all"
-                    >
-                      𝕏
-                    </a>
-                    <a 
-                      href={siteConfig.socials.bluesky} 
-                      onClick={() => playSound("click")}
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-sm hover:scale-105 transition-all"
-                    >
-                      🦋
-                    </a>
-                    <a 
-                      href={siteConfig.socials.furaffinity} 
-                      onClick={() => playSound("click")}
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-xs font-bold hover:scale-105 transition-all"
-                    >
-                      FA
-                    </a>
-                    <a 
-                      href={siteConfig.socials.telegram} 
-                      onClick={() => playSound("click")}
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-xs font-bold hover:scale-105 transition-all"
-                    >
-                      TG
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+        {/* Slide-out Notebook drawer */}
+        <div
+          style={{ willChange: "transform" }}
+          className={`relative w-[calc(100%-16px)] sm:max-w-[380px] h-screen bg-white border-l-4 border-orange-950 shadow-2xl z-10 transition-transform duration-350 cubic-bezier(0.16, 1, 0.3, 1) ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          {/* Red notebook margin line */}
+          <div className="absolute top-0 bottom-0 left-8 md:left-10 w-0.5 bg-red-400/40 pointer-events-none z-0" />
+          
+          {/* Spiral rings effect on the left edge of drawer (completely unclipped!) */}
+          <div className="absolute top-0 bottom-0 left-[-13px] flex flex-col justify-around py-4 pointer-events-none z-20">
+            {Array.from({ length: 15 }).map((_, i) => (
+              <div key={i} className="w-[26px] h-[18px] bg-gradient-to-b from-gray-400 to-gray-250 border-2 border-orange-950 rounded-full shadow-sm" />
+            ))}
           </div>
-        )}
-      </AnimatePresence>
+
+          {/* Scrollable Content Wrapper */}
+          <div className="w-full h-full overflow-y-auto flex flex-col justify-between pt-8 pb-10 sm:py-12 px-6 md:px-8 relative z-10">
+            {/* Close Button Inside Drawer */}
+            <div className="flex justify-end pl-6">
+              <motion.button
+                onClick={handleCloseDrawer}
+                className={`p-2.5 bg-amber-100 border-2 border-orange-950 text-orange-950 shadow-[2px_2px_0px_#451a03] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all ${sketchyBorderStyles.avatar}`}
+                whileHover={{ scale: 1.05, rotate: -4 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <X className="w-6 h-6 stroke-[2.5]" />
+              </motion.button>
+            </div>
+
+            {/* Links List */}
+            <nav className="flex flex-col space-y-7 pl-8 md:pl-12 mt-4 sm:mt-8 mb-auto text-left">
+              {siteConfig.navigation.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => handleLinkClick(item.href)}
+                  className="font-comic text-3xl font-black text-orange-950 hover:text-orange-600 transition-colors w-fit relative group"
+                >
+                  {item.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-200 group-hover:w-full" />
+                </a>
+              ))}
+              
+              {/* Art Wishlist Button badge */}
+              <div className="pt-4">
+                <a
+                  href="#commissions"
+                  onClick={() => handleLinkClick("#commissions")}
+                  className={`inline-flex items-center space-x-2 px-4 py-3 bg-orange-500 text-white font-comic font-black text-sm border-2 border-orange-950 shadow-[3px_4px_0px_#7c2d12] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 ${sketchyBorderStyles.button}`}
+                >
+                  <span>Wishlist 🎨</span>
+                  <Heart className="w-4 h-4 fill-white text-orange-200 animate-pulse" />
+                </a>
+              </div>
+            </nav>
+
+            {/* Social icons footer in drawer */}
+            <div className="pl-8 md:pl-12 text-left space-y-4">
+              <div className="text-sm font-comic font-bold text-orange-900/60 uppercase tracking-wider">
+                Draw with me! 🎨
+              </div>
+              <div className="flex gap-4">
+                <a 
+                  href={siteConfig.socials.twitter} 
+                  onClick={() => playSound("click")}
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-sm hover:scale-105 transition-all"
+                >
+                  𝕏
+                </a>
+                <a 
+                  href={siteConfig.socials.bluesky} 
+                  onClick={() => playSound("click")}
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-sm hover:scale-105 transition-all"
+                >
+                  🦋
+                </a>
+                <a 
+                  href={siteConfig.socials.furaffinity} 
+                  onClick={() => playSound("click")}
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-xs font-bold hover:scale-105 transition-all"
+                >
+                  FA
+                </a>
+                <a 
+                  href={siteConfig.socials.telegram} 
+                  onClick={() => playSound("click")}
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 bg-amber-50 hover:bg-orange-100 text-orange-950 border border-orange-950 rounded-full shadow-[1.5px_2px_0px_#451a03] text-xs font-bold hover:scale-105 transition-all"
+                >
+                  TG
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Scroll Progress Bar with running paw print */}
       <div className="absolute bottom-[-3px] left-0 right-0 h-[3px] bg-amber-100/40 overflow-visible pointer-events-none z-50">
         <motion.div
