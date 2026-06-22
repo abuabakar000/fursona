@@ -111,3 +111,13 @@ html.lenis, html.lenis body {
   will-change: transform;
 }
 
+/* Equalizer bounce animation for background music indicator */
+@keyframes equalizer {
+  0% {
+    height: 4px;
+  }
+  100% {
+    height: 18px;
+  }
+}
+

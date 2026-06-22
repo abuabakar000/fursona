@@ -2,14 +2,14 @@
 
 import React, { useState } from "react";
 import { siteConfig } from "@/config/site";
-import { Menu, X, Heart, Volume2, VolumeX } from "lucide-react";
+import { Menu, X, Heart, Volume2, VolumeX, Music } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { useAudio } from "@/context/AudioContext";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isMuted, toggleMute, playSound } = useAudio();
+  const { isMuted, toggleMute, isMusicPlaying, toggleMusic, playSound } = useAudio();
   const { scrollYProgress } = useScroll();
   const pawX = useTransform(scrollYProgress, (v) => `calc(${v * 100}vw - ${v * 1.5}rem)`);
   const pawRotate = useTransform(scrollYProgress, [0, 1], [0, 720]);
@@ -77,9 +77,31 @@ export default function Header() {
           </span>
         </a>
 
-        {/* Action Controls: Sound Toggle + Hamburger menu */}
+        {/* Action Controls: Sound Toggle + Music Toggle + Hamburger menu */}
         <div className="flex items-center space-x-2 sm:space-x-3">
           
+          {/* Cozy Music Controller */}
+          <button
+            onClick={() => {
+              toggleMusic();
+              playSound("click");
+            }}
+            className={`p-2.5 sm:p-3 border-2 border-orange-950 font-comic font-black flex items-center justify-center shadow-[3px_3px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 rounded-[10px_120px_10px_140px/120px_10px_150px_10px] ${
+              isMusicPlaying ? "bg-orange-100 hover:bg-orange-200" : "bg-amber-100 hover:bg-amber-200"
+            }`}
+            title={isMusicPlaying ? "Pause cozy background music" : "Play cozy background music"}
+          >
+            {isMusicPlaying ? (
+              <div className="flex items-end space-x-[2.5px] h-5 w-5 pb-[1px] justify-center">
+                <div className="bg-orange-600 w-[3px] h-2.5 animate-[equalizer_0.6s_ease-in-out_infinite_alternate]" />
+                <div className="bg-orange-600 w-[3px] h-4.5 animate-[equalizer_0.8s_ease-in-out_infinite_alternate_0.25s]" />
+                <div className="bg-orange-600 w-[3px] h-1.5 animate-[equalizer_0.7s_ease-in-out_infinite_alternate_0.1s]" />
+              </div>
+            ) : (
+              <Music className="w-5 h-5 text-orange-900/60 stroke-[2.5]" />
+            )}
+          </button>
+
           {/* Global Sound Toggler */}
           <button
             onClick={() => {

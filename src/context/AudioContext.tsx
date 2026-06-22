@@ -5,6 +5,8 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 export interface AudioContextType {
   isMuted: boolean;
   toggleMute: (overrideMuted?: boolean) => void;
+  isMusicPlaying: boolean;
+  toggleMusic: () => void;
   playSound: (type: "pop" | "like" | "success" | "chime" | "melt" | "boop" | "poke" | "whoosh" | "click" | "fill") => void;
 }
 
@@ -12,17 +14,68 @@ const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export function AudioProvider({ children }: { children: React.ReactNode }) {
   const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false);
   const audioCtxRef = React.useRef<AudioContext | null>(null);
+  const musicRef = React.useRef<HTMLAudioElement | null>(null);
 
-  // Sync mute state with localStorage if available
+  // Sync mute state and initialize music with localStorage if available
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedMute = localStorage.getItem("citrini-mute-preference");
       if (savedMute !== null) {
         setIsMuted(savedMute === "true");
       }
+
+      // Initialize background music
+      const audio = new Audio("/music.mp3");
+      audio.loop = true;
+      audio.volume = 0.12; // cozy soft background volume level
+      musicRef.current = audio;
+
+      const savedMusic = localStorage.getItem("citrini-music-preference");
+      const shouldPlay = savedMusic === "playing";
+
+      const startMusicOnInteraction = () => {
+        if (shouldPlay && musicRef.current) {
+          musicRef.current.play().then(() => {
+            setIsMusicPlaying(true);
+          }).catch((e) => {
+            console.log("Autoplay blocked background music until user explicit click:", e);
+          });
+        }
+        window.removeEventListener("pointerdown", startMusicOnInteraction);
+        window.removeEventListener("keydown", startMusicOnInteraction);
+      };
+
+      window.addEventListener("pointerdown", startMusicOnInteraction);
+      window.addEventListener("keydown", startMusicOnInteraction);
+
+      return () => {
+        audio.pause();
+        audio.src = "";
+        window.removeEventListener("pointerdown", startMusicOnInteraction);
+        window.removeEventListener("keydown", startMusicOnInteraction);
+      };
     }
   }, []);
+
+  const toggleMusic = () => {
+    const audio = musicRef.current;
+    if (!audio) return;
+
+    if (isMusicPlaying) {
+      audio.pause();
+      setIsMusicPlaying(false);
+      localStorage.setItem("citrini-music-preference", "paused");
+    } else {
+      audio.play().then(() => {
+        setIsMusicPlaying(true);
+        localStorage.setItem("citrini-music-preference", "playing");
+      }).catch((e) => {
+        console.warn("Failed to start music (file may not be uploaded yet):", e);
+      });
+    }
+  };
 
   const toggleMute = (overrideMuted?: boolean) => {
     setIsMuted((prev) => {
@@ -285,7 +338,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AudioContext.Provider value={{ isMuted, toggleMute, playSound }}>
+    <AudioContext.Provider value={{ isMuted, toggleMute, isMusicPlaying, toggleMusic, playSound }}>
       {children}
     </AudioContext.Provider>
   );
