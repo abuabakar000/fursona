@@ -55,7 +55,6 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       };
 
       if (shouldPlay) {
-        setIsMusicPlaying(true);
         // 1. Attempt immediate play (works if browser allows autoplay)
         audio.play().then(() => {
           setIsMusicPlaying(true);
