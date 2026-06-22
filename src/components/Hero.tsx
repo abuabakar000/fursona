@@ -60,79 +60,9 @@ export default function Hero() {
   const [sparkles, setSparkles] = useState<{ id: number; x: number; y: number }[]>([]);
   const [speechBubble, setSpeechBubble] = useState<string | null>(null);
   
-  // Custom interactive wardrobe, headpats, and music sync states
-  const [activeOutfit, setActiveOutfit] = useState<"none" | "bandana" | "sweater" | "pajamas" | "raincoat">("none");
-  const [isHoveringHead, setIsHoveringHead] = useState(false);
-  const [pats, setPats] = useState<{ id: number; x: number; y: number; text: string }[]>([]);
-  const [musicNotes, setMusicNotes] = useState<{ id: number; x: number; y: number; note: string }[]>([]);
-
-  const headpatPhrases = [
-    "*purrr*",
-    "*happy ear wiggles*",
-    "*chirp!*",
-    "Aww~ ❤️",
-    "*nuzzles*",
-    "Headpats! 🥰",
-    "*happy fennec noises*",
-    "*wag wag*",
-    "Pawsome! ✨",
-    "Soft fur... 🧡"
-  ];
-  
   // Mouse position state to look at cursor
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
-  const { playSound, isMusicPlaying } = useAudio();
-
-  // Spawns floaty ambient music notes/stars around Citrini when music is active
-  useEffect(() => {
-    if (!isMusicPlaying) {
-      setMusicNotes([]);
-      return;
-    }
-
-    const interval = setInterval(() => {
-      const notesList = ["🎵", "🎶", "✨", "🎵"];
-      const randomNote = notesList[Math.floor(Math.random() * notesList.length)];
-      const newNote = {
-        id: Date.now() + Math.random(),
-        x: Math.random() * 80 + 10,
-        y: 80,
-        note: randomNote
-      };
-      
-      setMusicNotes((prev) => [...prev, newNote]);
-
-      setTimeout(() => {
-        setMusicNotes((prev) => prev.filter((n) => n.id !== newNote.id));
-      }, 3000);
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, [isMusicPlaying]);
-
-  const handleHeadpat = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    
-    // Position clicks relative to parent container
-    const rect = e.currentTarget.parentElement?.getBoundingClientRect();
-    if (!rect) return;
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const randomPhrase = headpatPhrases[Math.floor(Math.random() * headpatPhrases.length)];
-    const newPat = {
-      id: Date.now() + Math.random(),
-      x,
-      y,
-      text: randomPhrase
-    };
-    
-    setPats((prev) => [...prev, newPat]);
-    
-    setTimeout(() => {
-      setPats((prev) => prev.filter((p) => p.id !== newPat.id));
-    }, 1200);
-  };
+  const { playSound } = useAudio();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -456,53 +386,30 @@ export default function Hero() {
             </a>
           </motion.div>
         </div>
-
+ 
         {/* Right Mascot (Follows Cursor & Reacts dynamically) */}
-        <div className="lg:col-span-6 flex flex-col items-center justify-center relative min-h-[360px] sm:min-h-[440px] md:min-h-[500px]">
+        <div className="lg:col-span-6 flex justify-center items-center relative min-h-[320px] sm:min-h-[400px] md:min-h-[460px] lg:min-h-[480px]">
  
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="relative w-full max-w-[460px] aspect-square flex justify-center items-center select-none group z-10"
+            className="relative w-full max-w-[460px] aspect-square flex justify-center items-center cursor-pointer select-none group z-10"
+            onClick={handleMascotClick}
           >
-            {/* Music notes floating up behind the mascot */}
-            {musicNotes.map((n) => (
-              <motion.span
-                key={n.id}
-                className="absolute text-xl pointer-events-none select-none text-orange-400/80 z-0"
-                style={{ left: `${n.x}%`, top: `${n.y}%` }}
-                initial={{ opacity: 0, y: 0, scale: 0.5 }}
-                animate={{ opacity: [0, 1, 1, 0], y: -250, x: [0, 20, -20, 0], scale: 1.2 }}
-                transition={{ duration: 3, ease: "easeInOut" }}
-              >
-                {n.note}
-              </motion.span>
-            ))}
-
-            {/* Mascot Image wrapper (looks at & tilts towards user's cursor dynamically!) */}
+            {/* Mascot Image (looks at & tilts towards user's cursor dynamically!) */}
             <motion.div
-              className="relative w-full h-full flex items-center justify-center p-2 cursor-pointer"
-              animate={isHoveringHead ? {
-                rotate: [0, -3, 3, -3, 3, 0],
-                scale: 1.03,
-                transition: {
-                  repeat: Infinity,
-                  duration: 0.6,
-                  ease: "easeInOut"
-                }
-              } : {
+              className="relative w-full h-full flex items-center justify-center p-2"
+              animate={{
                 x: mouseOffset.x,
                 y: mouseOffset.y,
                 rotate: mouseOffset.x * 0.4,
-                scale: 1,
               }}
               transition={{
                 type: "spring",
                 stiffness: 85,
                 damping: 18,
               }}
-              onClick={handleMascotClick}
             >
               {/* Cute Dialog speech bubble floating above mascot */}
               <AnimatePresence>
@@ -520,34 +427,21 @@ export default function Hero() {
                   </motion.div>
                 )}
               </AnimatePresence>
- 
+
               {/* Nested div for hardware-accelerated continuous breathing */}
               <motion.div
                 className="w-full h-full flex items-center justify-center animate-breathing"
-                animate={isMusicPlaying ? {
-                  y: [0, -8, 0],
-                  scale: [1, 1.018, 1],
-                } : {
+                animate={{
                   y: [0, -5, 0],
                 }}
-                transition={isMusicPlaying ? {
-                  repeat: Infinity,
-                  duration: 1.8, // Faster, musical breathing!
-                  ease: "easeInOut",
-                } : {
+                transition={{
                   repeat: Infinity,
                   duration: 3.5,
                   ease: "easeInOut",
                 }}
               >
                 <Image
-                  src={
-                    activeOutfit === "none" ? "/images/mascot.png" :
-                    activeOutfit === "bandana" ? "/images/outfit_bandana.png" :
-                    activeOutfit === "sweater" ? "/images/outfit_sweater.png" :
-                    activeOutfit === "pajamas" ? "/images/outfit_pajamas.png" :
-                    "/images/outfit_raincoat.png"
-                  }
+                  src={siteConfig.mascot.imageUrl}
                   alt={siteConfig.mascot.name}
                   width={450}
                   height={450}
@@ -556,33 +450,10 @@ export default function Hero() {
                 />
               </motion.div>
             </motion.div>
-  
-            {/* Invisible petting hotspot over mascot's head */}
-            <div 
-              className="absolute top-[8%] left-[24%] w-[52%] h-[32%] rounded-full cursor-pointer z-30"
-              onMouseEnter={() => setIsHoveringHead(true)}
-              onMouseLeave={() => setIsHoveringHead(false)}
-              onClick={handleHeadpat}
-              title="Give headpats! 🐾"
-            />
-
-            {/* Floaty headpat texts */}
-            {pats.map((p) => (
-              <motion.span
-                key={p.id}
-                className="absolute font-comic font-black text-sm text-orange-600 bg-white border-2 border-orange-950 px-2 py-1 rounded-md shadow-[2px_2px_0px_#451a03] z-40 pointer-events-none select-none"
-                style={{ left: p.x, top: p.y }}
-                initial={{ opacity: 1, scale: 0.4, y: 0 }}
-                animate={{ opacity: 0, scale: 1.1, y: -90, rotate: Math.random() * 20 - 10 }}
-                transition={{ duration: 1.2, ease: "easeOut" }}
-              >
-                {p.text}
-              </motion.span>
-            ))}
-
+ 
             {/* Tap prompt */}
             <div className="absolute bottom-0 bg-orange-700 text-white font-comic text-xs font-bold px-3 py-1.5 rounded-full border-2 border-orange-950 shadow-[2px_3px_0px_#451a03] transform -rotate-2 select-none pointer-events-none group-hover:scale-110 transition-transform">
-              {isHoveringHead ? "Pet me! 🥰" : `Poke me! ${clickCount > 0 ? `x${clickCount}` : ""}`}
+              Poke me! {clickCount > 0 && `x${clickCount}`}
             </div>
  
             {/* Sparkles on Mascot click */}
@@ -599,37 +470,8 @@ export default function Hero() {
               </motion.span>
             ))}
           </motion.div>
-
-          {/* Outfit Dressing Wardrobe Selectors - Hand-Drawn Closet Shelf Style */}
-          <div className="mt-4 flex flex-col items-center w-full max-w-[420px] bg-amber-100/60 border-2 border-orange-950 p-2.5 shadow-[4px_4px_0px_#451a03] rounded-[10px_80px_12px_95px/95px_12px_90px_10px] z-20">
-            <span className="font-comic font-black text-xs text-orange-950/70 mb-2 uppercase tracking-wide">👗 Dressing Closet</span>
-            <div className="flex flex-wrap justify-center gap-2">
-              {[
-                { id: "none", label: "Default", icon: "🦊" },
-                { id: "bandana", label: "Bandana", icon: "🧣" },
-                { id: "sweater", label: "Sweater", icon: "🧥" },
-                { id: "pajamas", label: "Pajamas", icon: "💤" },
-                { id: "raincoat", label: "Raincoat", icon: "🌧️" }
-              ].map((o) => (
-                <button
-                  key={o.id}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveOutfit(o.id as any);
-                  }}
-                  className={`px-3 py-1.5 border-2 border-orange-950 font-comic font-black text-xs sm:text-sm flex items-center space-x-1 shadow-[2px_2px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[1px] hover:translate-y-[1px] transition-all rounded-[10px_40px_10px_35px/35px_10px_40px_10px] ${
-                    activeOutfit === o.id
-                      ? "bg-orange-500 text-white"
-                      : "bg-amber-50 hover:bg-amber-100 text-orange-950"
-                  }`}
-                >
-                  <span>{o.icon}</span>
-                  <span>{o.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
+        
       </div>
     </section>
   );
