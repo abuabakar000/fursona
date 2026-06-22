@@ -33,17 +33,23 @@ export default function LoadingScreen() {
     };
   }, []);
 
+  const [showEnterButton, setShowEnterButton] = useState(false);
+
   useEffect(() => {
     if (progress === 100) {
-      // Small delay for satisfying 100% display
+      // Small delay before showing the enter button
       const timeout = setTimeout(() => {
-        setIsVisible(false);
-        document.body.style.overflow = "";
-      }, 350);
+        setShowEnterButton(true);
+      }, 200);
 
       return () => clearTimeout(timeout);
     }
   }, [progress]);
+
+  const handleEnter = () => {
+    setIsVisible(false);
+    document.body.style.overflow = "";
+  };
 
   return (
     <AnimatePresence>
@@ -96,19 +102,43 @@ export default function LoadingScreen() {
               </p>
             </div>
 
-            {/* Custom Progress Bar */}
-            <div className="w-52 space-y-2">
-              <div className="w-full h-3 bg-orange-100 border-2 border-orange-950 rounded-full overflow-hidden p-0.5 shadow-inner">
-                <motion.div 
-                  className="h-full bg-orange-500 rounded-full"
-                  style={{ width: `${progress}%` }}
-                  transition={{ ease: "easeOut" }}
-                />
-              </div>
-              
-              <div className="font-comic font-black text-sm text-orange-950">
-                {progress}%
-              </div>
+            {/* Custom Progress Bar / Enter Button */}
+            <div className="w-56 h-20 flex flex-col items-center justify-center relative">
+              <AnimatePresence mode="wait">
+                {!showEnterButton ? (
+                  <motion.div
+                    key="progress"
+                    initial={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="w-full space-y-2 flex flex-col items-center"
+                  >
+                    <div className="w-full h-3 bg-orange-100 border-2 border-orange-950 rounded-full overflow-hidden p-0.5 shadow-inner">
+                      <motion.div 
+                        className="h-full bg-orange-500 rounded-full"
+                        style={{ width: `${progress}%` }}
+                        transition={{ ease: "easeOut" }}
+                      />
+                    </div>
+                    
+                    <div className="font-comic font-black text-sm text-orange-950">
+                      {progress}%
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.button
+                    key="enter-btn"
+                    initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    whileHover={{ scale: 1.05, rotate: 1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleEnter}
+                    className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-comic font-black text-base border-3 border-orange-950 shadow-[3px_4px_0px_#451a03] hover:shadow-[1px_2px_0px_#451a03] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 rounded-2xl cursor-pointer flex items-center justify-center space-x-2"
+                  >
+                    <span>Enter Den</span>
+                    <span className="text-xl">🐾</span>
+                  </motion.button>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </motion.div>
