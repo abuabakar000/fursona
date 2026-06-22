@@ -179,7 +179,10 @@ export default function Commissions() {
       wishlistItems.length - 1,
       Math.max(0, Math.round(pct * (wishlistItems.length - 1)))
     );
-    setWishlistActiveIndex(index);
+    setWishlistActiveIndex((prev) => {
+      if (prev === index) return prev;
+      return index;
+    });
   };
 
   const artistsScrollRef = useRef<HTMLDivElement>(null);
@@ -196,7 +199,10 @@ export default function Commissions() {
       adoredArtists.length - 1,
       Math.max(0, Math.round(pct * (adoredArtists.length - 1)))
     );
-    setArtistsActiveIndex(index);
+    setArtistsActiveIndex((prev) => {
+      if (prev === index) return prev;
+      return index;
+    });
   };
 
   return (

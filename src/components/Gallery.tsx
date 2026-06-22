@@ -80,7 +80,10 @@ export default function Gallery() {
       filteredGallery.length - 1,
       Math.max(0, Math.round(pct * (filteredGallery.length - 1)))
     );
-    setGalleryActiveIndex(index);
+    setGalleryActiveIndex((prev) => {
+      if (prev === index) return prev;
+      return index;
+    });
   };
 
   useEffect(() => {
@@ -509,7 +512,6 @@ export default function Gallery() {
 
         {/* Gallery Grid: Polaroid Scrapbook Layout */}
         <motion.div 
-          layout 
           ref={galleryScrollRef}
           onScroll={handleGalleryScroll}
           initial={{ opacity: 0, y: 30 }}
@@ -518,20 +520,17 @@ export default function Gallery() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 pt-4 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none pb-8 px-4 -mx-4 sm:px-0 sm:mx-0"
         >
-          <AnimatePresence mode="popLayout">
-            {filteredGallery.map((item, index) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                whileHover={{ y: -8, rotate: 0, scale: 1.02, zIndex: 10 }}
-                onClick={() => handleOpenModal(item)}
-                style={{ rotate: index % 2 === 0 ? "-1.5deg" : "1.5deg" }}
-                className="group cursor-pointer bg-white border-3 border-orange-950 p-4 pb-8 shadow-[5px_6px_0px_rgba(69,26,3,0.18)] flex flex-col h-full rounded-sm relative select-none transition-shadow hover:shadow-[9px_10px_0px_rgba(69,26,3,0.15)] flex-shrink-0 w-[82vw] max-w-[290px] sm:w-auto sm:max-w-none snap-center snap-always"
-              >
+          {filteredGallery.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: index * 0.02 }}
+              whileHover={{ y: -8, rotate: 0, scale: 1.02, zIndex: 10 }}
+              onClick={() => handleOpenModal(item)}
+              style={{ rotate: index % 2 === 0 ? "-1.5deg" : "1.5deg" }}
+              className="group cursor-pointer bg-white border-3 border-orange-950 p-4 pb-8 shadow-[5px_6px_0px_rgba(69,26,3,0.18)] flex flex-col h-full rounded-sm relative select-none transition-shadow hover:shadow-[9px_10px_0px_rgba(69,26,3,0.15)] flex-shrink-0 w-[82vw] max-w-[290px] sm:w-auto sm:max-w-none snap-center snap-always"
+            >
                 {/* Translucent Washi Tape at the top of Polaroid */}
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 -translate-y-3 w-16 h-5 backdrop-blur-[0.5px] border border-dashed shadow-[1px_1.5px_2px_rgba(0,0,0,0.06)] z-20 ${
                   index % 4 === 0 ? "bg-orange-200/70 border-orange-300/40 rotate-[-3deg]" :
@@ -598,7 +597,6 @@ export default function Gallery() {
                 </div>
               </motion.div>
             ))}
-          </AnimatePresence>
         </motion.div>
 
         {/* Sketchy dots for mobile slider */}
@@ -629,17 +627,7 @@ export default function Gallery() {
         {/* Lightbox Modal with interactive comment form & mascot */}
         <AnimatePresence>
           {selectedItem && (
-            <>
-              <style>{`
-                html, body {
-                  overflow: hidden !important;
-                  height: 100% !important;
-                }
-                header {
-                  display: none !important;
-                }
-              `}</style>
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-orange-950/65 backdrop-blur-sm overflow-hidden">
+            <div className="fixed inset-0 z-[100000] flex items-center justify-center p-2 sm:p-4 bg-orange-950/65 backdrop-blur-sm overflow-hidden">
                 <motion.div 
                   className="absolute inset-0" 
                   onClick={handleCloseModal} 
@@ -854,7 +842,6 @@ export default function Gallery() {
 
               </motion.div>
             </div>
-            </>
           )}
         </AnimatePresence>
       </div>
