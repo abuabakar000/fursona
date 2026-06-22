@@ -80,59 +80,70 @@ const stickersData: Sticker[] = [
     imageUrl: "/images/user_art_4.png"
   },
   {
-    id: "sticker-cookie",
-    name: "Grandma's Cookie",
+    id: "sticker-sweater",
+    name: "Cozy Sweater",
     category: "stamp",
-    description: "Fresh chocolate-chip cookie. Warning: contains digital crumbs! 🍪",
+    description: "Citrini's favourite warm woolly winter sweater. Die-cut outline! 🧥",
     defaultRotate: 12,
     initialX: 130,
     initialY: 260,
     styleType: "die-cut",
-    emoji: "🍪"
+    imageUrl: "/images/outfit_sweater.png"
   },
   {
-    id: "sticker-orange",
-    name: "Giant Orange Slice",
+    id: "sticker-pajamas",
+    name: "Sleepy Pajamas",
     category: "stamp",
-    description: "Juicy organic citrus slice. Guaranteed 100% vitamin-cute! 🍊",
+    description: "Starry night slumber pajamas sticker. Super soft and warm! 💤",
     defaultRotate: -15,
-    initialX: 350,
+    initialX: 320,
     initialY: 250,
     styleType: "die-cut",
-    emoji: "🍊"
+    imageUrl: "/images/outfit_pajamas.png"
   },
   {
-    id: "sticker-ramen",
-    name: "Midnight Ramen",
+    id: "sticker-raincoat",
+    name: "Puddle Raincoat",
     category: "stamp",
-    description: "Steaming hot fennec-style ramen. Best served cozy! 🍜",
+    description: "Bright yellow raincoat sticker for wet autumn weather! 🌧️",
     defaultRotate: 6,
-    initialX: 570,
+    initialX: 510,
     initialY: 265,
     styleType: "die-cut",
-    emoji: "🍜"
+    imageUrl: "/images/outfit_raincoat.png"
+  },
+  {
+    id: "sticker-bandana",
+    name: "Sketchy Bandana",
+    category: "stamp",
+    description: "Hand-painted floral bandana sticker. A classic signature look! 🧣",
+    defaultRotate: 10,
+    initialX: 680,
+    initialY: 260,
+    styleType: "die-cut",
+    imageUrl: "/images/outfit_bandana.png"
+  },
+  {
+    id: "sticker-holo-mascot",
+    name: "Holo Citrini Foil",
+    category: "badge",
+    description: "Ultra rare holographic mascot print. Shimmers with metallic foil reflections! ✨🦊",
+    defaultRotate: -9,
+    initialX: 830,
+    initialY: 245,
+    styleType: "holo",
+    imageUrl: "/images/mascot.png"
   },
   {
     id: "sticker-holo-paw",
     name: "Holo Squeak Paw",
     category: "badge",
-    description: "Double-sided holographic paw print. Shimmers when you drag it! 🐾",
-    defaultRotate: -9,
-    initialX: 740,
-    initialY: 245,
-    styleType: "holo",
-    emoji: "🐾"
-  },
-  {
-    id: "sticker-holo-star",
-    name: "Holo Neon Star",
-    category: "stamp",
-    description: "Holographic retro star. Gives off positive energy! ✨",
+    description: "Holographic retro fennec paw print. Gives off positive energy! ✨🐾",
     defaultRotate: 15,
-    initialX: 920,
+    initialX: 950,
     initialY: 230,
     styleType: "holo",
-    emoji: "⭐"
+    emoji: "🐾"
   }
 ];
 
@@ -348,21 +359,69 @@ export default function StickerBook() {
                       )}
 
                       {sticker.styleType === "die-cut" && (
-                        <div className="flex items-center justify-center p-3.5 bg-white border-[3px] border-orange-950 shadow-[3px_3.5px_0px_rgba(69,26,3,0.15)] hover:bg-orange-50 transition-colors rounded-full aspect-square w-16 sm:w-20">
-                          <span className="text-3xl sm:text-4xl select-none filter drop-shadow-[1.5px_1.5px_0px_#451a03]">{sticker.emoji}</span>
+                        <div className="relative w-16 sm:w-20 aspect-square flex items-center justify-center filter drop-shadow-[3px_4px_6px_rgba(69,26,3,0.25)]">
+                          {sticker.imageUrl ? (
+                            <div 
+                              className="w-full h-full relative"
+                              style={{
+                                filter: "drop-shadow(2px 2px 0px #fff) drop-shadow(-2px -2px 0px #fff) drop-shadow(-2px 2px 0px #fff) drop-shadow(2px -2px 0px #fff)"
+                              }}
+                            >
+                              <Image 
+                                src={sticker.imageUrl} 
+                                alt={sticker.name}
+                                fill
+                                className="object-contain"
+                              />
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-center p-3.5 bg-white border-[3px] border-orange-950 shadow-[3px_3.5px_0px_rgba(69,26,3,0.15)] hover:bg-orange-50 transition-colors rounded-full aspect-square w-full">
+                              <span className="text-3xl sm:text-4xl select-none filter drop-shadow-[1.5px_1.5px_0px_#451a03]">{sticker.emoji}</span>
+                            </div>
+                          )}
                         </div>
                       )}
 
                       {sticker.styleType === "holo" && (
-                        <div 
-                          className="flex items-center justify-center p-3.5 bg-gradient-to-tr from-pink-300 via-purple-300 to-indigo-300 border-[3.5px] border-white shadow-[3px_4px_0px_rgba(69,26,3,0.15)] outline outline-3 outline-orange-950 rounded-full aspect-square w-16 sm:w-20"
-                          style={{
-                            backgroundImage: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%)",
-                            backgroundSize: "200% 200%",
-                            animation: "gradientShift 4s ease infinite"
-                          }}
-                        >
-                          <span className="text-3xl sm:text-4xl select-none filter drop-shadow-[2px_2.5px_0px_rgba(255,255,255,0.7)]">{sticker.emoji}</span>
+                        <div className="relative w-16 sm:w-20 aspect-square flex items-center justify-center filter drop-shadow-[3px_4px_6px_rgba(69,26,3,0.25)]">
+                          {sticker.imageUrl ? (
+                            <div 
+                              className="w-full h-full relative"
+                              style={{
+                                filter: "drop-shadow(2px 2px 0px #fff) drop-shadow(-2px -2px 0px #fff) drop-shadow(-2px 2px 0px #fff) drop-shadow(2px -2px 0px #fff)"
+                              }}
+                            >
+                              {/* Shifting holographic overlay blend */}
+                              <div 
+                                className="absolute inset-0 z-10 opacity-75"
+                                style={{
+                                  backgroundImage: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 30%, #fbc2eb 70%, #a1c4fd 100%)",
+                                  backgroundSize: "200% 200%",
+                                  animation: "gradientShift 3.5s ease infinite",
+                                  mixBlendMode: "color-dodge",
+                                  mask: `url(${sticker.imageUrl}) no-repeat center / contain`,
+                                  WebkitMask: `url(${sticker.imageUrl}) no-repeat center / contain`
+                                }}
+                              />
+                              <Image 
+                                src={sticker.imageUrl} 
+                                alt={sticker.name}
+                                fill
+                                className="object-contain"
+                              />
+                            </div>
+                          ) : (
+                            <div 
+                              className="flex items-center justify-center p-3.5 bg-gradient-to-tr from-pink-300 via-purple-300 to-indigo-300 border-[3.5px] border-white shadow-[3px_4px_0px_rgba(69,26,3,0.15)] outline outline-3 outline-orange-950 rounded-full aspect-square w-full"
+                              style={{
+                                backgroundImage: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%)",
+                                backgroundSize: "200% 200%",
+                                animation: "gradientShift 4s ease infinite"
+                              }}
+                            >
+                              <span className="text-3xl sm:text-4xl select-none filter drop-shadow-[2px_2.5px_0px_rgba(255,255,255,0.7)]">{sticker.emoji}</span>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
