@@ -35,30 +35,44 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       const savedMusic = localStorage.getItem("citrini-music-preference");
       const shouldPlay = savedMusic !== "paused";
 
-      if (shouldPlay) {
-        setIsMusicPlaying(true);
-      }
-
-      const startMusicOnInteraction = () => {
+      const startMusic = () => {
         if (shouldPlay && musicRef.current) {
           musicRef.current.play().then(() => {
             setIsMusicPlaying(true);
+            cleanUpListeners();
           }).catch((e) => {
-            console.log("Autoplay blocked background music until user explicit click:", e);
+            console.log("Autoplay block active, waiting for user interaction gesture:", e);
           });
         }
-        window.removeEventListener("pointerdown", startMusicOnInteraction);
-        window.removeEventListener("keydown", startMusicOnInteraction);
       };
 
-      window.addEventListener("pointerdown", startMusicOnInteraction);
-      window.addEventListener("keydown", startMusicOnInteraction);
+      const cleanUpListeners = () => {
+        window.removeEventListener("pointerdown", startMusic);
+        window.removeEventListener("keydown", startMusic);
+        window.removeEventListener("touchstart", startMusic);
+        window.removeEventListener("mousedown", startMusic);
+        window.removeEventListener("click", startMusic);
+      };
+
+      if (shouldPlay) {
+        setIsMusicPlaying(true);
+        // 1. Attempt immediate play (works if browser allows autoplay)
+        audio.play().then(() => {
+          setIsMusicPlaying(true);
+        }).catch(() => {
+          // 2. Fall back to interaction listeners if immediate autoplay is blocked
+          window.addEventListener("pointerdown", startMusic);
+          window.addEventListener("keydown", startMusic);
+          window.addEventListener("touchstart", startMusic);
+          window.addEventListener("mousedown", startMusic);
+          window.addEventListener("click", startMusic);
+        });
+      }
 
       return () => {
         audio.pause();
         audio.src = "";
-        window.removeEventListener("pointerdown", startMusicOnInteraction);
-        window.removeEventListener("keydown", startMusicOnInteraction);
+        cleanUpListeners();
       };
     }
   }, []);
