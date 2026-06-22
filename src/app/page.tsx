@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Gallery from "@/components/Gallery";
-import StickerBook from "@/components/StickerBook";
+import CrackYourVibe from "@/components/CrackYourVibe";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -20,9 +20,9 @@ export default function Home() {
       
       {/* Portfolio Gallery */}
       <Gallery />
-      
-      {/* Interactive Sticker Book and Badge Collection */}
-      <StickerBook />
+
+      {/* "Crack Your Vibe" Egg-Cracking Minigame */}
+      <CrackYourVibe />
       
       {/* Notebook-styled Client Pitch form */}
       <Contact />

@@ -101,7 +101,7 @@ export default function About() {
       particleCount: 7,
       spread: 35,
       origin: { x, y },
-      colors: ["#f07828", "#fce8a6", "#fca5a5"]
+      colors: ["#ea580c", "#f97316", "#fdba74", "#fed7aa"]
     });
 
     const phrase = boopPhrases[Math.floor(Math.random() * boopPhrases.length)];
@@ -268,24 +268,24 @@ export default function About() {
             className={`bg-white border-3 border-orange-950 p-4 pb-6 shadow-[5px_6px_0px_rgba(120,53,4,0.15)] hover:shadow-[7px_9px_0px_rgba(120,53,4,0.15)] max-w-[320px] w-full text-center ${sketchyBorderStyles.card} cursor-pointer select-none group relative`}
           >
             {/* Boop Heart Sticker Indicator */}
-            <div className={`absolute -top-3.5 -right-3 bg-red-400 text-white border-2 border-orange-950 p-2 font-bold rounded-full shadow-[2.5px_3.5px_0px_#451a03] group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 z-20`}>
+            <div className={`absolute -top-3.5 -right-3 bg-orange-500 text-white border-2 border-orange-950 p-2 font-bold rounded-full shadow-[2.5px_3.5px_0px_#451a03] group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 z-20`}>
               <Heart className="w-5 h-5 fill-white text-orange-950 stroke-[2.5]" />
-            </div>
-
-            {/* Tap to Boop banner */}
-            <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 bg-orange-500 text-white font-comic text-xs font-black uppercase tracking-wider px-3 py-1.5 rounded-full border-2 border-orange-950 shadow-[2px_3px_0px_#451a03] opacity-0 group-hover:opacity-100 transition-opacity z-20 scale-95 group-hover:scale-100 pointer-events-none">
-              👉 Tap to Boop!
             </div>
 
             {/* Photo Container */}
             <div className="relative aspect-square w-full bg-amber-50/80 border border-orange-950/20 rounded-md overflow-hidden mb-5">
               <Image
-                src="/images/mascot.png"
+                src="/images/about.png"
                 alt="Citrini Polaroid Profile"
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-102"
                 sizes="(max-w-md) 100vw, 50vw"
               />
+              
+              {/* Tap to Boop banner - non-intrusive bottom caption overlay */}
+              <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-orange-500/90 text-white font-comic text-[10px] font-black uppercase tracking-wider px-4 py-1.5 rounded-full border-2 border-orange-950 shadow-[2.5px_3.5px_0px_#451a03] z-20 group-hover:bg-orange-600 transition-all duration-200 pointer-events-none scale-95 group-hover:scale-100 whitespace-nowrap">
+                🐾 Tap Citrini to boop!
+              </div>
             </div>
             
             <span className="font-comic text-xl font-black text-orange-950 block tracking-tight">
@@ -307,7 +307,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="lg:col-span-7 flex flex-col space-y-6 text-left"
         >
-          <p className="text-orange-900/90 font-sans text-base sm:text-lg leading-relaxed text-left">
+          <p className="text-orange-900/95 font-sans text-base sm:text-lg font-medium leading-relaxed text-left pl-3 border-l-3 border-orange-500/50">
             {siteConfig.mascot.bio}
           </p>
 
@@ -317,6 +317,10 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ type: "spring", stiffness: 70, damping: 15, delay: 0.15 }}
+            style={{
+              backgroundImage: "linear-gradient(to right, rgba(120,53,4,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(120,53,4,0.06) 1px, transparent 1px)",
+              backgroundSize: "20px 20px",
+            }}
             className={`bg-white border-3 border-orange-950 p-5 md:p-6 shadow-[5px_6px_0px_#451a03] grid grid-cols-1 md:grid-cols-2 gap-6 ${sketchyBorderStyles.card}`}
           >
             
@@ -327,7 +331,7 @@ export default function About() {
                 <span>Ref Color Palette</span>
               </h3>
               
-              <p className="text-[10px] text-orange-900/50 font-bold uppercase tracking-wider">
+              <p className="text-[10px] text-orange-900/55 font-black uppercase tracking-wider">
                 Click paw prints to copy color HEX! 🎨
               </p>
 
@@ -336,8 +340,7 @@ export default function About() {
                   <motion.button
                     key={color.hex}
                     onClick={(e) => copyToClipboard(color.hex, e)}
-                    className="flex items-center justify-between p-1.5 pr-3 bg-amber-50/50 hover:bg-orange-50 border-2 border-orange-950/20 hover:border-orange-950/60 rounded-xl transition-all w-full text-left cursor-pointer group"
-                    whileHover={{ scale: 1.02, x: 2 }}
+                    className="flex items-center justify-between p-2 pr-3 bg-amber-50/40 hover:bg-orange-50/80 border-2 border-orange-950 transition-all w-full text-left cursor-pointer group shadow-[1.5px_2px_0px_rgba(69,26,3,0.15)] hover:shadow-[2px_3.5px_0px_#451a03] rounded-xl hover:-translate-y-0.5 hover:-translate-x-0.5"
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="flex items-center space-x-2.5">
@@ -359,63 +362,75 @@ export default function About() {
             </div>
 
             {/* Right Col: Interaction Trade status cards & Ref drawing guidelines */}
-            <div className="space-y-4 flex flex-col justify-between">
+            <div className="space-y-5 flex flex-col justify-between">
               <div>
                 <h3 className="font-comic text-lg font-black text-orange-950 border-b-2 border-dashed border-amber-200 pb-1.5 flex flex-wrap items-center gap-1.5">
-                  <Star className="w-4.5 h-4.5 text-red-500 fill-red-500/10" />
+                  <Star className="w-4.5 h-4.5 text-orange-500 fill-orange-500/10" strokeWidth={2.5} />
                   <span>Interaction Status</span>
                 </h3>
                 
                 <div className="grid grid-cols-1 gap-2.5 mt-3">
-                  <div className="flex flex-wrap items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl gap-2">
+                  <div className="flex flex-wrap items-center justify-between p-2.5 bg-amber-50/30 border-2 border-orange-950 rounded-xl shadow-[1px_1.5px_0px_rgba(69,26,3,0.15)] gap-2">
                     <span className="text-xs font-comic font-black text-orange-950">Art Trades:</span>
-                    <span className={`px-2.5 py-1 text-xs font-bold border-2 ${getStatusBadge("trades").style} ${sketchyBorderStyles.badge}`}>
+                    <span className={`px-2.5 py-1 text-xs font-bold border-2 rotate-[-1deg] ${getStatusBadge("trades").style} ${sketchyBorderStyles.badge}`}>
                       {getStatusBadge("trades").text}
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl gap-2">
+                  <div className="flex flex-wrap items-center justify-between p-2.5 bg-amber-50/30 border-2 border-orange-950 rounded-xl shadow-[1px_1.5px_0px_rgba(69,26,3,0.15)] gap-2">
                     <span className="text-xs font-comic font-black text-orange-950">Gift Art:</span>
-                    <span className={`px-2.5 py-1 text-xs font-bold border-2 ${getStatusBadge("gifts").style} ${sketchyBorderStyles.badge}`}>
+                    <span className={`px-2.5 py-1 text-xs font-bold border-2 rotate-[1.5deg] ${getStatusBadge("gifts").style} ${sketchyBorderStyles.badge}`}>
                       {getStatusBadge("gifts").text}
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between p-2 bg-amber-50/20 border-2 border-dashed border-orange-950/30 rounded-xl gap-2">
+                  <div className="flex flex-wrap items-center justify-between p-2.5 bg-amber-50/30 border-2 border-orange-950 rounded-xl shadow-[1px_1.5px_0px_rgba(69,26,3,0.15)] gap-2">
                     <span className="text-xs font-comic font-black text-orange-950">Fursuit Owns:</span>
-                    <span className={`px-2.5 py-1 text-xs font-bold border-2 ${getStatusBadge("suit").style} ${sketchyBorderStyles.badge}`}>
+                    <span className={`px-2.5 py-1 text-xs font-bold border-2 rotate-[-1.5deg] ${getStatusBadge("suit").style} ${sketchyBorderStyles.badge}`}>
                       {getStatusBadge("suit").text}
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Ref drawing rules for artists drawing the character (Extremely popular in furry community) */}
-              <div className="p-3 bg-amber-50/50 border-2 border-dashed border-orange-950/20 rounded-xl text-left space-y-1.5">
-                <h4 className="font-comic text-xs font-black text-orange-950 uppercase tracking-wider pb-0.5 border-b border-orange-950/10">
-                  ✏️ Drawing Reference Swatches:
+              {/* Ref drawing rules styled as a yellow post-it sticky note */}
+              <div className="relative p-4 bg-yellow-100/95 border-2 border-orange-950 shadow-[3px_4px_0px_#451a03] rotate-[-1deg] text-left space-y-2 rounded-xs">
+                {/* Translucent Washi Tape at the top of note */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2.5 w-14 h-4 bg-orange-200/60 border border-dashed border-orange-300/40 rotate-[2deg] z-10" />
+                
+                <h4 className="font-comic text-xs font-black text-orange-950 uppercase tracking-wider pb-1 border-b border-orange-950/25">
+                  ✏️ Drawing Guidelines:
                 </h4>
-                <ul className="text-[11px] text-orange-900/90 font-sans space-y-1 font-semibold">
-                  <li>🦊 Large ears are super fluffy inside!</li>
-                  <li>🧣 Bandana is optional but highly preferred!</li>
-                  <li>👕 Hoodie has white strings & double sleeve stripes.</li>
+                <ul className="text-[10px] text-orange-950 font-sans space-y-1.5 font-bold leading-normal">
+                  <li className="flex items-start gap-1">
+                    <span>🦊</span>
+                    <span>Large ears are super fluffy inside!</span>
+                  </li>
+                  <li className="flex items-start gap-1">
+                    <span>🧣</span>
+                    <span>Bandana is optional but highly preferred!</span>
+                  </li>
+                  <li className="flex items-start gap-1">
+                    <span>👕</span>
+                    <span>Hoodie has white strings & double sleeve stripes.</span>
+                  </li>
                 </ul>
               </div>
             </div>
 
           </motion.div>
 
-          {/* SFW Profile rules shield */}
+          {/* SFW Profile rules banner */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center space-x-3 p-3.5 bg-amber-100/40 border border-dashed border-orange-900/40 rounded-lg"
+            className={`flex items-center space-x-3.5 p-4 bg-orange-50 border-2 border-orange-950 shadow-[3px_3px_0px_#451a03] ${sketchyBorderStyles.card}`}
           >
-            <ShieldCheck className="w-6 h-6 text-orange-700 flex-shrink-0" />
-            <p className="text-xs text-orange-950 leading-relaxed font-medium font-sans">
-              <strong>SFW Profile Rules:</strong> This page represents a clean, SFW furry character space. Anyone is welcome to draw Citrini as long as the content stays PG-13!
+            <ShieldCheck className="w-7 h-7 text-orange-600 flex-shrink-0" strokeWidth={2.5} />
+            <p className="text-xs text-orange-950 leading-relaxed font-bold font-sans">
+              <strong className="text-orange-850">SFW Profile Rules:</strong> This page represents a clean, SFW furry character space. Anyone is welcome to draw Citrini as long as the content stays PG-13!
             </p>
           </motion.div>
         </motion.div>

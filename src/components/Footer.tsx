@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { Mail, Globe, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import VisitorCounter from "./VisitorCounter";
 
 export default function Footer() {
   return (
@@ -86,6 +87,17 @@ export default function Footer() {
           </span>
         </div>
 
+      </motion.div>
+
+      {/* Visitor Counter centered at bottom */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="mt-8 pt-6 border-t border-orange-950/5 w-full flex justify-center"
+      >
+        <VisitorCounter />
       </motion.div>
     </footer>
   );

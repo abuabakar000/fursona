@@ -5,36 +5,10 @@ import Image from "next/image";
 import { siteConfig, GalleryItem } from "@/config/site";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Search, Heart, MessageSquare, ExternalLink, Send, Smile, Sparkles } from "lucide-react";
+import { X, Search, Heart, ExternalLink, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { useAudio } from "@/context/AudioContext";
 import confetti from "canvas-confetti";
 import { SketchPaw, SketchTwig, SketchLeaf, SketchStar, SketchHeart, OrangeSlice } from "./SketchIcons";
-
-interface MockComments {
-  author: string;
-  avatar: string;
-  text: string;
-}
-
-// Mock comments mapped to each gallery item ID
-const mockCommentsMap: Record<string, MockComments[]> = {
-  "gal-1": [
-    { author: "StardustFox", avatar: "🦊", text: "Zephryn did an amazing job with the blep and starry shading! ⭐" },
-    { author: "NightLeopard", avatar: "🐱", text: "Such a cool black leopard icon portrait! Absolutely adore it! 🌌" }
-  ],
-  "gal-2": [
-    { author: "MelonTail", avatar: "🦖", text: "OMGG he eating the watermelon! So adorable and fluffy! 🍉" },
-    { author: "ScalePaw", avatar: "🦎", text: "Look at those cute squeaky padded claws! Cute work WJ!" }
-  ],
-  "gal-3": [
-    { author: "VoltPaws", avatar: "🐈", text: "The neon lightning themes and pastel shades look so cozy! ⚡" },
-    { author: "NoodleCat", avatar: "🐱", text: "Super adorable retro outfit and color palette! Loving the fish collar." }
-  ],
-  "gal-4": [
-    { author: "BrushTiger", avatar: "🐯", text: "The mint hair and retro glasses look so stylish! 🎨" },
-    { author: "SonaLover", avatar: "🐰", text: "Casual streetwear vibes look amazing on this canine!" }
-  ],
-};
 // --- Doodle Component for Compositor Animations ---
 interface DoodleProps {
   className: string;
@@ -93,29 +67,23 @@ export default function Gallery() {
     }
   }, [filter]);
 
-  // Prevent background body scroll when gallery item modal is open
+  // Prevent background body scroll and hide header when gallery item modal is open
   useEffect(() => {
     if (selectedItem) {
       document.body.style.overflow = "hidden";
+      document.body.classList.add("modal-open");
     } else {
       document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
     }
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("modal-open");
     };
   }, [selectedItem]);
   
   // Shared audio context
   const { playSound } = useAudio();
-
-  // Comments state initialized with mock data
-  const [commentsMap, setCommentsMap] = useState<Record<string, MockComments[]>>(mockCommentsMap);
-  
-  // Comment Form States
-  const [commentName, setCommentName] = useState("");
-  const [commentText, setCommentText] = useState("");
-  const [selectedAvatar, setSelectedAvatar] = useState("🦊");
-  const avatarOptions = ["🦊", "🐺", "🐶", "🐱", "🐯", "🦁", "🐨", "🐰", "🐹", "🐻", "🐼", "🐸", "🦄", "🐾", "✨", "🍊"];
 
   // Likes states
   const [likes, setLikes] = useState<Record<string, number>>({
@@ -129,14 +97,17 @@ export default function Gallery() {
   // Mascot dynamic speech inside the modal
   const [mascotSpeech, setMascotSpeech] = useState<string>("Oh! You like this one? 🥺");
 
+  // Zoom state and click timeout ref
+  const [isZoomed, setIsZoomed] = useState(false);
+  const clickTimeoutRef = useRef<any>(null);
+
   // Floating emojis state
   const [floatingEmojis, setFloatingEmojis] = useState<{ id: number; x: number; y: number; char: string }[]>([]);
 
-  // Melt Meter stats
+  // Melt stats based on likes only
   const totalLikes = Object.values(likes).reduce((a, b) => a + b, 0);
-  const totalComments = Object.values(commentsMap).flat().length;
-  const currentPoints = totalLikes + totalComments * 8; // 1 comment is worth 8 points
-  const maxPoints = 430; // Target goal to reach 100%
+  const currentPoints = totalLikes;
+  const maxPoints = 392; // Default is 390
   const meltPercentage = Math.min(100, Math.round((currentPoints / maxPoints) * 100));
 
   const [hasCelebratedMelt, setHasCelebratedMelt] = useState(false);
@@ -194,21 +165,30 @@ export default function Gallery() {
       const x = (rect.left + rect.width / 2) / window.innerWidth;
       const y = (rect.top + rect.height / 2) / window.innerHeight;
 
-      // Burst of cute red/pink hearts!
+      // Burst of cute orange/amber hearts!
       confetti({
         particleCount: 8,
         spread: 35,
         origin: { x, y },
-        colors: ["#fca5a5", "#f87171", "#ef4444", "#ffffff"]
+        colors: ["#fdba74", "#f97316", "#ea580c", "#ffffff"]
       });
     } else {
       playSound("pop");
     }
   };
 
-  const handleDoubleTap = (id: string, e: React.MouseEvent) => {
-    // Register double click
-    if (e.detail === 2) {
+  const handleImageClick = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (e.detail === 1) {
+      clickTimeoutRef.current = setTimeout(() => {
+        setIsZoomed(true);
+        playSound("pop");
+      }, 220);
+    } else if (e.detail === 2) {
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
+        clickTimeoutRef.current = null;
+      }
       const isAlreadyLiked = likedItems[id];
       if (!isAlreadyLiked) {
         setLikedItems((prev) => ({ ...prev, [id]: true }));
@@ -230,7 +210,7 @@ export default function Gallery() {
           particleCount: 12,
           spread: 50,
           origin: { x, y },
-          colors: ["#fca5a5", "#f87171", "#ef4444"]
+          colors: ["#fdba74", "#f97316", "#ea580c", "#ffffff"]
         });
 
         setMascotSpeech("Aaa, my heart is melting! *blushes* 🥺💖");
@@ -240,6 +220,7 @@ export default function Gallery() {
 
   const handleOpenModal = (item: GalleryItem) => {
     setSelectedItem(item);
+    setIsZoomed(false);
     setMascotSpeech(`Oh! You like "${item.title}"? 🥺`);
     playSound("pop");
     setTimeout(() => playSound("whoosh"), 80);
@@ -247,48 +228,55 @@ export default function Gallery() {
 
   const handleCloseModal = () => {
     setSelectedItem(null);
+    setIsZoomed(false);
     playSound("whoosh");
   };
 
-  const handleAddComment = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedItem || !commentText.trim()) return;
-
-    const authorName = commentName.trim() || "Anonymous Furry";
-    const newComment = {
-      author: authorName,
-      avatar: selectedAvatar,
-      text: commentText.trim()
-    };
-
-    setCommentsMap((prev) => ({
-      ...prev,
-      [selectedItem.id]: [...(prev[selectedItem.id] || []), newComment]
-    }));
-
-    // Clear form inputs
-    setCommentText("");
-
-    playSound("chime");
-    setTimeout(() => playSound("fill"), 120);
-
-    // Mini confetti on submission
-    const formBtn = (e.target as HTMLFormElement).querySelector("button[type='submit']");
-    if (formBtn) {
-      const rect = formBtn.getBoundingClientRect();
-      confetti({
-        particleCount: 8,
-        spread: 30,
-        origin: {
-          x: (rect.left + rect.width / 2) / window.innerWidth,
-          y: (rect.top + rect.height / 2) / window.innerHeight
-        },
-        colors: ["#fdba74", "#fca5a5", "#ef4444"]
-      });
+  const handlePrevItem = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (!selectedItem) return;
+    setIsZoomed(false);
+    const currentIndex = filteredGallery.findIndex((item) => item.id === selectedItem.id);
+    if (currentIndex >= 0) {
+      const prevIndex = (currentIndex - 1 + filteredGallery.length) % filteredGallery.length;
+      setSelectedItem(filteredGallery[prevIndex]);
+      setMascotSpeech(`Here is "${filteredGallery[prevIndex].title}"! 🥺`);
+      playSound("pop");
     }
-
-    setMascotSpeech("That is so sweet! You made my tail wag! *happy ear wiggles* 🦊✨");
   };
+
+  const handleNextItem = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (!selectedItem) return;
+    setIsZoomed(false);
+    const currentIndex = filteredGallery.findIndex((item) => item.id === selectedItem.id);
+    if (currentIndex >= 0) {
+      const nextIndex = (currentIndex + 1) % filteredGallery.length;
+      setSelectedItem(filteredGallery[nextIndex]);
+      setMascotSpeech(`Here is "${filteredGallery[nextIndex].title}"! 🥺`);
+      playSound("pop");
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedItem) return;
+      if (e.key === "ArrowLeft") {
+        handlePrevItem();
+      } else if (e.key === "ArrowRight") {
+        handleNextItem();
+      } else if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedItem, filteredGallery]);
+
+
 
   // Trigger grand melt celebration at 100%
   useEffect(() => {
@@ -306,14 +294,14 @@ export default function Gallery() {
           angle: 60,
           spread: 55,
           origin: { x: 0, y: 0.8 },
-          colors: ["#fca5a5", "#fdba74", "#ef4444", "#60a5fa"]
+          colors: ["#fdba74", "#f97316", "#ea580c", "#fed7aa"]
         });
         confetti({
           particleCount: 2,
           angle: 120,
           spread: 55,
           origin: { x: 1, y: 0.8 },
-          colors: ["#fca5a5", "#fdba74", "#ef4444", "#60a5fa"]
+          colors: ["#fdba74", "#f97316", "#ea580c", "#fed7aa"]
         });
 
         if (Date.now() < end) {
@@ -587,11 +575,11 @@ export default function Gallery() {
                       onClick={(e) => handleLike(item.id, e)}
                       className={`p-1.5 border-2 rounded-full transition-all duration-150 ${
                         likedItems[item.id]
-                          ? "bg-red-100 text-red-500 border-red-500 shadow-none scale-95"
-                          : "bg-amber-50 hover:bg-red-50 text-orange-950/60 hover:text-red-500 border-orange-950/20 hover:border-red-400 shadow-[1px_1.5px_0px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
+                          ? "bg-orange-100 text-orange-600 border-orange-500 shadow-none scale-95"
+                          : "bg-amber-50 hover:bg-orange-55 text-orange-950/60 hover:text-orange-600 border-orange-950/20 hover:border-orange-400 shadow-[1px_1.5px_0px_rgba(0,0,0,0.1)] hover:-translate-y-0.5"
                       }`}
                     >
-                      <Heart className={`w-3.5 h-3.5 ${likedItems[item.id] ? "fill-red-500 stroke-[2.5]" : "stroke-[2.5]"}`} />
+                      <Heart className={`w-3.5 h-3.5 ${likedItems[item.id] ? "fill-orange-500 stroke-[2.5]" : "stroke-[2.5]"}`} />
                     </button>
                   </div>
                 </div>
@@ -652,28 +640,44 @@ export default function Gallery() {
                   className={`relative bg-amber-50 border-4 border-orange-950 p-4 sm:p-6 max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col md:flex-row gap-5 sm:gap-6 md:gap-8 ${sketchyBorderStyles.card}`}
                 >
                   {/* Space holder for floating button on mobile close */}
-                  <div className="h-4 w-full md:hidden flex-shrink-0" />
-
-                {/* Left Side: Double-tappable Modal Image */}
-                <div 
-                  onClick={(e) => handleDoubleTap(selectedItem.id, e)}
-                  className="flex-shrink-0 md:flex-1 relative aspect-square w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] md:max-h-[calc(90vh-5rem)] mx-auto bg-white border-3 border-orange-950 rounded-2xl overflow-hidden p-2 select-none cursor-pointer group shadow-inner"
-                >
-                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-amber-50/20">
-                    <Image
-                      src={selectedItem.imageUrl}
-                      alt={selectedItem.title}
-                      fill
-                      className="object-contain"
-                      sizes="(max-w-4xl) 50vw, 100vw"
-                    />
-                  </div>
-                  
-                  {/* Floating click cue bubble */}
-                  <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-orange-950/80 text-white font-comic text-[10px] font-bold px-3 py-1.5 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-wider">
-                    💖 Double Tap to Love!
-                  </div>
-                </div>
+                              {/* Left Side: Modal Image with Navigation, Zoom and Double-tap Love */}
+                 <div 
+                   className="flex-shrink-0 md:flex-1 relative aspect-square w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] md:max-h-[calc(90vh-5rem)] mx-auto bg-white border-3 border-orange-950 rounded-2xl overflow-hidden p-2 select-none group shadow-inner"
+                 >
+                   <div 
+                     onClick={(e) => handleImageClick(selectedItem.id, e)}
+                     className="relative w-full h-full rounded-xl overflow-hidden bg-amber-50/20 cursor-zoom-in"
+                   >
+                     <Image
+                       src={selectedItem.imageUrl}
+                       alt={selectedItem.title}
+                       fill
+                       className="object-contain"
+                       sizes="(max-w-4xl) 50vw, 100vw"
+                     />
+                   </div>
+                   
+                   {/* Navigation Arrows overlaying the image */}
+                   <button
+                     onClick={handlePrevItem}
+                     className="absolute left-3 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-white/95 hover:bg-orange-100 text-orange-950 border-2 border-orange-950 rounded-full shadow-[2px_2px_0px_#451a03] hover:translate-x-[-1px] hover:translate-y-[-48%] active:translate-y-[-50%] transition-all cursor-pointer"
+                     aria-label="Previous image"
+                   >
+                     <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
+                   </button>
+                   <button
+                     onClick={handleNextItem}
+                     className="absolute right-3 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-white/95 hover:bg-orange-100 text-orange-950 border-2 border-orange-950 rounded-full shadow-[2px_2px_0px_#451a03] hover:translate-x-[1px] hover:translate-y-[-48%] active:translate-y-[-50%] transition-all cursor-pointer"
+                     aria-label="Next image"
+                   >
+                     <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+                   </button>
+                   
+                   {/* Floating click cue bubble */}
+                   <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-orange-950/85 text-white font-comic text-[9px] font-bold px-3 py-1.5 rounded-full backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-wider text-center w-[85%]">
+                     🔍 Click to Zoom • 💖 Double Click to Love
+                   </div>
+                 </div>
 
                 {/* Right Side: Artwork Info, Dynamic Mascot & Guestbook Comments */}
                 <div className="flex-1 flex flex-col justify-between py-1 text-left space-y-4 md:max-h-[calc(90vh-5rem)] md:overflow-y-auto pr-1">
@@ -689,9 +693,9 @@ export default function Gallery() {
                           handleLike(selectedItem.id, e);
                           setMascotSpeech("Aaa, my heart is melting! *blushes* 🥺💖");
                         }}
-                        className="text-xs font-sans font-bold text-orange-900/75 flex items-center space-x-1 hover:text-red-500 transition-colors"
+                        className="text-xs font-sans font-bold text-orange-900/75 flex items-center space-x-1 hover:text-orange-600 transition-colors"
                       >
-                        <Heart className={`w-4 h-4 text-red-400 ${likedItems[selectedItem.id] ? "fill-red-400" : ""}`} />
+                        <Heart className={`w-4 h-4 text-orange-500 ${likedItems[selectedItem.id] ? "fill-orange-500" : ""}`} />
                         <span>{likes[selectedItem.id] || 0} loves</span>
                       </button>
                     </div>
@@ -724,127 +728,51 @@ export default function Gallery() {
                     )}
                   </div>
 
-
-
-                  {/* Comments Guestbook List */}
-                  <div className="space-y-3 pt-3 border-t border-dashed border-amber-200 pr-2">
-                    <h4 className="font-comic text-xs font-black text-orange-950 uppercase tracking-wider flex items-center space-x-1.5">
-                      <MessageSquare className="w-3.5 h-3.5 text-orange-600" />
-                      <span>Guestbook Comments ({commentsMap[selectedItem.id]?.length || 0})</span>
-                    </h4>
-                    
-                    <div className="flex flex-col space-y-2.5 max-h-[150px] overflow-y-auto pr-1">
-                      {commentsMap[selectedItem.id] && commentsMap[selectedItem.id].length > 0 ? (
-                        commentsMap[selectedItem.id].map((comment, i) => (
-                          <motion.div 
-                            key={i} 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="bg-white/60 p-2.5 rounded-xl border border-orange-950/15 flex items-start space-x-2.5 text-xs shadow-sm"
-                          >
-                            <span className="text-xl leading-none select-none" role="img" aria-label="avatar">{comment.avatar}</span>
-                            <div className="space-y-0.5 text-left flex-1">
-                              <strong className="font-comic text-orange-950 block">@{comment.author}</strong>
-                              <p className="text-orange-900 font-sans leading-relaxed break-words">{comment.text}</p>
-                            </div>
-                          </motion.div>
-                        ))
-                      ) : (
-                        <div className="text-center py-4 text-orange-900/40 font-sans text-xs">
-                          No comments yet. Be the first to leave a sweet note! 🐾
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Write a comment form */}
-                  <form onSubmit={handleAddComment} className="space-y-3.5 pt-3 border-t border-dashed border-amber-200 pr-2 text-left">
-                    <h4 className="font-comic text-xs font-black text-orange-950 uppercase tracking-wider flex items-center space-x-1">
-                      <Smile className="w-3.5 h-3.5 text-orange-500" />
-                      <span>Leave a Sweet Comment</span>
-                    </h4>
-
-                    {/* Nickname & Avatar Selection Row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-comic font-black text-orange-950/70 uppercase">Furry Name</label>
-                        <input
-                          type="text"
-                          maxLength={25}
-                          value={commentName}
-                          onChange={(e) => setCommentName(e.target.value)}
-                          placeholder="Your Name (e.g. Sparky)"
-                          className="w-full px-3 py-1.5 text-xs bg-white border-2 border-orange-950 rounded-lg outline-none font-sans focus:border-orange-500 transition-colors"
-                        />
-                      </div>
-                      
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-comic font-black text-orange-950/70 uppercase">Pick Avatar {selectedAvatar}</label>
-                        <div className="flex gap-1.5 overflow-x-auto pb-1 max-w-full scrollbar-none">
-                          {avatarOptions.map((av) => (
-                            <button
-                              key={av}
-                              type="button"
-                              onClick={() => {
-                                setSelectedAvatar(av);
-                                playSound("pop");
-                              }}
-                              className={`text-base p-1 rounded-md border-2 transition-all flex-shrink-0 ${
-                                selectedAvatar === av 
-                                  ? "bg-orange-100 border-orange-500 scale-110" 
-                                  : "bg-white border-orange-950/15 hover:border-orange-950/40"
-                              }`}
-                            >
-                              {av}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Message Area */}
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-comic font-black text-orange-950/70 uppercase">Message</label>
-                      <textarea
-                        required
-                        maxLength={120}
-                        value={commentText}
-                        onChange={(e) => setCommentText(e.target.value)}
-                        onFocus={() => setMascotSpeech("Ooh, writing a message for me? Can't wait! 🐾")}
-                        placeholder="Say something sweet... (Max 120 chars)"
-                        rows={2}
-                        className="w-full px-3 py-2 text-xs bg-white border-2 border-orange-950 rounded-lg outline-none font-sans focus:border-orange-500 transition-colors resize-none"
-                      />
-                    </div>
-
-                    {/* Submit Comment Button */}
+                  {/* Love This Art Button */}
+                  <div className="pt-4 border-t border-dashed border-amber-200 pr-2">
                     <button
-                      type="submit"
-                      className={`w-full py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-comic font-black text-xs flex items-center justify-center space-x-2 border-2 border-orange-950 shadow-[2px_3px_0px_#451a03] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1.5px_0px_#451a03] transition-all duration-150 ${sketchyBorderStyles.button}`}
+                      onClick={(e) => {
+                        handleLike(selectedItem.id, e);
+                        setMascotSpeech("Aaa, my heart is melting! *blushes* 🥺💖");
+                      }}
+                      className={`w-full py-3 bg-orange-500 hover:bg-orange-600 text-white border-2 border-orange-950 font-comic font-black text-sm flex items-center justify-center space-x-2 shadow-[2px_3px_0px_#451a03] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1.5px_0px_#451a03] transition-all duration-150 ${sketchyBorderStyles.button} cursor-pointer`}
                     >
-                      <Send className="w-3.5 h-3.5" />
-                      <span>Post Boop Comment! (+8 points)</span>
+                      <Heart className={`w-4 h-4 fill-white text-white ${likedItems[selectedItem.id] ? "animate-pulse" : ""}`} />
+                      <span>{likedItems[selectedItem.id] ? "You Loved This! 💖" : "Give some Love!"} ({likes[selectedItem.id] || 0})</span>
                     </button>
-                  </form>
-
-                  {/* Draw me CTA button */}
-                  <div className="pt-2 border-t border-dashed border-amber-200 pr-2">
-                    <a
-                      href="#contact"
-                      onClick={handleCloseModal}
-                      className={`inline-flex items-center justify-center space-x-2 px-5 py-2.5 w-full bg-amber-100 hover:bg-amber-200 text-orange-950 font-comic font-black text-xs border-2 border-orange-950 shadow-[2px_3px_0px_#451a03] hover:translate-x-[1.5px] hover:translate-y-[1.5px] hover:shadow-[1px_1.5px_0px_#451a03] transition-all duration-150 ${sketchyBorderStyles.button}`}
-                    >
-                      <span>Request Art Trade / Commission</span>
-                      <Sparkles className="w-3.5 h-3.5 text-orange-600" />
-                    </a>
                   </div>
                 </div>
 
               </motion.div>
             </div>
-          )}
-        </AnimatePresence>
-      </div>
-    </section>
-  );
-}
+            )}
+          </AnimatePresence>
+
+          {/* Fullscreen Zoom Overlay */}
+          <AnimatePresence>
+            {isZoomed && selectedItem && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsZoomed(false)}
+                className="fixed inset-0 z-[200000] bg-orange-950/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out select-none"
+              >
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img
+                    src={selectedItem.imageUrl}
+                    alt={selectedItem.title}
+                    className="max-w-full max-h-full object-contain rounded-md shadow-2xl transition-transform duration-300 border-2 border-orange-950/10"
+                  />
+                  {/* Floating escape/close cue */}
+                  <div className="absolute top-4 right-4 bg-orange-950/80 text-white font-comic text-xs font-bold px-4 py-2 rounded-full border border-orange-750/30 backdrop-blur-sm pointer-events-none">
+                    Click anywhere to exit zoom 🔍
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
+    );
+  }

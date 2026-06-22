@@ -81,7 +81,7 @@ export const siteConfig = {
     { label: "Home", href: "#home" },
     { label: "Profile", href: "#about" },
     { label: "Ref Gallery", href: "#gallery" },
-    { label: "Sticker Book", href: "#stickers" },
+    { label: "Vibe Check", href: "#vibe-check" },
     { label: "Get In Touch", href: "#contact" },
   ],
   

@@ -152,27 +152,27 @@ export default function Header() {
           </div>
 
           {/* Scrollable Content Wrapper */}
-          <div className="w-full h-full overflow-y-auto flex flex-col justify-between pt-8 pb-10 sm:py-12 px-6 md:px-8 relative z-10">
+          <div className="w-full h-full overflow-y-auto flex flex-col justify-between pt-5 pb-5 sm:py-8 px-6 md:px-8 relative z-10">
             {/* Close Button Inside Drawer */}
             <div className="flex justify-end pl-6">
               <motion.button
                 onClick={handleCloseDrawer}
-                className={`p-2.5 bg-amber-100 border-2 border-orange-950 text-orange-950 shadow-[2px_2px_0px_#451a03] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all ${sketchyBorderStyles.avatar}`}
+                className={`p-2 bg-amber-100 border-2 border-orange-950 text-orange-950 shadow-[2px_2px_0px_#451a03] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all ${sketchyBorderStyles.avatar}`}
                 whileHover={{ scale: 1.05, rotate: -4 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <X className="w-6 h-6 stroke-[2.5]" />
+                <X className="w-5.5 h-5.5 stroke-[2.5]" />
               </motion.button>
             </div>
 
             {/* Links List */}
-            <nav className="flex flex-col space-y-7 pl-8 md:pl-12 mt-4 sm:mt-8 mb-auto text-left">
+            <nav className="flex flex-col space-y-4 sm:space-y-5 md:space-y-6 pl-8 md:pl-12 mt-2 sm:mt-4 mb-auto text-left">
               {siteConfig.navigation.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => handleLinkClick(item.href)}
-                  className="font-comic text-3xl font-black text-orange-950 hover:text-orange-600 transition-colors w-fit relative group"
+                  className="font-comic text-2xl sm:text-3xl font-black text-orange-950 hover:text-orange-600 transition-colors w-fit relative group"
                 >
                   {item.label}
                   <span className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-200 group-hover:w-full" />
@@ -180,11 +180,11 @@ export default function Header() {
               ))}
               
               {/* Art Wishlist Button badge */}
-              <div className="pt-4">
+              <div className="pt-2 sm:pt-4">
                 <a
                   href="#commissions"
                   onClick={() => handleLinkClick("#commissions")}
-                  className={`inline-flex items-center space-x-2 px-4 py-3 bg-orange-500 text-white font-comic font-black text-sm border-2 border-orange-950 shadow-[3px_4px_0px_#7c2d12] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 ${sketchyBorderStyles.button}`}
+                  className={`inline-flex items-center space-x-2 px-4 py-2.5 sm:py-3 bg-orange-500 text-white font-comic font-black text-sm border-2 border-orange-950 shadow-[3px_4px_0px_#7c2d12] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 ${sketchyBorderStyles.button}`}
                 >
                   <span>Wishlist 🎨</span>
                   <Heart className="w-4 h-4 fill-white text-orange-200 animate-pulse" />
@@ -193,11 +193,11 @@ export default function Header() {
             </nav>
 
             {/* Social icons footer in drawer */}
-            <div className="pl-8 md:pl-12 text-left space-y-4">
-              <div className="text-sm font-comic font-bold text-orange-900/60 uppercase tracking-wider">
+            <div className="pl-8 md:pl-12 text-left space-y-2 sm:space-y-3">
+              <div className="text-xs sm:text-sm font-comic font-bold text-orange-900/60 uppercase tracking-wider">
                 Draw with me! 🎨
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-3.5">
                 <a 
                   href={siteConfig.socials.twitter} 
                   onClick={() => playSound("click")}

@@ -121,3 +121,15 @@ html.lenis, html.lenis body {
   }
 }
 
+/* Hide navbar when modal is open */
+body.modal-open header {
+  display: none !important;
+}
+
+/* Elevate gallery section z-index to stack on top of other sections when modal is open */
+body.modal-open #gallery {
+  z-index: 10000;
+}
+
+
+

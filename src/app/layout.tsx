@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 import FloatingPaws from "@/components/FloatingPaws";
 import { AudioProvider } from "@/context/AudioContext";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import LoadingScreen from "@/components/LoadingScreen";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 
@@ -39,6 +40,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-paper-texture">
         <SmoothScrollProvider>
+          {/* Preloading Screen */}
+          <LoadingScreen />
+
           <AudioProvider>
             {/* Floating animated click details and particles */}
             <FloatingPaws />
