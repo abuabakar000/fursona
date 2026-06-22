@@ -25,6 +25,34 @@ const cutePhrases = [
   "*nuzzles your screen*"
 ];
 
+// --- Doodle Component for Compositor Animations ---
+interface DoodleProps {
+  className: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+  duration?: string;
+  y?: string;
+  rStart?: string;
+  rEnd?: string;
+}
+
+const Doodle = ({ className, style, children, duration = "5s", y = "-6px", rStart = "0deg", rEnd = "5deg" }: DoodleProps) => {
+  return (
+    <div
+      className={`${className} animate-doodle`}
+      style={{
+        ...style,
+        "--doodle-duration": duration,
+        "--doodle-translate-y": y,
+        "--doodle-rotate-start": rStart,
+        "--doodle-rotate-end": rEnd,
+      } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
+};
+
 // --- Main Hero Component ---
 
 export default function Hero() {
@@ -95,171 +123,211 @@ export default function Hero() {
       {/* --- Scattered Mini Arts Framed Closer to Content --- */}
       
       {/* Top Left Area */}
-      <motion.div
+      <Doodle
         className="absolute top-6 left-[8%] text-orange-455/60 pointer-events-none hidden md:block"
-        animate={{ y: [0, -3, 0], rotate: [15, 20, 15] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+        duration="4s"
+        y="-3px"
+        rStart="15deg"
+        rEnd="20deg"
       >
         <SketchStar className="w-6 h-6" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-16 left-[4%] text-amber-500/50 pointer-events-none hidden md:block"
-        animate={{ y: [0, 4, 0], rotate: [-15, -10, -15] }}
-        transition={{ repeat: Infinity, duration: 4.8, ease: "easeInOut", delay: 0.2 }}
+        duration="4.8s"
+        y="4px"
+        rStart="-15deg"
+        rEnd="-10deg"
       >
         <OrangeSlice className="w-10 h-10" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-8 left-[18%] text-orange-300/40 pointer-events-none hidden sm:block"
-        animate={{ scale: [1, 1.05, 1], rotate: [5, 10, 5] }}
-        transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+        duration="3.5s"
+        y="-2px"
+        rStart="5deg"
+        rEnd="10deg"
       >
         <SketchPaw className="w-6 h-6" />
-      </motion.div>
+      </Doodle>
 
       {/* Middle Left Area */}
-      <motion.div
+      <Doodle
         className="absolute top-[40%] left-[2%] text-orange-300/45 pointer-events-none hidden md:block"
-        animate={{ x: [0, 2, 0], rotate: [25, 20, 25] }}
-        transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+        duration="4.5s"
+        y="2px"
+        rStart="25deg"
+        rEnd="20deg"
       >
         <SketchPaw className="w-8 h-8" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-[32%] left-[20%] text-red-400/40 pointer-events-none hidden md:block"
-        animate={{ scale: [0.95, 1.05, 0.95], rotate: [-8, -3, -8] }}
-        transition={{ repeat: Infinity, duration: 3.8, ease: "easeInOut" }}
+        duration="3.8s"
+        y="-2px"
+        rStart="-8deg"
+        rEnd="-3deg"
       >
         <SketchHeart className="w-5 h-5 fill-red-400/10" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-[52%] left-[10%] text-orange-400/35 pointer-events-none hidden md:block"
-        animate={{ y: [0, 3, 0], rotate: [10, 5, 10] }}
-        transition={{ repeat: Infinity, duration: 4.2, ease: "easeInOut", delay: 0.3 }}
+        duration="4.2s"
+        y="3px"
+        rStart="10deg"
+        rEnd="5deg"
       >
         <SketchTwig className="w-7 h-7" />
-      </motion.div>
+      </Doodle>
 
       {/* Bottom Left Area */}
-      <motion.div
+      <Doodle
         className="absolute bottom-10 left-[6%] text-orange-455/50 pointer-events-none hidden md:block"
-        animate={{ y: [0, -5, 0], rotate: [35, 30, 35] }}
-        transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.6 }}
+        duration="5s"
+        y="-5px"
+        rStart="35deg"
+        rEnd="30deg"
       >
         <OrangeSlice className="w-12 h-12" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute bottom-[24%] left-[14%] text-amber-500/60 pointer-events-none hidden md:block"
-        animate={{ scale: [0.9, 1.05, 0.9] }}
-        transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
+        duration="3.2s"
+        y="-2px"
+        rStart="0deg"
+        rEnd="5deg"
       >
         <SketchStar className="w-5 h-5" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute bottom-6 left-[22%] text-red-455/45 pointer-events-none hidden md:block"
-        animate={{ y: [0, -3, 0], rotate: [12, 18, 12] }}
-        transition={{ repeat: Infinity, duration: 4.4, ease: "easeInOut" }}
+        duration="4.4s"
+        y="-3px"
+        rStart="12deg"
+        rEnd="18deg"
       >
         <SketchHeart className="w-6 h-6 fill-red-455/15" />
-      </motion.div>
+      </Doodle>
 
       {/* Top Center & Header Area */}
-      <motion.div
+      <Doodle
         className="absolute top-6 left-[46%] text-orange-400/45 pointer-events-none hidden md:block"
-        animate={{ y: [0, 4, 0], rotate: [20, 15, 20] }}
-        transition={{ repeat: Infinity, duration: 4.2, ease: "easeInOut" }}
+        duration="4.2s"
+        y="4px"
+        rStart="20deg"
+        rEnd="15deg"
       >
         <SketchHeart className="w-7 h-7 fill-orange-400/10" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-18 left-[52%] text-orange-300/40 pointer-events-none hidden md:block"
-        animate={{ scale: [0.95, 1.05, 0.95] }}
-        transition={{ repeat: Infinity, duration: 3.6, ease: "easeInOut", delay: 0.4 }}
+        duration="3.6s"
+        y="-2px"
+        rStart="0deg"
+        rEnd="5deg"
       >
         <SketchLeaf className="w-6 h-6" />
-      </motion.div>
+      </Doodle>
 
       {/* Top Right Area */}
-      <motion.div
+      <Doodle
         className="absolute top-6 right-[6%] text-orange-455/65 pointer-events-none hidden md:block"
-        animate={{ y: [0, -4, 0], rotate: [-25, -20, -25] }}
-        transition={{ repeat: Infinity, duration: 5.2, ease: "easeInOut", delay: 0.1 }}
+        duration="5.2s"
+        y="-4px"
+        rStart="-25deg"
+        rEnd="-20deg"
       >
         <OrangeSlice className="w-12 h-12" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-18 right-[14%] text-amber-500/50 pointer-events-none hidden md:block"
-        animate={{ scale: [1, 1.08, 1], rotate: [10, 15, 10] }}
-        transition={{ repeat: Infinity, duration: 3.6, ease: "easeInOut" }}
+        duration="3.6s"
+        y="2px"
+        rStart="10deg"
+        rEnd="15deg"
       >
         <SketchStar className="w-6 h-6" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-[30%] right-[22%] text-orange-400/35 pointer-events-none hidden sm:block"
-        animate={{ y: [0, 3, 0] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }}
+        duration="4s"
+        y="3px"
+        rStart="0deg"
+        rEnd="5deg"
       >
         <SketchTwig className="w-6 h-6" />
-      </motion.div>
+      </Doodle>
 
       {/* Middle Right Area */}
-      <motion.div
+      <Doodle
         className="absolute top-[44%] right-[4%] text-orange-355/50 pointer-events-none hidden md:block"
-        animate={{ scale: [0.95, 1.05, 0.95], rotate: [-10, -5, -10] }}
-        transition={{ repeat: Infinity, duration: 4.1, ease: "easeInOut" }}
+        duration="4.1s"
+        y="-2px"
+        rStart="-10deg"
+        rEnd="-5deg"
       >
         <SketchStar className="w-5 h-5" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-[52%] right-[2%] text-red-400/40 pointer-events-none hidden md:block"
-        animate={{ x: [0, 2, 0], rotate: [15, 20, 15] }}
-        transition={{ repeat: Infinity, duration: 3.4, ease: "easeInOut", delay: 0.8 }}
+        duration="3.4s"
+        y="2px"
+        rStart="15deg"
+        rEnd="20deg"
       >
         <SketchHeart className="w-6 h-6 fill-red-400/10" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute top-[26%] right-[30%] text-orange-300/40 pointer-events-none hidden md:block"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ repeat: Infinity, duration: 3.9, ease: "easeInOut" }}
+        duration="3.9s"
+        y="-2px"
+        rStart="0deg"
+        rEnd="5deg"
       >
         <SketchPaw className="w-5 h-5" />
-      </motion.div>
+      </Doodle>
 
       {/* Bottom Right Area */}
-      <motion.div
+      <Doodle
         className="absolute bottom-10 right-[2%] text-orange-300/45 pointer-events-none hidden md:block"
-        animate={{ x: [0, -2, 0], rotate: [-20, -15, -20] }}
-        transition={{ repeat: Infinity, duration: 4.4, ease: "easeInOut" }}
+        duration="4.4s"
+        y="-2px"
+        rStart="-20deg"
+        rEnd="-15deg"
       >
         <SketchPaw className="w-9 h-9" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute bottom-14 right-[10%] text-amber-500/70 pointer-events-none hidden md:block"
-        animate={{ scale: [0.9, 1.05, 0.9] }}
-        transition={{ repeat: Infinity, duration: 2.8, ease: "easeInOut" }}
+        duration="2.8s"
+        y="2px"
+        rStart="0deg"
+        rEnd="5deg"
       >
         <SketchStar className="w-5 h-5" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
+      <Doodle
         className="absolute bottom-8 right-[18%] text-orange-355/45 pointer-events-none hidden md:block"
-        animate={{ y: [0, -4, 0], rotate: [8, 14, 8] }}
-        transition={{ repeat: Infinity, duration: 4.6, ease: "easeInOut", delay: 0.4 }}
+        duration="4.6s"
+        y="-4px"
+        rStart="8deg"
+        rEnd="14deg"
       >
         <SketchLeaf className="w-7 h-7" />
-      </motion.div>
+      </Doodle>
 
       {/* Tight Grid Layout */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">

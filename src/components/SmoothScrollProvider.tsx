@@ -22,19 +22,26 @@ export default function SmoothScrollProvider({
   const pathname = usePathname();
 
   useEffect(() => {
+    // Check if it is a touch device or mobile screen
+    const isTouchDevice = 
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768);
+
+    if (isTouchDevice) {
+      // Do not initialize Lenis on touch devices to ensure 100% native mobile scroll performance
+      return;
+    }
+
     const lenis = new Lenis({
-      // How smooth the scroll feels — lower = silkier/lazier, higher = snappier
-      duration: 1.35,
-      // Organic easing curve: slow start, gentle glide, soft stop
-      easing: (t: number) => 1 - Math.pow(1 - t, 4),
-      // Allow touch on mobile — keep natural touch momentum
-      touchMultiplier: 1.8,
-      // Wheel feels natural, not too fast or slow
-      wheelMultiplier: 1.0,
-      // Sync direction for consistent feel
+      // Let Lenis manage its own animation frame loop
+      autoRaf: true,
+      // Snappy and organic linear interpolation (lerp) instead of slow duration curves
+      lerp: 0.08,
+      // Natural wheel multiplier
+      wheelMultiplier: 0.9,
+      // Sync direction
       orientation: "vertical",
       gestureOrientation: "vertical",
-      // Smooth scroll on anchor clicks too
       smoothWheel: true,
     });
 
@@ -43,22 +50,14 @@ export default function SmoothScrollProvider({
     // Expose lenis globally so anchor links can trigger smooth scroll
     (window as unknown as Record<string, unknown>).__lenis = lenis;
 
-    // RAF loop — keeps scroll in sync with framer-motion
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
     return () => {
-      cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      (window as unknown as Record<string, unknown>).__lenis = undefined;
     };
   }, []);
 
-  // On route change, scroll back to top smoothly
+  // On route change, scroll back to top smoothly if Lenis is active
   useEffect(() => {
     lenisRef.current?.scrollTo(0, { immediate: true });
   }, [pathname]);

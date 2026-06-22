@@ -5,6 +5,7 @@ import FloatingPaws from "@/components/FloatingPaws";
 import { AudioProvider } from "@/context/AudioContext";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
 const comicNeue = Comic_Neue({
   weight: ["300", "400", "700"],

@@ -41,12 +41,19 @@ export default function FloatingPaws() {
   useEffect(() => {
     window.addEventListener("click", handleClick);
     
+    // Detect mobile touch screen and reduce background floaters count
+    const isMobile = 
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768);
+
+    const floaterCount = isMobile ? 3 : 15;
+    
     // Create random background floaters
-    const initialFloaters: FloatingItem[] = Array.from({ length: 15 }).map((_, i) => ({
+    const initialFloaters: FloatingItem[] = Array.from({ length: floaterCount }).map((_, i) => ({
       id: i,
       x: Math.random() * 100, // percentage
       y: Math.random() * 100, // percentage
-      size: Math.random() * 20 + 15, // 15px to 35px
+      size: isMobile ? Math.random() * 12 + 12 : Math.random() * 20 + 15, // smaller on mobile
       speed: Math.random() * 30 + 30, // seconds to complete loop
       type: i % 3 === 0 ? "paw" : i % 3 === 1 ? "star" : "splatter",
       color: i % 2 === 0 ? "text-amber-200/40" : "text-orange-200/40",
@@ -70,6 +77,7 @@ export default function FloatingPaws() {
             top: `${item.y}%`,
             width: item.size,
             height: item.size,
+            willChange: "transform",
           }}
           animate={{
             y: ["0vh", "-100vh"],

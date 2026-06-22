@@ -136,6 +136,33 @@ const adoredArtists: AdoredArtist[] = [
 ];
 
 
+// --- Doodle Component for Compositor Animations ---
+interface DoodleProps {
+  className: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+  duration?: string;
+  y?: string;
+  rStart?: string;
+  rEnd?: string;
+}
+
+const Doodle = ({ className, style, children, duration = "5s", y = "-6px", rStart = "0deg", rEnd = "5deg" }: DoodleProps) => {
+  return (
+    <div
+      className={`${className} animate-doodle`}
+      style={{
+        ...style,
+        "--doodle-duration": duration,
+        "--doodle-translate-y": y,
+        "--doodle-rotate-start": rStart,
+        "--doodle-rotate-end": rEnd,
+      } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default function Commissions() {
   const wishlistScrollRef = useRef<HTMLDivElement>(null);
@@ -176,77 +203,93 @@ export default function Commissions() {
     <section id="commissions" className="w-full px-6 py-16 md:py-24 bg-amber-50/40 overflow-hidden relative border-t-2 border-dashed border-amber-200">
       
       {/* Background doodles */}
-      <motion.div
-        animate={{ y: [0, -8, 0], rotate: [0, 3, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ left: "5%", top: "10%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5.5s"
+        y="-8px"
+        rStart="0deg"
+        rEnd="3deg"
       >
         <SketchPaw className="w-12 h-12" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, 7, 0], rotate: [0, -2, 0] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ right: "8%", top: "25%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="4.8s"
+        y="7px"
+        rStart="0deg"
+        rEnd="-2deg"
       >
         <SketchHeart className="w-10 h-10 fill-orange-950/2" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, -4, 0], rotate: [12, 18, 12] }}
-        transition={{ duration: 5.3, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ right: "12%", top: "45%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5.3s"
+        y="-4px"
+        rStart="12deg"
+        rEnd="18deg"
       >
         <SketchLeaf className="w-10 h-10" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, -6, 0], rotate: [0, 4, 0] }}
-        transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ left: "4%", bottom: "35%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="6.2s"
+        y="-6px"
+        rStart="0deg"
+        rEnd="4deg"
       >
         <SketchStar className="w-9 h-9" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, 6, 0], rotate: [-10, -5, -10] }}
-        transition={{ duration: 4.9, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ left: "10%", top: "65%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="4.9s"
+        y="6px"
+        rStart="-10deg"
+        rEnd="-5deg"
       >
         <SketchPaw className="w-10 h-10" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, 9, 0], rotate: [0, -3, 0] }}
-        transition={{ duration: 5.7, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ right: "5%", bottom: "15%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5.7s"
+        y="9px"
+        rStart="0deg"
+        rEnd="-3deg"
       >
         <OrangeSlice className="w-11 h-11" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, -7, 0], rotate: [15, 25, 15] }}
-        transition={{ duration: 5.9, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ right: "15%", bottom: "60%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5.9s"
+        y="-7px"
+        rStart="15deg"
+        rEnd="25deg"
       >
         <SketchHeart className="w-9 h-9 fill-orange-950/2" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, -5, 0], rotate: [0, 2, 0] }}
-        transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ left: "8%", bottom: "10%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5.1s"
+        y="-5px"
+        rStart="0deg"
+        rEnd="2deg"
       >
         <SketchTwig className="w-10 h-10" />
-      </motion.div>
+      </Doodle>
 
       {/* Background watercolor glows */}
       <div className="absolute top-10 right-[-5%] w-48 h-48 bg-orange-100/60 rounded-full blur-3xl pointer-events-none" />

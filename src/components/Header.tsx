@@ -11,7 +11,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { isMuted, toggleMute, playSound } = useAudio();
   const { scrollYProgress } = useScroll();
-  const pawLeft = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const pawX = useTransform(scrollYProgress, (v) => `calc(${v * 100}vw - ${v * 1.5}rem)`);
   const pawRotate = useTransform(scrollYProgress, [0, 1], [0, 720]);
 
   const handleLinkClick = (href: string) => {
@@ -245,8 +245,8 @@ export default function Header() {
         <motion.span 
           className="absolute top-[-7px] text-sm select-none z-50 pointer-events-none"
           style={{ 
-            left: pawLeft,
-            x: "-50%",
+            left: 0,
+            x: pawX,
             rotate: pawRotate
           }}
         >

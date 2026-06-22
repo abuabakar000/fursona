@@ -33,6 +33,33 @@ const boopPhrases = [
   "Mwef! 👅",
   "Hey! *boops back*"
 ];
+// --- Doodle Component for Compositor Animations ---
+interface DoodleProps {
+  className: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode;
+  duration?: string;
+  y?: string;
+  rStart?: string;
+  rEnd?: string;
+}
+
+const Doodle = ({ className, style, children, duration = "5s", y = "-6px", rStart = "0deg", rEnd = "5deg" }: DoodleProps) => {
+  return (
+    <div
+      className={`${className} animate-doodle`}
+      style={{
+        ...style,
+        "--doodle-duration": duration,
+        "--doodle-translate-y": y,
+        "--doodle-rotate-start": rStart,
+        "--doodle-rotate-end": rEnd,
+      } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default function About() {
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
@@ -115,59 +142,71 @@ export default function About() {
     <section id="about" className="w-full px-6 py-12 md:py-16 bg-amber-50/20 border-t-2 border-dashed border-amber-200 relative overflow-hidden">
       
       {/* Background doodles */}
-      <motion.div
-        animate={{ y: [0, -6, 0], rotate: [0, 2, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ right: "5%", top: "8%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5s"
+        y="-6px"
+        rStart="0deg"
+        rEnd="2deg"
       >
         <SketchPaw className="w-12 h-12" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, 5, 0], rotate: [12, 18, 12] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ left: "8%", top: "12%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="4.2s"
+        y="5px"
+        rStart="12deg"
+        rEnd="18deg"
       >
         <OrangeSlice className="w-10 h-10" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, 8, 0], rotate: [0, -3, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ left: "4%", top: "45%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="6s"
+        y="8px"
+        rStart="0deg"
+        rEnd="-3deg"
       >
         <SketchHeart className="w-10 h-10 fill-orange-950/2" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, -4, 0], rotate: [-10, -5, -10] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ right: "12%", top: "52%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="4.8s"
+        y="-4px"
+        rStart="-10deg"
+        rEnd="-5deg"
       >
         <SketchTwig className="w-9 h-9" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, -7, 0], rotate: [0, 4, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ right: "8%", bottom: "10%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5.5s"
+        y="-7px"
+        rStart="0deg"
+        rEnd="4deg"
       >
         <SketchStar className="w-8 h-8" />
-      </motion.div>
+      </Doodle>
 
-      <motion.div
-        animate={{ y: [0, 6, 0], rotate: [8, 12, 8] }}
-        transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut" }}
+      <Doodle
         style={{ left: "6%", bottom: "25%" }}
         className="absolute text-orange-950/5 pointer-events-none hidden md:block"
+        duration="5.1s"
+        y="6px"
+        rStart="8deg"
+        rEnd="12deg"
       >
         <SketchLeaf className="w-10 h-10" />
-      </motion.div>
+      </Doodle>
 
       {/* Copied Hex Code Toast Dialog */}
       <AnimatePresence>

@@ -74,3 +74,40 @@ a, button, select, option, [role="button"], input[type="submit"], input[type="bu
 ::-webkit-scrollbar-thumb:hover {
   background: #fdba74;
 }
+
+/* Lenis smooth scrolling rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hardware-accelerated background doodles keyframe animation */
+@keyframes slowFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--doodle-rotate-start, 0deg));
+  }
+  50% {
+    transform: translateY(var(--doodle-translate-y, -6px)) rotate(var(--doodle-rotate-end, 5deg));
+  }
+}
+
+.animate-doodle {
+  animation: slowFloat var(--doodle-duration, 5s) ease-in-out infinite;
+  will-change: transform;
+}
+
