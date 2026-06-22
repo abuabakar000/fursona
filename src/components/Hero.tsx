@@ -431,7 +431,33 @@ export default function Hero() {
                 )}
               </AnimatePresence>
 
-              <ReactiveMascot outfit={activeOutfit} />
+              {/* Nested div for hardware-accelerated continuous breathing */}
+              <motion.div
+                className="w-full h-full flex items-center justify-center animate-breathing"
+                animate={{
+                  y: [0, -5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 3.5,
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src={
+                    activeOutfit === "none" ? "/images/mascot.png" :
+                    activeOutfit === "bandana" ? "/images/outfit_bandana.png" :
+                    activeOutfit === "sweater" ? "/images/outfit_sweater.png" :
+                    activeOutfit === "pajamas" ? "/images/outfit_pajamas.png" :
+                    "/images/outfit_raincoat.png"
+                  }
+                  alt={siteConfig.mascot.name}
+                  width={450}
+                  height={450}
+                  className="object-contain max-h-[95%] drop-shadow-[8px_12px_0px_rgba(251,146,60,0.15)] group-hover:scale-102 transition-transform duration-300"
+                  priority
+                />
+              </motion.div>
             </motion.div>
  
             {/* Tap prompt */}
