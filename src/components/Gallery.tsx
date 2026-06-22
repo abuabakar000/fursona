@@ -19,20 +19,20 @@ interface MockComments {
 // Mock comments mapped to each gallery item ID
 const mockCommentsMap: Record<string, MockComments[]> = {
   "gal-1": [
-    { author: "FluffyFox", avatar: "🦊", text: "Aaaa Citrini is so cute here! I wanna cuddle! 🥺" },
-    { author: "CocoaPaws", avatar: "🐶", text: "*ear twitches* That hot chocolate mug is huge! Cozy vibes! ☕" }
+    { author: "StardustFox", avatar: "🦊", text: "Zephryn did an amazing job with the blep and starry shading! ⭐" },
+    { author: "NightLeopard", avatar: "🐱", text: "Such a cool black leopard icon portrait! Absolutely adore it! 🌌" }
   ],
   "gal-2": [
-    { author: "AwooWolf", avatar: "🐺", text: "Awoo~! The glowing mushrooms and celestial lighting are stunning! 🌌" },
-    { author: "DragonHoard", avatar: "🐉", text: "Incredible shading! The fur looks so soft to pet." }
+    { author: "MelonTail", avatar: "🦖", text: "OMGG he eating the watermelon! So adorable and fluffy! 🍉" },
+    { author: "ScalePaw", avatar: "🦎", text: "Look at those cute squeaky padded claws! Cute work WJ!" }
   ],
   "gal-3": [
-    { author: "PandaRoll", avatar: "🐼", text: "Nom nom nom! Red pandas eating ramen is my weakness! 🍜" },
-    { author: "CatNip", avatar: "🐱", text: "The steam details look so warm and cozy. Love it!" }
+    { author: "VoltPaws", avatar: "🐈", text: "The neon lightning themes and pastel shades look so cozy! ⚡" },
+    { author: "NoodleCat", avatar: "🐱", text: "Super adorable retro outfit and color palette! Loving the fish collar." }
   ],
   "gal-4": [
-    { author: "BrushTiger", avatar: "🐯", text: "Such a clean reference layout! Easy to draw Citrini now! 🎨" },
-    { author: "SparkyBun", avatar: "🐰", text: "Saving this to draw gift art later! *happy ear wiggles*" }
+    { author: "BrushTiger", avatar: "🐯", text: "The mint hair and retro glasses look so stylish! 🎨" },
+    { author: "SonaLover", avatar: "🐰", text: "Casual streetwear vibes look amazing on this canine!" }
   ],
 };
 // --- Doodle Component for Compositor Animations ---
