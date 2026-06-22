@@ -33,7 +33,11 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       musicRef.current = audio;
 
       const savedMusic = localStorage.getItem("citrini-music-preference");
-      const shouldPlay = savedMusic === "playing";
+      const shouldPlay = savedMusic !== "paused";
+
+      if (shouldPlay) {
+        setIsMusicPlaying(true);
+      }
 
       const startMusicOnInteraction = () => {
         if (shouldPlay && musicRef.current) {
@@ -88,6 +92,8 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   };
 
   const playSound = (type: "pop" | "like" | "success" | "chime" | "melt" | "boop" | "poke" | "whoosh" | "click" | "fill") => {
+    return; // sound effects are disabled, only music is active
+    /*
     if (isMuted || typeof window === "undefined") return;
     try {
       let ctx = audioCtxRef.current;
@@ -335,6 +341,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     } catch (e) {
       console.warn("Web Audio blocked or failed to play sound:", e);
     }
+    */
   };
 
   return (

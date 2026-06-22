@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { siteConfig } from "@/config/site";
-import { Menu, X, Heart, Volume2, VolumeX } from "lucide-react";
+import { Menu, X, Heart } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { useAudio } from "@/context/AudioContext";
@@ -106,25 +106,7 @@ export default function Header() {
             )}
           </button>
 
-          {/* Global Sound Toggler */}
-          <button
-            onClick={() => {
-              const nextMuted = !isMuted;
-              toggleMute(nextMuted);
-              // Play chime feedback if unmuting
-              if (!nextMuted) {
-                setTimeout(() => playSound("pop"), 50);
-              }
-            }}
-            className="p-2.5 sm:p-3 bg-amber-100 hover:bg-amber-200 border-2 border-orange-950 font-comic font-black flex items-center justify-center shadow-[3px_3px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150 rounded-[150px_10px_140px_10px/10px_140px_10px_150px]"
-            title={isMuted ? "Unmute sound effects" : "Mute sound effects"}
-          >
-            {isMuted ? (
-              <VolumeX className="w-5 h-5 text-orange-900/60 stroke-[2.5]" />
-            ) : (
-              <Volume2 className="w-5 h-5 text-orange-700 stroke-[2.5]" />
-            )}
-          </button>
+
 
           {/* Hamburger menu button */}
           <motion.button
