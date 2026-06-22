@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Gallery from "@/components/Gallery";
-import Commissions from "@/components/Commissions";
+import StickerBook from "@/components/StickerBook";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -21,8 +21,8 @@ export default function Home() {
       {/* Portfolio Gallery */}
       <Gallery />
       
-      {/* Commission status and pricing plans */}
-      <Commissions />
+      {/* Interactive Sticker Book and Badge Collection */}
+      <StickerBook />
       
       {/* Notebook-styled Client Pitch form */}
       <Contact />
