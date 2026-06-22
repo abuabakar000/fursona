@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
+import ReactiveMascot, { OutfitType } from "./ReactiveMascot";
 import { sketchyBorderStyles } from "@/utils/sketchy";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAudio } from "@/context/AudioContext";
@@ -59,6 +60,8 @@ export default function Hero() {
   const [clickCount, setClickCount] = useState(0);
   const [sparkles, setSparkles] = useState<{ id: number; x: number; y: number }[]>([]);
   const [speechBubble, setSpeechBubble] = useState<string | null>(null);
+  
+  const [activeOutfit, setActiveOutfit] = useState<OutfitType>("none");
   
   // Mouse position state to look at cursor
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
@@ -428,27 +431,7 @@ export default function Hero() {
                 )}
               </AnimatePresence>
 
-              {/* Nested div for hardware-accelerated continuous breathing */}
-              <motion.div
-                className="w-full h-full flex items-center justify-center animate-breathing"
-                animate={{
-                  y: [0, -5, 0],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 3.5,
-                  ease: "easeInOut",
-                }}
-              >
-                <Image
-                  src={siteConfig.mascot.imageUrl}
-                  alt={siteConfig.mascot.name}
-                  width={450}
-                  height={450}
-                  className="object-contain max-h-[95%] drop-shadow-[8px_12px_0px_rgba(251,146,60,0.15)] group-hover:scale-102 transition-transform duration-300"
-                  priority
-                />
-              </motion.div>
+              <ReactiveMascot outfit={activeOutfit} />
             </motion.div>
  
             {/* Tap prompt */}
@@ -470,6 +453,33 @@ export default function Hero() {
               </motion.span>
             ))}
           </motion.div>
+
+          {/* Outfit Dressing Wardrobe Selectors */}
+          <div className="mt-4 flex flex-wrap justify-center gap-2.5 relative z-20 max-w-[420px]">
+            {[
+              { id: "none", label: "Default", icon: "🦊" },
+              { id: "bandana", label: "Bandana", icon: "🧣" },
+              { id: "sweater", label: "Sweater", icon: "🧥" },
+              { id: "pajamas", label: "Pajamas", icon: "💤" },
+              { id: "raincoat", label: "Raincoat", icon: "🌧️" }
+            ].map((o) => (
+              <button
+                key={o.id}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering mascot poke/bubble on button click
+                  setActiveOutfit(o.id as OutfitType);
+                }}
+                className={`px-3 py-1.5 border-2 border-orange-950 font-comic font-black text-xs sm:text-sm flex items-center space-x-1 shadow-[2px_2px_0px_#451a03] hover:shadow-[1px_1px_0px_#451a03] hover:translate-x-[1px] hover:translate-y-[1px] transition-all rounded-[10px_40px_10px_35px/35px_10px_40px_10px] ${
+                  activeOutfit === o.id
+                    ? "bg-orange-500 text-white"
+                    : "bg-amber-100 hover:bg-amber-200 text-orange-950"
+                }`}
+              >
+                <span>{o.icon}</span>
+                <span>{o.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
         
       </div>
