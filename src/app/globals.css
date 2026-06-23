@@ -143,10 +143,10 @@ body.modal-open #gallery {
 /* Pulse/glow animation for the cozy citrus text */
 @keyframes citrusGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.45)) drop-shadow(0 0 2px rgba(249, 115, 22, 0.25));
+    filter: drop-shadow(0 2px 4px rgba(249, 115, 22, 0.2));
   }
   50% {
-    filter: drop-shadow(0 0 14px rgba(249, 115, 22, 0.7)) drop-shadow(0 0 5px rgba(239, 68, 68, 0.4));
+    filter: drop-shadow(0 4px 10px rgba(249, 115, 22, 0.35));
   }
 }
 

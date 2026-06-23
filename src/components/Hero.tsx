@@ -118,12 +118,12 @@ export default function Hero() {
       {/* --- SVG Filters for Sketchy and Melty Text --- */}
       <svg className="absolute w-0 h-0 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          {/* Sketchy hand-drawn wiggle filter (alive frame-by-frame) */}
+          {/* Sketchy hand-drawn wiggle filter (2-frame cozy wiggle) */}
           <filter id="sketchy-alive-filter" x="-10%" y="-10%" width="120%" height="120%">
             <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
-              <animate attributeName="seed" dur="0.9s" values="1;2;3;4;5;6;7;8" repeatCount="indefinite" />
+              <animate attributeName="seed" dur="0.6s" values="1;2" calcMode="discrete" repeatCount="indefinite" />
             </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G" />
           </filter>
 
           {/* Melty gooey slime/liquid dripping filter */}
@@ -131,7 +131,7 @@ export default function Hero() {
             <feTurbulence type="fractalNoise" baseFrequency="0.015 0.03" numOctaves="3" result="noise">
               <animate attributeName="baseFrequency" dur="10s" values="0.015 0.03;0.018 0.035;0.012 0.025;0.015 0.03" repeatCount="indefinite" />
             </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
           </filter>
         </defs>
       </svg>
@@ -354,31 +354,19 @@ export default function Hero() {
         
         {/* Left Text details */}
         <div className="lg:col-span-6 flex flex-col items-start text-left space-y-4">
-          {/* Sona tag badge */}
-          <div 
-            className="flex items-center space-x-2 bg-orange-100/90 text-orange-950 font-comic text-xs md:text-sm font-bold px-3 py-1.5 rounded-full border-2 border-orange-950 shadow-[2px_3px_0px_#2d1606] transform -rotate-1 hover:rotate-1 transition-transform cursor-pointer select-none"
-            style={{ filter: "url(#sketchy-alive-filter)" }}
-          >
-            <span>🍊 {siteConfig.species} Den</span>
-            <span className="animate-bounce">✨</span>
-          </div>
-
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="font-comic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-none text-orange-950 tracking-tight"
           >
-            {/* Hand-drawn sketchy "Welcome to" */}
-            <span 
-              className="block text-3xl sm:text-4xl md:text-5xl text-orange-900 select-none pr-4 pb-2"
-              style={{ filter: "url(#sketchy-alive-filter)" }}
-            >
+            {/* Standard Welcome to text */}
+            <span className="block text-3xl sm:text-4xl md:text-5xl text-orange-950/80 pr-4 pb-2">
               Welcome to
             </span>
             
-            {/* Melty/Gooey Citrini's Den */}
-            <div className="relative mt-1 block select-none animate-cartoon-wobble cursor-grab active:cursor-grabbing pb-4">
+            {/* Melty/Gooey Citrini's Den with clean glow applied to whole container */}
+            <div className="relative mt-1 block select-none pb-4 animate-citrus-glow">
               {/* Offset drop shadow layer */}
               <span 
                 className="absolute left-1.5 top-1.5 text-orange-950/20 pointer-events-none select-none"
@@ -399,7 +387,7 @@ export default function Hero() {
 
               {/* Main filled text with vertical gooey turbulence and citrus gradient */}
               <span 
-                className="relative block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-red-500 animate-citrus-glow select-none"
+                className="relative block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-red-500 select-none"
                 style={{ filter: "url(#melty-gooey-filter)" }}
               >
                 {siteConfig.name}'s Den
