@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { useAudio } from "@/context/AudioContext";
 
 export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
@@ -46,7 +47,10 @@ export default function LoadingScreen() {
     }
   }, [progress]);
 
+  const { playMusic } = useAudio();
+
   const handleEnter = () => {
+    playMusic();
     setIsVisible(false);
     document.body.style.overflow = "";
   };

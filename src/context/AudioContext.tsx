@@ -7,6 +7,7 @@ export interface AudioContextType {
   toggleMute: (overrideMuted?: boolean) => void;
   isMusicPlaying: boolean;
   toggleMusic: () => void;
+  playMusic: () => void;
   playSound: (type: "pop" | "like" | "success" | "chime" | "melt" | "boop" | "poke" | "whoosh" | "click" | "fill") => void;
 }
 
@@ -92,6 +93,22 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
         console.warn("Failed to start music (file may not be uploaded yet):", e);
       });
     }
+  };
+
+  const playMusic = () => {
+    const audio = musicRef.current;
+    if (!audio) return;
+
+    const savedMusic = localStorage.getItem("citrini-music-preference");
+    const shouldPlay = savedMusic !== "paused";
+    if (!shouldPlay) return;
+
+    audio.play().then(() => {
+      setIsMusicPlaying(true);
+      localStorage.setItem("citrini-music-preference", "playing");
+    }).catch((e) => {
+      console.warn("Failed to play music on user gesture:", e);
+    });
   };
 
   const toggleMute = (overrideMuted?: boolean) => {
@@ -358,7 +375,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AudioContext.Provider value={{ isMuted, toggleMute, isMusicPlaying, toggleMusic, playSound }}>
+    <AudioContext.Provider value={{ isMuted, toggleMute, isMusicPlaying, toggleMusic, playMusic, playSound }}>
       {children}
     </AudioContext.Provider>
   );

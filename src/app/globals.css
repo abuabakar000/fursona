@@ -131,5 +131,39 @@ body.modal-open #gallery {
   z-index: 10000;
 }
 
+/* Custom Text Stroke & Melt Styles */
+.text-stroke-pencil {
+  -webkit-text-stroke: 3px #2d1606;
+}
+
+.text-stroke-pencil-thick {
+  -webkit-text-stroke: 6px #2d1606;
+}
+
+/* Pulse/glow animation for the cozy citrus text */
+@keyframes citrusGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.45)) drop-shadow(0 0 2px rgba(249, 115, 22, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(249, 115, 22, 0.7)) drop-shadow(0 0 5px rgba(239, 68, 68, 0.4));
+  }
+}
+
+.animate-citrus-glow {
+  animation: citrusGlow 4s ease-in-out infinite;
+}
+
+/* Wobbly cartoon tilt animation */
+@keyframes cartoonWobble {
+  0%, 100% { transform: rotate(-1deg) scale(1); }
+  50% { transform: rotate(1.5deg) scale(1.02); }
+}
+
+.animate-cartoon-wobble {
+  animation: cartoonWobble 3s ease-in-out infinite;
+}
+
+
 
 

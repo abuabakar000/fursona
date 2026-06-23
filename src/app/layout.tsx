@@ -40,10 +40,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-paper-texture">
         <SmoothScrollProvider>
-          {/* Preloading Screen */}
-          <LoadingScreen />
-
           <AudioProvider>
+            {/* Preloading Screen */}
+            <LoadingScreen />
+
             {/* Floating animated click details and particles */}
             <FloatingPaws />
             
