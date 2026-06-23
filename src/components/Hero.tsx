@@ -365,33 +365,25 @@ export default function Hero() {
               Welcome to
             </span>
             
-            {/* Melty/Gooey Citrini's Den with clean glow applied to whole container */}
-            <div className="relative mt-1 block select-none pb-4 animate-citrus-glow">
-              {/* Offset drop shadow layer */}
-              <span 
-                className="absolute left-1.5 top-1.5 text-orange-950/20 pointer-events-none select-none"
-                style={{ filter: "url(#sketchy-alive-filter)" }}
-                aria-hidden="true"
-              >
-                {siteConfig.name}'s Den
-              </span>
+            {/* Citrini's Den heading wrapper */}
+            <div className="relative mt-1 block select-none pb-4">
+              {/* Text block grouped together with the 2-frame hand-drawn wiggle filter */}
+              <div style={{ filter: "url(#sketchy-alive-filter)" }}>
+                {/* Thick dark stroke outline underneath */}
+                <span 
+                  className="absolute inset-0 text-orange-950 pointer-events-none select-none text-stroke-pencil-thick"
+                  aria-hidden="true"
+                >
+                  {siteConfig.name}'s Den
+                </span>
 
-              {/* Thick dark stroke outline underneath */}
-              <span 
-                className="absolute inset-0 text-orange-950 pointer-events-none select-none text-stroke-pencil-thick"
-                style={{ filter: "url(#sketchy-alive-filter)" }}
-                aria-hidden="true"
-              >
-                {siteConfig.name}'s Den
-              </span>
-
-              {/* Main filled text with vertical gooey turbulence and citrus gradient */}
-              <span 
-                className="relative block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-red-500 select-none"
-                style={{ filter: "url(#melty-gooey-filter)" }}
-              >
-                {siteConfig.name}'s Den
-              </span>
+                {/* Main filled text with citrus gradient */}
+                <span 
+                  className="relative block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-red-500 select-none"
+                >
+                  {siteConfig.name}'s Den
+                </span>
+              </div>
               
               {/* Dripping/Melty cartoon emojis */}
               <span className="absolute -right-8 -top-3 text-2xl sm:text-3xl animate-bounce pointer-events-none select-none">
