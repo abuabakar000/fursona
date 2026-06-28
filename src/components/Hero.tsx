@@ -120,10 +120,11 @@ export default function Hero() {
         <defs>
           {/* Sketchy hand-drawn wiggle filter (2-frame cozy wiggle) */}
           <filter id="sketchy-alive-filter" x="-10%" y="-10%" width="120%" height="120%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
-              <animate attributeName="seed" dur="0.6s" values="1;2" calcMode="discrete" repeatCount="indefinite" />
+            <feTurbulence type="fractalNoise" numOctaves="3" result="noise">
+              <animate attributeName="seed" dur="0.35s" values="1;2" calcMode="discrete" repeatCount="indefinite" />
+              <animate attributeName="baseFrequency" dur="0.35s" values="0.038;0.042" calcMode="discrete" repeatCount="indefinite" />
             </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
           </filter>
 
           {/* Melty gooey slime/liquid dripping filter */}
@@ -365,8 +366,8 @@ export default function Hero() {
               Welcome to
             </span>
             
-            {/* Citrini's Den heading wrapper */}
-            <div className="relative mt-1 block select-none pb-4">
+            {/* Citrini's Den heading wrapper with synchronized 2-frame shifts */}
+            <div className="relative mt-1 block select-none pb-4 animate-cartoon-boil-2frame">
               {/* Text block grouped together with the 2-frame hand-drawn wiggle filter */}
               <div style={{ filter: "url(#sketchy-alive-filter)" }}>
                 {/* Thick dark stroke outline underneath */}
@@ -384,14 +385,6 @@ export default function Hero() {
                   {siteConfig.name}'s Den
                 </span>
               </div>
-              
-              {/* Dripping/Melty cartoon emojis */}
-              <span className="absolute -right-8 -top-3 text-2xl sm:text-3xl animate-bounce pointer-events-none select-none">
-                💦
-              </span>
-              <span className="absolute -left-6 bottom-2 text-xl sm:text-2xl animate-pulse pointer-events-none select-none">
-                🍯
-              </span>
             </div>
           </motion.h1>
  
@@ -432,13 +425,13 @@ export default function Hero() {
         </div>
  
         {/* Right Mascot (Follows Cursor & Reacts dynamically) */}
-        <div className="lg:col-span-6 flex justify-center items-center relative min-h-[320px] sm:min-h-[400px] md:min-h-[460px] lg:min-h-[480px]">
+        <div className="lg:col-span-6 flex justify-center items-center relative min-h-[350px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[550px]">
  
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="relative w-full max-w-[460px] aspect-square flex justify-center items-center cursor-pointer select-none group z-10"
+            className="relative w-full max-w-[520px] aspect-square flex justify-center items-center cursor-pointer select-none group z-10"
             onClick={handleMascotClick}
           >
             {/* Mascot Image (looks at & tilts towards user's cursor dynamically!) */}
@@ -487,8 +480,8 @@ export default function Hero() {
                 <Image
                   src={siteConfig.mascot.imageUrl}
                   alt={siteConfig.mascot.name}
-                  width={450}
-                  height={450}
+                  width={520}
+                  height={520}
                   className="object-contain max-h-[95%] drop-shadow-[8px_12px_0px_rgba(251,146,60,0.15)] group-hover:scale-102 transition-transform duration-300"
                   priority
                 />

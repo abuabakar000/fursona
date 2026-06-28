@@ -164,6 +164,21 @@ body.modal-open #gallery {
   animation: cartoonWobble 3s ease-in-out infinite;
 }
 
+/* Authentic 2-frame flipbook cartoon boil (slightly offsets position/rotation in sync with the SVG filter) */
+@keyframes cartoonBoil2Frame {
+  0%, 100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  50% {
+    transform: translate(0.5px, -0.5px) rotate(-0.3deg);
+  }
+}
+
+.animate-cartoon-boil-2frame {
+  animation: cartoonBoil2Frame 0.35s steps(1) infinite;
+}
+
+
 
 
 
